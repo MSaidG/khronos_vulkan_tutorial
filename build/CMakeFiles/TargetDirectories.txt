@@ -1,0 +1,3 @@
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/HelloTriangleApplication.dir
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/edit_cache.dir
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/rebuild_cache.dir

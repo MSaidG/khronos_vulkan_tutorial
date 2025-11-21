@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -Wl,--dependency-file=CMakeFiles/HelloTriangleApplication.dir/link.d CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o -o HelloTriangleApplication  -lglfw /lib64/libvulkan.so

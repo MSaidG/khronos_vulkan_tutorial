@@ -1,0 +1,12 @@
+x11 -> 
+export GDK_BACKEND=x11
+export SDL_VIDEODRIVER=x11  
+export XDG_SESSION_TYPE=x11
+
+GDK_BACKEND=x11 ./build/HelloTriangleApplication
+
+
+
+slang -> 
+export LD_LIBRARY_PATH=/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/lib:$LD_LIBRARY_PATH
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/bin/slangc shader.slang -target spirv -profile spirv_1_4 -emit-spirv-directly -fvk-use-entrypoint-name -entry vertMain -entry fragMain -o slang.spv
