@@ -68,9 +68,10 @@ class HelloTriangleApplication
 	std::vector<vk::raii::Semaphore> presentCompleteSemaphores; 
 	std::vector<vk::raii::Semaphore> renderFinishedSemaphores;  
 	std::vector<vk::raii::Fence>     inFlightFences;  
-    
-    uint32_t currentFrame = 0;
+
+	uint32_t currentFrame = 0;
     uint32_t semaphoreIndex = 0;
+	bool framebufferResized = false;
 
 	std::vector<const char *> requiredDeviceExtension = {
 	    vk::KHRSwapchainExtensionName,
@@ -83,9 +84,12 @@ class HelloTriangleApplication
 		glfwInit();
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 		window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan", nullptr, nullptr);
+
+		glfwSetWindowUserPointer(window, this);
+		glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
 	}
 
 	void initVulkan()
@@ -115,8 +119,9 @@ class HelloTriangleApplication
 
 	void cleanup()
 	{
-		glfwDestroyWindow(window);
+		cleanupSwapChain();
 
+		glfwDestroyWindow(window);
 		glfwTerminate();
 	}
 
@@ -527,6 +532,15 @@ class HelloTriangleApplication
         while (vk::Result::eTimeout == device.waitForFences({inFlightFences[currentFrame]}, vk::True, UINT64_MAX));
 		auto [result, imageIndex] = swapChain.acquireNextImage(UINT64_MAX, presentCompleteSemaphores[semaphoreIndex], nullptr);
 
+		if (result == vk::Result::eErrorOutOfDateKHR) {
+			recreateSwapChain();
+			return;
+		}
+
+		if (result != vk::Result::eSuccess && result != vk::Result::eSuboptimalKHR) {
+			throw std::runtime_error("Failed to acquire swap chain image!");
+		}
+
 		device.resetFences({*inFlightFences[currentFrame]});
         commandBuffers[currentFrame].reset();
 		recordCommandBuffer(imageIndex);
@@ -551,6 +565,14 @@ class HelloTriangleApplication
             .setPImageIndices(&imageIndex);
 
 		result = queue.presentKHR(presentInfoKHR);
+
+		if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR || framebufferResized) {
+			framebufferResized = false;
+		    recreateSwapChain();
+		} else if (result != vk::Result::eSuccess) {
+		    throw std::runtime_error("failed to present swap chain image!");
+		}
+
 		switch (result)
 		{
 			case vk::Result::eSuccess:
@@ -656,6 +678,34 @@ class HelloTriangleApplication
 		file.close();
 		return buffer;
 	}
+
+	void cleanupSwapChain() {
+		swapChainImageViews.clear();
+		swapChain = nullptr;
+	}
+
+	void recreateSwapChain() {
+		int width = 0, height = 0;
+		glfwGetFramebufferSize(window, &width, &height);
+		while(width == 0 || height == 0) {
+			glfwGetFramebufferSize(window, &width, &height);
+			glfwWaitEvents();
+		}
+
+
+	    device.waitIdle();
+
+		cleanupSwapChain();
+
+	    createSwapChain();
+	    createImageViews();
+	}
+
+	static void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
+		auto app = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
+		app->framebufferResized = true;
+	}
+
 };
 
 int main()
