@@ -121,7 +121,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/cxxabi_forced.h \
   /usr/include/c++/15/bits/cxxabi_init_exception.h \
   /usr/include/c++/15/bits/enable_special_members.h \
-  /usr/include/c++/15/bits/erase_if.h \
   /usr/include/c++/15/bits/exception.h \
   /usr/include/c++/15/bits/exception_defines.h \
   /usr/include/c++/15/bits/exception_ptr.h \
@@ -149,7 +148,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/move.h \
   /usr/include/c++/15/bits/nested_exception.h \
   /usr/include/c++/15/bits/new_allocator.h \
-  /usr/include/c++/15/bits/node_handle.h \
   /usr/include/c++/15/bits/ostream.h \
   /usr/include/c++/15/bits/ostream.tcc \
   /usr/include/c++/15/bits/ostream_insert.h \
@@ -179,16 +177,12 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/stl_iterator.h \
   /usr/include/c++/15/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/15/bits/stl_iterator_base_types.h \
-  /usr/include/c++/15/bits/stl_map.h \
-  /usr/include/c++/15/bits/stl_multimap.h \
   /usr/include/c++/15/bits/stl_pair.h \
   /usr/include/c++/15/bits/stl_raw_storage_iter.h \
   /usr/include/c++/15/bits/stl_relops.h \
   /usr/include/c++/15/bits/stl_tempbuf.h \
-  /usr/include/c++/15/bits/stl_tree.h \
   /usr/include/c++/15/bits/stl_uninitialized.h \
   /usr/include/c++/15/bits/stl_vector.h \
-  /usr/include/c++/15/bits/stream_iterator.h \
   /usr/include/c++/15/bits/streambuf.tcc \
   /usr/include/c++/15/bits/streambuf_iterator.h \
   /usr/include/c++/15/bits/string_view.tcc \
@@ -235,10 +229,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/iosfwd \
   /usr/include/c++/15/iostream \
   /usr/include/c++/15/istream \
-  /usr/include/c++/15/iterator \
   /usr/include/c++/15/limits \
   /usr/include/c++/15/locale \
-  /usr/include/c++/15/map \
   /usr/include/c++/15/memory \
   /usr/include/c++/15/new \
   /usr/include/c++/15/numbers \
@@ -248,7 +240,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/pstl/glue_algorithm_defs.h \
   /usr/include/c++/15/pstl/glue_memory_defs.h \
   /usr/include/c++/15/pstl/pstl_config.h \
-  /usr/include/c++/15/ranges \
   /usr/include/c++/15/span \
   /usr/include/c++/15/stdexcept \
   /usr/include/c++/15/streambuf \
@@ -476,33 +467,17 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/cpu_defines.h:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++io.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h:
-
-/usr/include/c++/15/version:
-
-/usr/include/c++/15/vector:
-
-/usr/include/c++/15/utility:
-
 /usr/include/c++/15/bits/formatfwd.h:
 
 /usr/include/c++/15/initializer_list:
 
 /usr/include/asm/bitsperlong.h:
 
-/usr/include/c++/15/bits/alloc_traits.h:
+/usr/include/c++/15/bits/functional_hash.h:
+
+/usr/include/c++/15/ext/type_traits.h:
 
 /usr/include/c++/15/bits/atomic_wait.h:
-
-/usr/include/c++/15/map:
 
 /usr/include/c++/15/bits/atomic_lockfree_defines.h:
 
@@ -519,6 +494,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/c++/15/bits/version.h:
 
 /usr/include/c++/15/backward/binders.h:
+
+/usr/include/c++/15/utility:
 
 /usr/include/c++/15/array:
 
@@ -582,7 +559,15 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/types/mbstate_t.h:
 
+/usr/include/c++/15/bits/alloc_traits.h:
+
 /usr/include/bits/types/locale_t.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/include/stdint.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/c++/15/bits/locale_classes.h:
 
 /usr/include/c++/15/bits/charconv.h:
 
@@ -637,8 +622,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/bits/atomic_wide_counter.h:
 
 /usr/include/bits/posix_opt.h:
-
-/usr/include/c++/15/bits/stream_iterator.h:
 
 /usr/include/bits/types/__mbstate_t.h:
 
@@ -698,15 +681,11 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/asm-generic/errno.h:
 
-/usr/include/c++/15/bits/node_handle.h:
-
 /usr/include/c++/15/pstl/glue_memory_defs.h:
 
 /usr/include/c++/15/bits/monostate.h:
 
 /usr/include/asm/types.h:
-
-/usr/include/c++/15/ranges:
 
 /usr/include/alloca.h:
 
@@ -719,6 +698,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/c++/15/bits/refwrap.h:
 
 /usr/include/c++/15/type_traits:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h:
 
 /usr/include/errno.h:
 
@@ -754,9 +735,7 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/basic_ios.tcc:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h:
-
-/usr/include/c++/15/bits/codecvt.h:
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++io.h:
 
 /usr/include/bits/pthread_stack_min-dynamic.h:
 
@@ -784,6 +763,16 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/vector.tcc:
 
+/usr/include/c++/15/version:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/c++/15/bits/enable_special_members.h:
+
+/usr/include/bits/types/struct___jmp_buf_tag.h:
+
 /usr/include/c++/15/bits/ostream_insert.h:
 
 /usr/include/bits/types/error_t.h:
@@ -800,13 +789,9 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/bits/types/__FILE.h:
 
+/usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h:
+
 /usr/include/bits/types/time_t.h:
-
-/usr/include/c++/15/iterator:
-
-/usr/include/c++/15/bits/functional_hash.h:
-
-/usr/include/c++/15/ext/type_traits.h:
 
 /lib64/libm.so.6:
 
@@ -898,11 +883,13 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/shared_ptr.h:
 
-/usr/include/c++/15/bits/erase_if.h:
-
 /usr/include/c++/15/bits/stringfwd.h:
 
 /usr/include/c++/15/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/15/bits/stl_uninitialized.h:
+
+/usr/include/c++/15/bits/shared_ptr_base.h:
 
 /usr/include/c++/15/bits/std_abs.h:
 
@@ -934,6 +921,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/memory:
 
+/usr/include/c++/15/vector:
+
 /usr/include/c++/15/bits/ranges_algobase.h:
 
 /usr/include/c++/15/bits/ptr_traits.h:
@@ -956,33 +945,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/stl_iterator_base_types.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/include/stdint.h:
-
-/usr/include/linux/stddef.h:
-
-/usr/include/c++/15/bits/locale_classes.h:
-
-/usr/include/c++/15/bits/stl_map.h:
-
-/usr/include/c++/15/bits/stl_uninitialized.h:
-
-/usr/include/c++/15/bits/shared_ptr_base.h:
-
-/usr/include/c++/15/bits/stl_multimap.h:
-
 /usr/include/c++/15/bits/stl_tempbuf.h:
-
-/usr/include/bits/waitstatus.h:
-
-/usr/include/bits/wchar.h:
-
-/usr/include/c++/15/bits/enable_special_members.h:
-
-/usr/include/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/c++/15/bits/stl_tree.h:
-
-/usr/include/c++/15/cstring:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/os_defines.h:
 
@@ -1009,6 +972,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/concepts:
 
 /usr/include/c++/15/cstdint:
+
+/usr/include/c++/15/cstring:
 
 /usr/include/c++/15/ctime:
 
@@ -1077,3 +1042,11 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/bits/endian.h:
 
 /usr/include/c++/15/system_error:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h:
+
+/usr/include/c++/15/bits/codecvt.h:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h:
