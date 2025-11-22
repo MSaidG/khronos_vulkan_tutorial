@@ -1,3 +1,4 @@
+#include <glm/glm.hpp>
 #include <algorithm>
 #include <assert.h>
 #include <cstdlib>
@@ -8,6 +9,7 @@
 #include <memory>
 #include <stdexcept>
 #include <vector>
+#include <array>
 
 #if defined(__INTELLISENSE__) || !defined(USE_CPP20_MODULES)
 #	include <vulkan/vulkan_raii.hpp>
@@ -58,20 +60,49 @@ class HelloTriangleApplication
 	vk::SurfaceFormatKHR             swapChainSurfaceFormat;
 	vk::Extent2D                     swapChainExtent;
 	std::vector<vk::raii::ImageView> swapChainImageViews;
-
+	
 	vk::raii::PipelineLayout pipelineLayout   = nullptr;
 	vk::raii::Pipeline       graphicsPipeline = nullptr;
-
+	
 	vk::raii::CommandPool   commandPool   = nullptr;
 	std::vector<vk::raii::CommandBuffer> commandBuffers; 
-
+	
 	std::vector<vk::raii::Semaphore> presentCompleteSemaphores; 
 	std::vector<vk::raii::Semaphore> renderFinishedSemaphores;  
 	std::vector<vk::raii::Fence>     inFlightFences;  
+	
+	vk::raii::Buffer vertexBuffer = nullptr;
+	vk::raii::DeviceMemory vertexBufferMemory = nullptr;
+
+	struct Vertex {
+		glm::vec2 pos;
+		glm::vec3 color;
+
+		static vk::VertexInputBindingDescription getBindingDescription() {
+			return vk::VertexInputBindingDescription()
+				.setBinding(0)
+				.setStride(sizeof(Vertex))
+				.setInputRate(vk::VertexInputRate::eVertex);
+		}
+
+		static std::array<vk::VertexInputAttributeDescription, 2> getAttributeDescriptions() {
+			return {
+				vk::VertexInputAttributeDescription( 0, 0, vk::Format::eR32G32Sfloat, offsetof(Vertex, pos)),
+				vk::VertexInputAttributeDescription( 1, 0, vk::Format::eR32G32B32A32Sfloat, offsetof(Vertex, color))
+			};
+		}
+	};
+
+	std::vector<Vertex> vertices = {
+		{{0.0f, -0.5f}, {1.0f, 1.0f, 1.0f}},
+		{{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+		{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
+	};
 
 	uint32_t currentFrame = 0;
     uint32_t semaphoreIndex = 0;
 	bool framebufferResized = false;
+
 
 	std::vector<const char *> requiredDeviceExtension = {
 	    vk::KHRSwapchainExtensionName,
@@ -103,6 +134,7 @@ class HelloTriangleApplication
 		createImageViews();
 		createGraphicsPipeline();
 		createCommandPool();
+		createVertexBuffer();
 		createCommandBuffers();
 		createSyncObjects();
 	}
@@ -344,7 +376,14 @@ class HelloTriangleApplication
 		
         vk::PipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
 
-		vk::PipelineVertexInputStateCreateInfo   vertexInputInfo;
+		auto bindingDescription = Vertex::getBindingDescription();
+		auto attributeDescriptions = Vertex::getAttributeDescriptions();
+		vk::PipelineVertexInputStateCreateInfo   vertexInputInfo = vk::PipelineVertexInputStateCreateInfo()
+			.setVertexBindingDescriptionCount(1)
+			.setPVertexBindingDescriptions(&bindingDescription)
+			.setVertexAttributeDescriptionCount(attributeDescriptions.size())
+			.setPVertexAttributeDescriptions(attributeDescriptions.data());
+
 		vk::PipelineInputAssemblyStateCreateInfo inputAssembly = vk::PipelineInputAssemblyStateCreateInfo()
             .setTopology(vk::PrimitiveTopology::eTriangleList);
 		
@@ -457,6 +496,7 @@ class HelloTriangleApplication
 
 		commandBuffers[currentFrame].beginRendering(renderingInfo);
 		commandBuffers[currentFrame].bindPipeline(vk::PipelineBindPoint::eGraphics, *graphicsPipeline);
+		commandBuffers[currentFrame].bindVertexBuffers(0, *vertexBuffer, {0});
 		commandBuffers[currentFrame].setViewport(0, vk::Viewport(0.0f, 0.0f, static_cast<float>(swapChainExtent.width), static_cast<float>(swapChainExtent.height), 0.0f, 1.0f));
 		commandBuffers[currentFrame].setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), swapChainExtent));
 		commandBuffers[currentFrame].draw(3, 1, 0, 0);
@@ -704,6 +744,41 @@ class HelloTriangleApplication
 	static void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
 		auto app = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
 		app->framebufferResized = true;
+	}
+
+	void createVertexBuffer() {
+
+		vk::BufferCreateInfo bufferInfo = vk::BufferCreateInfo()
+			.setPNext({})
+			.setSize(sizeof(vertices[0]) * vertices.size())
+			.setUsage(vk::BufferUsageFlagBits::eVertexBuffer)
+			.setSharingMode(vk::SharingMode::eExclusive);
+		
+		vertexBuffer = vk::raii::Buffer(device, bufferInfo);
+		vk::MemoryRequirements memRequirements = vertexBuffer.getMemoryRequirements();
+		vk::MemoryAllocateInfo memoryAllocateInfo = vk::MemoryAllocateInfo()
+			.setAllocationSize(memRequirements.size)
+			.setMemoryTypeIndex(findMemoryType(memRequirements.memoryTypeBits, vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent));
+
+		vertexBufferMemory = vk::raii::DeviceMemory(device, memoryAllocateInfo);
+		vertexBuffer.bindMemory(*vertexBufferMemory, 0);
+
+		void* data = vertexBufferMemory.mapMemory(0, bufferInfo.size);
+		memcpy(data, vertices.data(), bufferInfo.size);
+		vertexBufferMemory.unmapMemory();
+
+	}
+
+	uint32_t findMemoryType(uint32_t typeFilter, vk::MemoryPropertyFlags properties) {
+
+		vk::PhysicalDeviceMemoryProperties memProperties = physicalDevice.getMemoryProperties();
+		for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
+			if ((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+				return i;
+			}
+		}
+
+		throw std::runtime_error("Failed to find suitable memory type!");
 	}
 
 };

@@ -59,4 +59,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/HelloTriangleApplication.dir/DependInfo.cmake"
+  "CMakeFiles/compile_shaders.dir/DependInfo.cmake"
   )

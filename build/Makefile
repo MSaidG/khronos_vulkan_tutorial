@@ -129,6 +129,19 @@ HelloTriangleApplication/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangleApplication.dir/build.make CMakeFiles/HelloTriangleApplication.dir/build
 .PHONY : HelloTriangleApplication/fast
 
+#=============================================================================
+# Target rules for targets named compile_shaders
+
+# Build rule for target.
+compile_shaders: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compile_shaders
+.PHONY : compile_shaders
+
+# fast build rule for target.
+compile_shaders/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_shaders.dir/build.make CMakeFiles/compile_shaders.dir/build
+.PHONY : compile_shaders/fast
+
 base_code.o: base_code.cpp.o
 .PHONY : base_code.o
 
@@ -161,6 +174,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... compile_shaders"
 	@echo "... HelloTriangleApplication"
 	@echo "... base_code.o"
 	@echo "... base_code.i"

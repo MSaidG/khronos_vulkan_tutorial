@@ -33,12 +33,22 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/bits/errno.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
+  /usr/include/bits/flt-eval-method.h \
+  /usr/include/bits/fp-fast.h \
+  /usr/include/bits/fp-logb.h \
   /usr/include/bits/getopt_core.h \
   /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/iscanonical.h \
   /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/libm-simd-decl-stubs.h \
   /usr/include/bits/local_lim.h \
   /usr/include/bits/locale.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/math-vector.h \
+  /usr/include/bits/mathcalls-helper-functions.h \
+  /usr/include/bits/mathcalls-macros.h \
+  /usr/include/bits/mathcalls-narrow.h \
+  /usr/include/bits/mathcalls.h \
   /usr/include/bits/posix1_lim.h \
   /usr/include/bits/posix2_lim.h \
   /usr/include/bits/posix_opt.h \
@@ -166,6 +176,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/shared_ptr.h \
   /usr/include/c++/15/bits/shared_ptr_atomic.h \
   /usr/include/c++/15/bits/shared_ptr_base.h \
+  /usr/include/c++/15/bits/specfun.h \
   /usr/include/c++/15/bits/std_abs.h \
   /usr/include/c++/15/bits/std_mutex.h \
   /usr/include/c++/15/bits/stl_algo.h \
@@ -199,9 +210,11 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/cassert \
   /usr/include/c++/15/cctype \
   /usr/include/c++/15/cerrno \
+  /usr/include/c++/15/cfloat \
   /usr/include/c++/15/charconv \
   /usr/include/c++/15/climits \
   /usr/include/c++/15/clocale \
+  /usr/include/c++/15/cmath \
   /usr/include/c++/15/compare \
   /usr/include/c++/15/concepts \
   /usr/include/c++/15/cstddef \
@@ -246,6 +259,18 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/string \
   /usr/include/c++/15/string_view \
   /usr/include/c++/15/system_error \
+  /usr/include/c++/15/tr1/bessel_function.tcc \
+  /usr/include/c++/15/tr1/beta_function.tcc \
+  /usr/include/c++/15/tr1/ell_integral.tcc \
+  /usr/include/c++/15/tr1/exp_integral.tcc \
+  /usr/include/c++/15/tr1/gamma.tcc \
+  /usr/include/c++/15/tr1/hypergeometric.tcc \
+  /usr/include/c++/15/tr1/legendre_function.tcc \
+  /usr/include/c++/15/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/15/tr1/poly_hermite.tcc \
+  /usr/include/c++/15/tr1/poly_laguerre.tcc \
+  /usr/include/c++/15/tr1/riemann_zeta.tcc \
+  /usr/include/c++/15/tr1/special_function_util.h \
   /usr/include/c++/15/tuple \
   /usr/include/c++/15/type_traits \
   /usr/include/c++/15/typeinfo \
@@ -273,6 +298,139 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/glm/common.hpp \
+  /usr/include/glm/detail/_fixes.hpp \
+  /usr/include/glm/detail/_vectorize.hpp \
+  /usr/include/glm/detail/compute_common.hpp \
+  /usr/include/glm/detail/compute_vector_relational.hpp \
+  /usr/include/glm/detail/func_common.inl \
+  /usr/include/glm/detail/func_exponential.inl \
+  /usr/include/glm/detail/func_geometric.inl \
+  /usr/include/glm/detail/func_integer.inl \
+  /usr/include/glm/detail/func_matrix.inl \
+  /usr/include/glm/detail/func_packing.inl \
+  /usr/include/glm/detail/func_trigonometric.inl \
+  /usr/include/glm/detail/func_vector_relational.inl \
+  /usr/include/glm/detail/qualifier.hpp \
+  /usr/include/glm/detail/setup.hpp \
+  /usr/include/glm/detail/type_half.hpp \
+  /usr/include/glm/detail/type_half.inl \
+  /usr/include/glm/detail/type_mat2x2.hpp \
+  /usr/include/glm/detail/type_mat2x2.inl \
+  /usr/include/glm/detail/type_mat2x3.hpp \
+  /usr/include/glm/detail/type_mat2x3.inl \
+  /usr/include/glm/detail/type_mat2x4.hpp \
+  /usr/include/glm/detail/type_mat2x4.inl \
+  /usr/include/glm/detail/type_mat3x2.hpp \
+  /usr/include/glm/detail/type_mat3x2.inl \
+  /usr/include/glm/detail/type_mat3x3.hpp \
+  /usr/include/glm/detail/type_mat3x3.inl \
+  /usr/include/glm/detail/type_mat3x4.hpp \
+  /usr/include/glm/detail/type_mat3x4.inl \
+  /usr/include/glm/detail/type_mat4x2.hpp \
+  /usr/include/glm/detail/type_mat4x2.inl \
+  /usr/include/glm/detail/type_mat4x3.hpp \
+  /usr/include/glm/detail/type_mat4x3.inl \
+  /usr/include/glm/detail/type_mat4x4.hpp \
+  /usr/include/glm/detail/type_mat4x4.inl \
+  /usr/include/glm/detail/type_vec1.hpp \
+  /usr/include/glm/detail/type_vec1.inl \
+  /usr/include/glm/detail/type_vec2.hpp \
+  /usr/include/glm/detail/type_vec2.inl \
+  /usr/include/glm/detail/type_vec3.hpp \
+  /usr/include/glm/detail/type_vec3.inl \
+  /usr/include/glm/detail/type_vec4.hpp \
+  /usr/include/glm/detail/type_vec4.inl \
+  /usr/include/glm/exponential.hpp \
+  /usr/include/glm/ext/matrix_double2x2.hpp \
+  /usr/include/glm/ext/matrix_double2x2_precision.hpp \
+  /usr/include/glm/ext/matrix_double2x3.hpp \
+  /usr/include/glm/ext/matrix_double2x3_precision.hpp \
+  /usr/include/glm/ext/matrix_double2x4.hpp \
+  /usr/include/glm/ext/matrix_double2x4_precision.hpp \
+  /usr/include/glm/ext/matrix_double3x2.hpp \
+  /usr/include/glm/ext/matrix_double3x2_precision.hpp \
+  /usr/include/glm/ext/matrix_double3x3.hpp \
+  /usr/include/glm/ext/matrix_double3x3_precision.hpp \
+  /usr/include/glm/ext/matrix_double3x4.hpp \
+  /usr/include/glm/ext/matrix_double3x4_precision.hpp \
+  /usr/include/glm/ext/matrix_double4x2.hpp \
+  /usr/include/glm/ext/matrix_double4x2_precision.hpp \
+  /usr/include/glm/ext/matrix_double4x3.hpp \
+  /usr/include/glm/ext/matrix_double4x3_precision.hpp \
+  /usr/include/glm/ext/matrix_double4x4.hpp \
+  /usr/include/glm/ext/matrix_double4x4_precision.hpp \
+  /usr/include/glm/ext/matrix_float2x2.hpp \
+  /usr/include/glm/ext/matrix_float2x2_precision.hpp \
+  /usr/include/glm/ext/matrix_float2x3.hpp \
+  /usr/include/glm/ext/matrix_float2x3_precision.hpp \
+  /usr/include/glm/ext/matrix_float2x4.hpp \
+  /usr/include/glm/ext/matrix_float2x4_precision.hpp \
+  /usr/include/glm/ext/matrix_float3x2.hpp \
+  /usr/include/glm/ext/matrix_float3x2_precision.hpp \
+  /usr/include/glm/ext/matrix_float3x3.hpp \
+  /usr/include/glm/ext/matrix_float3x3_precision.hpp \
+  /usr/include/glm/ext/matrix_float3x4.hpp \
+  /usr/include/glm/ext/matrix_float3x4_precision.hpp \
+  /usr/include/glm/ext/matrix_float4x2.hpp \
+  /usr/include/glm/ext/matrix_float4x2_precision.hpp \
+  /usr/include/glm/ext/matrix_float4x3.hpp \
+  /usr/include/glm/ext/matrix_float4x3_precision.hpp \
+  /usr/include/glm/ext/matrix_float4x4.hpp \
+  /usr/include/glm/ext/matrix_float4x4_precision.hpp \
+  /usr/include/glm/ext/scalar_int_sized.hpp \
+  /usr/include/glm/ext/scalar_uint_sized.hpp \
+  /usr/include/glm/ext/vector_bool2.hpp \
+  /usr/include/glm/ext/vector_bool2_precision.hpp \
+  /usr/include/glm/ext/vector_bool3.hpp \
+  /usr/include/glm/ext/vector_bool3_precision.hpp \
+  /usr/include/glm/ext/vector_bool4.hpp \
+  /usr/include/glm/ext/vector_bool4_precision.hpp \
+  /usr/include/glm/ext/vector_double2.hpp \
+  /usr/include/glm/ext/vector_double2_precision.hpp \
+  /usr/include/glm/ext/vector_double3.hpp \
+  /usr/include/glm/ext/vector_double3_precision.hpp \
+  /usr/include/glm/ext/vector_double4.hpp \
+  /usr/include/glm/ext/vector_double4_precision.hpp \
+  /usr/include/glm/ext/vector_float2.hpp \
+  /usr/include/glm/ext/vector_float2_precision.hpp \
+  /usr/include/glm/ext/vector_float3.hpp \
+  /usr/include/glm/ext/vector_float3_precision.hpp \
+  /usr/include/glm/ext/vector_float4.hpp \
+  /usr/include/glm/ext/vector_float4_precision.hpp \
+  /usr/include/glm/ext/vector_int2.hpp \
+  /usr/include/glm/ext/vector_int2_sized.hpp \
+  /usr/include/glm/ext/vector_int3.hpp \
+  /usr/include/glm/ext/vector_int3_sized.hpp \
+  /usr/include/glm/ext/vector_int4.hpp \
+  /usr/include/glm/ext/vector_int4_sized.hpp \
+  /usr/include/glm/ext/vector_uint2.hpp \
+  /usr/include/glm/ext/vector_uint2_sized.hpp \
+  /usr/include/glm/ext/vector_uint3.hpp \
+  /usr/include/glm/ext/vector_uint3_sized.hpp \
+  /usr/include/glm/ext/vector_uint4.hpp \
+  /usr/include/glm/ext/vector_uint4_sized.hpp \
+  /usr/include/glm/fwd.hpp \
+  /usr/include/glm/geometric.hpp \
+  /usr/include/glm/glm.hpp \
+  /usr/include/glm/integer.hpp \
+  /usr/include/glm/mat2x2.hpp \
+  /usr/include/glm/mat2x3.hpp \
+  /usr/include/glm/mat2x4.hpp \
+  /usr/include/glm/mat3x2.hpp \
+  /usr/include/glm/mat3x3.hpp \
+  /usr/include/glm/mat3x4.hpp \
+  /usr/include/glm/mat4x2.hpp \
+  /usr/include/glm/mat4x3.hpp \
+  /usr/include/glm/mat4x4.hpp \
+  /usr/include/glm/matrix.hpp \
+  /usr/include/glm/packing.hpp \
+  /usr/include/glm/simd/platform.h \
+  /usr/include/glm/trigonometric.hpp \
+  /usr/include/glm/vec2.hpp \
+  /usr/include/glm/vec3.hpp \
+  /usr/include/glm/vec4.hpp \
+  /usr/include/glm/vector_relational.hpp \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/libintl.h \
@@ -285,6 +443,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/linux/stddef.h \
   /usr/include/linux/types.h \
   /usr/include/locale.h \
+  /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
@@ -326,6 +485,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/vulkan/vulkan_to_string.hpp \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
+  /usr/lib/gcc/x86_64-redhat-linux/15/include/float.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/limits.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h \
@@ -357,8 +517,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
-
 /usr/lib64/libm.so:
 
 /usr/lib64/crt1.o:
@@ -366,8 +524,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /lib64/libvulkan.so:
 
 /lib64/libmvec.so.1:
-
-/lib64/libgcc_s.so.1:
 
 /lib64/libc.so.6:
 
@@ -377,27 +533,17 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h:
 
-/usr/include/vulkan/vulkan_to_string.hpp:
-
-/usr/include/vulkan/vulkan_handles.hpp:
-
 /usr/include/vulkan/vulkan_funcs.hpp:
 
 /usr/include/vulkan/vulkan_enums.hpp:
 
 /usr/include/vulkan/vulkan_core.h:
 
-/usr/include/vulkan/vulkan.hpp:
+/usr/lib/gcc/x86_64-redhat-linux/15/include/float.h:
 
 /usr/include/vk_video/vulkan_video_codecs_common.h:
 
-/usr/include/vk_video/vulkan_video_codec_vp9std_decode.h:
-
 /usr/include/vk_video/vulkan_video_codec_vp9std.h:
-
-/usr/include/vk_video/vulkan_video_codec_h265std_decode.h:
-
-/usr/include/vk_video/vulkan_video_codec_h265std.h:
 
 /usr/include/vk_video/vulkan_video_codec_h264std_encode.h:
 
@@ -421,27 +567,191 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/string.h:
 
-/usr/include/stdlib.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/wctype.h:
-
-/usr/include/sched.h:
-
 /usr/include/pthread.h:
 
-/usr/include/locale.h:
-
-/usr/include/linux/types.h:
-
 /usr/include/linux/limits.h:
-
-/usr/include/linux/close_range.h:
 
 /usr/include/limits.h:
 
 /usr/include/gnu/stubs.h:
+
+/usr/include/vulkan/vulkan_handles.hpp:
+
+/usr/include/glm/vector_relational.hpp:
+
+/usr/include/glm/simd/platform.h:
+
+/usr/include/glm/packing.hpp:
+
+/usr/include/glm/mat4x3.hpp:
+
+/usr/include/glm/mat4x2.hpp:
+
+/usr/include/glm/mat3x4.hpp:
+
+/usr/include/glm/mat2x3.hpp:
+
+/usr/include/glm/mat2x2.hpp:
+
+/usr/include/glm/integer.hpp:
+
+/usr/include/glm/glm.hpp:
+
+/usr/include/vk_video/vulkan_video_codec_h265std.h:
+
+/usr/include/glm/geometric.hpp:
+
+/usr/include/glm/fwd.hpp:
+
+/usr/include/glm/ext/vector_uint2_sized.hpp:
+
+/usr/include/glm/ext/vector_int4_sized.hpp:
+
+/usr/include/vk_video/vulkan_video_codec_h265std_decode.h:
+
+/usr/include/glm/ext/vector_int3.hpp:
+
+/usr/include/glm/ext/vector_int2_sized.hpp:
+
+/usr/include/glm/ext/vector_int2.hpp:
+
+/usr/include/glm/ext/vector_float4_precision.hpp:
+
+/usr/include/glm/ext/vector_float4.hpp:
+
+/usr/include/glm/ext/vector_float3_precision.hpp:
+
+/usr/include/glm/ext/vector_float3.hpp:
+
+/usr/include/glm/ext/vector_float2_precision.hpp:
+
+/usr/include/glm/ext/vector_float2.hpp:
+
+/usr/include/glm/ext/vector_double4_precision.hpp:
+
+/lib64/libgcc_s.so.1:
+
+/usr/include/glm/ext/vector_double3_precision.hpp:
+
+/usr/include/glm/ext/vector_double3.hpp:
+
+/usr/include/glm/ext/vector_double2.hpp:
+
+/usr/include/glm/ext/vector_bool3_precision.hpp:
+
+/usr/include/glm/ext/vector_bool2_precision.hpp:
+
+/usr/include/glm/ext/vector_bool2.hpp:
+
+/usr/include/glm/ext/scalar_uint_sized.hpp:
+
+/usr/include/glm/ext/matrix_float4x4_precision.hpp:
+
+/usr/include/glm/ext/matrix_float4x4.hpp:
+
+/usr/include/glm/ext/matrix_float4x3_precision.hpp:
+
+/usr/include/glm/ext/matrix_float4x3.hpp:
+
+/usr/include/glm/ext/matrix_float4x2.hpp:
+
+/usr/include/glm/ext/matrix_float3x4.hpp:
+
+/usr/include/glm/ext/matrix_float3x3.hpp:
+
+/usr/include/glm/ext/matrix_float2x4_precision.hpp:
+
+/usr/include/glm/ext/matrix_float2x4.hpp:
+
+/usr/include/glm/ext/matrix_float2x3.hpp:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/glm/ext/matrix_float2x2_precision.hpp:
+
+/usr/include/glm/ext/matrix_float2x2.hpp:
+
+/usr/include/glm/ext/matrix_double4x2_precision.hpp:
+
+/usr/include/glm/ext/matrix_double3x2_precision.hpp:
+
+/usr/include/glm/ext/matrix_double4x3.hpp:
+
+/usr/include/glm/ext/matrix_double3x2.hpp:
+
+/usr/include/glm/vec4.hpp:
+
+/usr/include/glm/ext/matrix_double2x4_precision.hpp:
+
+/usr/include/vulkan/vulkan_to_string.hpp:
+
+/usr/include/glm/ext/matrix_double2x4.hpp:
+
+/usr/include/glm/ext/matrix_double2x3.hpp:
+
+/usr/include/locale.h:
+
+/usr/include/glm/detail/type_vec4.hpp:
+
+/usr/include/glm/detail/type_vec3.inl:
+
+/usr/include/glm/detail/type_vec2.inl:
+
+/usr/include/glm/detail/type_mat4x4.inl:
+
+/usr/include/glm/detail/type_mat4x4.hpp:
+
+/usr/include/glm/detail/type_mat4x3.hpp:
+
+/usr/include/glm/detail/type_mat4x2.inl:
+
+/usr/include/glm/detail/type_mat4x2.hpp:
+
+/usr/include/glm/detail/type_mat3x4.hpp:
+
+/usr/include/glm/ext/vector_uint4_sized.hpp:
+
+/usr/include/glm/detail/type_mat3x3.inl:
+
+/usr/include/glm/detail/type_mat3x3.hpp:
+
+/usr/include/glm/detail/type_mat3x2.inl:
+
+/usr/include/linux/types.h:
+
+/usr/include/glm/detail/type_mat2x4.hpp:
+
+/usr/include/glm/detail/type_vec2.hpp:
+
+/usr/include/glm/detail/type_mat2x3.inl:
+
+/usr/include/glm/detail/type_half.hpp:
+
+/usr/include/glm/detail/setup.hpp:
+
+/usr/include/glm/detail/type_mat2x3.hpp:
+
+/usr/include/glm/detail/qualifier.hpp:
+
+/usr/include/linux/close_range.h:
+
+/usr/include/glm/detail/func_vector_relational.inl:
+
+/usr/include/glm/detail/func_trigonometric.inl:
+
+/usr/include/vulkan/vulkan.hpp:
+
+/usr/include/glm/detail/func_matrix.inl:
+
+/usr/include/stdlib.h:
+
+/usr/include/glm/detail/func_integer.inl:
+
+/usr/include/glm/detail/func_geometric.inl:
+
+/usr/include/math.h:
+
+/usr/include/glm/common.hpp:
 
 /usr/include/features-time64.h:
 
@@ -455,8 +765,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/ctype.h:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h:
-
 /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/gthr.h:
@@ -467,17 +775,61 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/cpu_defines.h:
 
-/usr/include/c++/15/bits/formatfwd.h:
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++io.h:
 
-/usr/include/c++/15/initializer_list:
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h:
+
+/usr/include/glm/ext/matrix_double4x4_precision.hpp:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h:
+
+/usr/include/glm/ext/matrix_float3x2.hpp:
+
+/usr/include/c++/15/version:
+
+/usr/include/glm/ext/vector_uint3_sized.hpp:
+
+/usr/include/c++/15/vector:
+
+/usr/include/c++/15/utility:
+
+/usr/include/c++/15/type_traits:
+
+/usr/include/c++/15/tuple:
+
+/usr/include/c++/15/tr1/special_function_util.h:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h:
+
+/usr/include/c++/15/tr1/riemann_zeta.tcc:
+
+/usr/include/vk_video/vulkan_video_codec_vp9std_decode.h:
+
+/usr/include/c++/15/tr1/poly_hermite.tcc:
+
+/usr/include/c++/15/tr1/modified_bessel_func.tcc:
+
+/usr/include/c++/15/tr1/legendre_function.tcc:
+
+/usr/include/c++/15/tr1/exp_integral.tcc:
+
+/usr/include/glm/matrix.hpp:
+
+/usr/include/glm/ext/vector_bool3.hpp:
+
+/usr/include/c++/15/tr1/ell_integral.tcc:
+
+/usr/include/glm/vec3.hpp:
+
+/usr/include/c++/15/tr1/beta_function.tcc:
+
+/usr/include/c++/15/tr1/bessel_function.tcc:
 
 /usr/include/asm/bitsperlong.h:
-
-/usr/include/c++/15/bits/functional_hash.h:
-
-/usr/include/c++/15/ext/type_traits.h:
-
-/usr/include/c++/15/bits/atomic_wait.h:
 
 /usr/include/c++/15/bits/atomic_lockfree_defines.h:
 
@@ -491,15 +843,13 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/streambuf:
 
+/usr/include/glm/ext/vector_double4.hpp:
+
+/usr/include/glm/ext/matrix_float4x2_precision.hpp:
+
 /usr/include/c++/15/bits/version.h:
 
-/usr/include/c++/15/backward/binders.h:
-
-/usr/include/c++/15/utility:
-
 /usr/include/c++/15/array:
-
-/usr/include/c++/15/tuple:
 
 /usr/include/bits/xopen_lim.h:
 
@@ -511,6 +861,10 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/range_access.h:
 
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+
+/usr/include/c++/15/cfloat:
+
 /usr/include/c++/15/bits/cpp_type_traits.h:
 
 /usr/include/bits/wctype-wchar.h:
@@ -519,16 +873,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/unistd_ext.h:
 
-/usr/include/vk_video/vulkan_video_codec_av1std_decode.h:
-
-/usr/include/c++/15/bits/iterator_concepts.h:
-
-/usr/include/c++/15/bits/concept_check.h:
-
-/usr/include/bits/uio_lim.h:
-
-/usr/include/c++/15/bits/align.h:
-
 /usr/include/gnu/stubs-64.h:
 
 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/base_code.cpp:
@@ -536,6 +880,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/bits/types/struct_timespec.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h:
+
+/usr/include/glm/ext/matrix_double3x3_precision.hpp:
 
 /usr/include/c++/15/bits/localefwd.h:
 
@@ -569,11 +915,17 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/locale_classes.h:
 
+/usr/include/glm/ext/matrix_double3x4.hpp:
+
+/usr/include/c++/15/tr1/poly_laguerre.tcc:
+
 /usr/include/c++/15/bits/charconv.h:
 
 /usr/include/c++/15/pstl/glue_algorithm_defs.h:
 
 /usr/include/bits/types/clock_t.h:
+
+/usr/include/bits/mathcalls.h:
 
 /usr/include/bits/types/__locale_t.h:
 
@@ -583,9 +935,43 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/errno.h:
 
+/usr/include/bits/time64.h:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/gthr-default.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/bits/thread-shared-types.h:
+
+/usr/include/bits/struct_mutex.h:
+
+CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
+
+/usr/include/bits/types/struct_timeval.h:
+
+/usr/include/glm/ext/matrix_double2x2_precision.hpp:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/glm/mat3x3.hpp:
+
+/usr/include/c++/15/numbers:
+
 /usr/include/libintl.h:
 
 /usr/include/bits/endianness.h:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
+
+/usr/include/c++/15/bits/ostream.h:
+
+/usr/include/glm/ext/vector_bool4.hpp:
 
 /usr/include/asm-generic/bitsperlong.h:
 
@@ -593,13 +979,25 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/asm-generic/errno-base.h:
 
+/usr/include/glm/ext/vector_double2_precision.hpp:
+
 /usr/include/bits/uintn-identity.h:
 
 /usr/include/bits/typesizes.h:
 
-/usr/include/bits/struct_mutex.h:
-
 /usr/include/bits/confname.h:
+
+/usr/include/c++/15/bits/concept_check.h:
+
+/usr/include/bits/uio_lim.h:
+
+/usr/include/bits/math-vector.h:
+
+/usr/include/glm/ext/vector_int3_sized.hpp:
+
+/usr/include/c++/15/fstream:
+
+/usr/include/assert.h:
 
 /usr/include/c++/15/bits/ranges_util.h:
 
@@ -611,6 +1009,24 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/long-double.h:
 
+/usr/include/glm/ext/matrix_double3x3.hpp:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h:
+
+/usr/include/c++/15/bits/codecvt.h:
+
+/usr/include/c++/15/system_error:
+
+/usr/include/bits/endian.h:
+
+/usr/include/c++/15/tr1/hypergeometric.tcc:
+
+/usr/include/bits/mathcalls-macros.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/glm/ext/matrix_float2x3_precision.hpp:
+
 /usr/include/bits/posix2_lim.h:
 
 /usr/include/c++/15/bits/basic_string.tcc:
@@ -621,33 +1037,33 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/atomic_wide_counter.h:
 
+/usr/include/glm/detail/type_mat2x4.inl:
+
 /usr/include/bits/posix_opt.h:
-
-/usr/include/bits/types/__mbstate_t.h:
-
-/usr/include/asm/posix_types.h:
-
-/usr/include/bits/time.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/c++/15/numbers:
 
 /usr/include/c++/15/cstdio:
 
-/usr/include/asm-generic/int-ll64.h:
+/usr/include/bits/syscall.h:
 
-/usr/include/c++/15/bits/fstream.tcc:
+/usr/include/bits/iscanonical.h:
 
-/usr/include/c++/15/bits/memoryfwd.h:
+/usr/include/c++/15/format:
+
+/usr/include/bits/locale.h:
+
+/usr/include/c++/15/bits/std_mutex.h:
 
 /usr/include/GL/glext.h:
+
+/usr/include/glm/detail/type_mat2x2.hpp:
 
 /usr/include/bits/dl_find_object.h:
 
 /usr/include/bits/types.h:
 
 /usr/include/c++/15/bits/streambuf_iterator.h:
+
+/usr/include/glm/detail/compute_vector_relational.hpp:
 
 /usr/include/bits/types/__sigset_t.h:
 
@@ -657,9 +1073,7 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/asm-generic/posix_types.h:
 
-/usr/include/c++/15/bits/stl_iterator_base_funcs.h:
-
-/usr/include/c++/15/ext/atomicity.h:
+/usr/include/glm/mat4x4.hpp:
 
 /usr/include/c++/15/bits/char_traits.h:
 
@@ -667,25 +1081,35 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/byteswap.h:
 
-/usr/include/bits/time64.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/gthr-default.h:
-
-/usr/include/bits/stdlib-float.h:
-
 /usr/include/linux/posix_types.h:
 
 /usr/include/bits/types/FILE.h:
 
+/usr/include/bits/flt-eval-method.h:
+
 /usr/include/GLFW/glfw3.h:
 
+/usr/include/bits/types/time_t.h:
+
+/usr/include/glm/detail/type_mat4x3.inl:
+
+/usr/include/bits/mathcalls-helper-functions.h:
+
+/usr/include/c++/15/bits/stl_function.h:
+
+/usr/include/c++/15/cwchar:
+
 /usr/include/asm-generic/errno.h:
+
+/usr/include/bits/fp-logb.h:
 
 /usr/include/c++/15/pstl/glue_memory_defs.h:
 
 /usr/include/c++/15/bits/monostate.h:
 
 /usr/include/asm/types.h:
+
+/usr/include/glm/ext/vector_bool4_precision.hpp:
 
 /usr/include/alloca.h:
 
@@ -697,45 +1121,55 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/refwrap.h:
 
-/usr/include/c++/15/type_traits:
+/usr/include/GL/gl.h:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h:
+/usr/include/c++/15/bits/atomic_wait.h:
 
-/usr/include/errno.h:
-
-/usr/include/c++/15/cstddef:
-
-/usr/include/bits/getopt_posix.h:
-
-/usr/include/bits/thread-shared-types.h:
+/usr/include/glm/ext/vector_uint3.hpp:
 
 /usr/include/bits/libc-header-start.h:
+
+/usr/include/glm/ext/matrix_float3x4_precision.hpp:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_base.h:
 
 /usr/include/c++/15/istream:
 
-/usr/include/GL/gl.h:
+/usr/include/c++/15/bits/align.h:
 
-/usr/include/bits/locale.h:
+/usr/include/bits/mathcalls-narrow.h:
 
-/usr/include/c++/15/bits/std_mutex.h:
+/usr/include/c++/15/bits/formatfwd.h:
 
-/usr/include/bits/syscall.h:
+/usr/include/wctype.h:
 
-/usr/include/c++/15/format:
+/usr/include/sched.h:
+
+/usr/include/glm/detail/func_exponential.inl:
+
+/usr/include/bits/fp-fast.h:
+
+/usr/include/bits/types/timer_t.h:
+
+/usr/include/c++/15/backward/auto_ptr.h:
+
+/usr/include/c++/15/bits/exception_defines.h:
+
+/usr/include/c++/15/bits/stl_heap.h:
 
 /usr/include/wchar.h:
 
 /usr/include/vulkan/vulkan_raii.hpp:
 
+/usr/include/glm/mat3x2.hpp:
+
 /usr/include/bits/posix1_lim.h:
 
 /usr/include/c++/15/cerrno:
 
-/usr/include/c++/15/bits/basic_ios.tcc:
+/usr/include/glm/vec2.hpp:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++io.h:
+/usr/include/c++/15/bits/basic_ios.tcc:
 
 /usr/include/bits/pthread_stack_min-dynamic.h:
 
@@ -751,9 +1185,17 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/stdint-uintn.h:
 
+/usr/include/features.h:
+
+/usr/include/bits/types/__FILE.h:
+
+/usr/include/bits/sched.h:
+
 /usr/include/bits/select.h:
 
 /usr/include/sys/cdefs.h:
+
+/usr/include/glm/detail/type_vec3.hpp:
 
 /usr/include/c++/15/debug/assertions.h:
 
@@ -763,35 +1205,57 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/vector.tcc:
 
-/usr/include/c++/15/version:
+/usr/include/c++/15/bits/ostream_insert.h:
+
+/usr/include/bits/types/error_t.h:
+
+/usr/include/c++/15/typeinfo:
+
+/usr/include/bits/types/clockid_t.h:
+
+/usr/include/bits/stdint-intn.h:
+
+/usr/include/glm/detail/func_packing.inl:
+
+/usr/include/c++/15/bits/utility.h:
+
+/usr/include/glm/detail/type_mat3x4.inl:
 
 /usr/include/bits/waitstatus.h:
 
 /usr/include/bits/wchar.h:
 
-/usr/include/c++/15/bits/enable_special_members.h:
-
 /usr/include/bits/types/struct___jmp_buf_tag.h:
 
-/usr/include/c++/15/bits/ostream_insert.h:
+/usr/include/c++/15/bits/enable_special_members.h:
 
-/usr/include/bits/types/error_t.h:
+/usr/include/glm/ext/matrix_double4x4.hpp:
 
-/usr/include/c++/15/bits/utility.h:
+/usr/include/c++/15/bits/stl_iterator_base_funcs.h:
 
-CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
+/usr/include/c++/15/ext/atomicity.h:
 
-/usr/include/bits/types/struct_timeval.h:
+/usr/include/glm/detail/func_common.inl:
 
-/usr/include/features.h:
+/usr/include/c++/15/initializer_list:
 
-/usr/include/bits/sched.h:
+/usr/include/errno.h:
 
-/usr/include/bits/types/__FILE.h:
+/usr/include/bits/getopt_posix.h:
 
-/usr/include/c++/15/x86_64-redhat-linux/bits/atomic_word.h:
+/usr/include/c++/15/cstddef:
 
-/usr/include/bits/types/time_t.h:
+/usr/include/c++/15/bits/memoryfwd.h:
+
+/usr/include/c++/15/bits/fstream.tcc:
+
+/usr/include/vk_video/vulkan_video_codec_av1std_decode.h:
+
+/usr/include/c++/15/bits/iterator_concepts.h:
+
+/usr/include/c++/15/bits/functional_hash.h:
+
+/usr/include/c++/15/ext/type_traits.h:
 
 /lib64/libm.so.6:
 
@@ -801,7 +1265,11 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/hash_bytes.h:
 
+/usr/include/glm/detail/type_vec1.inl:
+
 /usr/include/c++/15/bits/locale_classes.tcc:
+
+/usr/include/glm/ext/matrix_double2x2.hpp:
 
 /usr/include/c++/15/bits/invoke.h:
 
@@ -815,9 +1283,13 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/istream.tcc:
 
+/usr/include/glm/ext/scalar_int_sized.hpp:
+
 /usr/include/bits/types/wint_t.h:
 
 /usr/include/c++/15/bits/locale_facets.h:
+
+/usr/include/glm/ext/vector_uint4.hpp:
 
 /usr/include/dlfcn.h:
 
@@ -835,6 +1307,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/locale_facets_nonio.tcc:
 
+/usr/include/glm/ext/matrix_float3x2_precision.hpp:
+
 /usr/include/c++/15/bits/max_size_type.h:
 
 /usr/include/linux/sched/types.h:
@@ -845,21 +1319,15 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/ranges_base.h:
 
-/usr/include/bits/dlfcn.h:
-
 /usr/include/bits/cpu-set.h:
+
+/usr/include/bits/dlfcn.h:
 
 /usr/include/c++/15/bits/new_allocator.h:
 
 /usr/include/bits/struct_rwlock.h:
 
 /usr/include/c++/15/bits/uses_allocator.h:
-
-/usr/include/c++/15/bits/ostream.h:
-
-/usr/include/assert.h:
-
-/usr/include/c++/15/fstream:
 
 /usr/include/c++/15/bits/ostream.tcc:
 
@@ -870,6 +1338,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/asm/unistd.h:
 
 /usr/include/c++/15/bits/ranges_algo.h:
+
+/usr/include/glm/ext/matrix_double4x3_precision.hpp:
 
 /usr/include/KHR/khrplatform.h:
 
@@ -891,13 +1361,13 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/shared_ptr_base.h:
 
+/usr/include/c++/15/backward/binders.h:
+
+/usr/include/c++/15/bits/specfun.h:
+
 /usr/include/c++/15/bits/std_abs.h:
 
-/usr/include/bits/types/clockid_t.h:
-
-/usr/include/bits/stdint-intn.h:
-
-/usr/include/c++/15/typeinfo:
+/usr/include/glm/detail/type_mat3x2.hpp:
 
 /usr/include/c++/15/bits/stl_algo.h:
 
@@ -913,15 +1383,19 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/clocale:
 
+/usr/include/glm/detail/_vectorize.hpp:
+
 /usr/include/c++/15/bits/stl_pair.h:
 
 /usr/include/c++/15/bits/stl_bvector.h:
 
+/usr/include/glm/ext/matrix_float3x3_precision.hpp:
+
 /usr/include/c++/15/bits/stl_iterator.h:
 
-/usr/include/c++/15/memory:
+/usr/include/glm/detail/_fixes.hpp:
 
-/usr/include/c++/15/vector:
+/usr/include/c++/15/memory:
 
 /usr/include/c++/15/bits/ranges_algobase.h:
 
@@ -929,23 +1403,15 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/stl_construct.h:
 
-/usr/include/c++/15/bits/stl_function.h:
-
-/usr/include/c++/15/cwchar:
-
-/usr/include/bits/types/timer_t.h:
-
-/usr/include/c++/15/backward/auto_ptr.h:
-
-/usr/include/c++/15/bits/exception_defines.h:
-
-/usr/include/c++/15/bits/stl_heap.h:
-
 /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
 
 /usr/include/c++/15/bits/stl_iterator_base_types.h:
 
+/usr/include/glm/detail/type_half.inl:
+
 /usr/include/c++/15/bits/stl_tempbuf.h:
+
+/usr/include/glm/mat2x4.hpp:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/os_defines.h:
 
@@ -954,6 +1420,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/bits/stl_vector.h:
 
 /usr/include/c++/15/cwctype:
+
+/usr/include/glm/detail/type_vec1.hpp:
 
 /usr/include/bits/types/struct_tm.h:
 
@@ -965,17 +1433,25 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/uses_allocator_args.h:
 
+/usr/include/glm/exponential.hpp:
+
 /usr/include/c++/15/charconv:
 
 /usr/include/c++/15/climits:
+
+/usr/include/c++/15/cmath:
 
 /usr/include/c++/15/concepts:
 
 /usr/include/c++/15/cstdint:
 
+/usr/include/glm/detail/type_vec4.inl:
+
 /usr/include/c++/15/cstring:
 
 /usr/include/c++/15/ctime:
+
+/usr/include/glm/ext/matrix_double3x4_precision.hpp:
 
 /usr/include/bits/getopt_core.h:
 
@@ -983,15 +1459,19 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/ext/aligned_buffer.h:
 
+/usr/include/glm/ext/vector_uint2.hpp:
+
 /usr/include/c++/15/ext/alloc_traits.h:
 
-/usr/include/c++/15/bits/exception_ptr.h:
-
 /usr/include/bits/floatn-common.h:
+
+/usr/include/c++/15/bits/exception_ptr.h:
 
 /usr/include/c++/15/ext/concurrence.h:
 
 /usr/lib64/libc_nonshared.a:
+
+/usr/include/glm/ext/matrix_double4x2.hpp:
 
 /usr/include/c++/15/ext/numeric_traits.h:
 
@@ -1004,6 +1484,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/limits:
 
 /usr/include/c++/15/locale:
+
+/usr/include/glm/ext/matrix_double2x3_precision.hpp:
 
 /usr/include/c++/15/string_view:
 
@@ -1023,6 +1505,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/strings.h:
 
+/usr/include/glm/detail/compute_common.hpp:
+
 /usr/include/c++/15/bits/exception.h:
 
 /usr/include/c++/15/ostream:
@@ -1033,20 +1517,16 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/sys/syscall.h:
 
+/usr/include/glm/detail/type_mat2x2.inl:
+
+/usr/include/c++/15/tr1/gamma.tcc:
+
 /usr/include/c++/15/span:
+
+/usr/include/glm/ext/vector_int4.hpp:
 
 /usr/include/c++/15/stdexcept:
 
+/usr/include/glm/trigonometric.hpp:
+
 /usr/include/c++/15/string:
-
-/usr/include/bits/endian.h:
-
-/usr/include/c++/15/system_error:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++allocator.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++config.h:
-
-/usr/include/c++/15/bits/codecvt.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h:
