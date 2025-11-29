@@ -70,7 +70,9 @@ private:
   std::vector<vk::raii::Fence> inFlightFences;
 
   vk::raii::Buffer vertexBuffer = nullptr;
+  vk::raii::Buffer indexBuffer = nullptr;
   vk::raii::DeviceMemory vertexBufferMemory = nullptr;
+  vk::raii::DeviceMemory indexBufferMemory = nullptr;
 
   struct Vertex {
     glm::vec2 pos;
@@ -93,9 +95,12 @@ private:
     }
   };
 
-  std::vector<Vertex> vertices = {{{0.0f, -0.5f}, {1.0f, 1.0f, 1.0f}},
-                                  {{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
-                                  {{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}};
+  const std::vector<Vertex> vertices = {{{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+                                        {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+                                        {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+                                        {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}}};
+
+  const std::vector<uint16_t> indices = {0, 1, 2, 2, 3, 0};
 
   uint32_t currentFrame = 0;
   uint32_t semaphoreIndex = 0;
@@ -129,6 +134,7 @@ private:
     createGraphicsPipeline();
     createCommandPool();
     createVertexBuffer();
+    createIndexBuffer();
     createCommandBuffers();
     createSyncObjects();
   }
@@ -557,14 +563,20 @@ private:
     commandBuffers[currentFrame].beginRendering(renderingInfo);
     commandBuffers[currentFrame].bindPipeline(vk::PipelineBindPoint::eGraphics,
                                               *graphicsPipeline);
-    commandBuffers[currentFrame].bindVertexBuffers(0, *vertexBuffer, {0});
     commandBuffers[currentFrame].setViewport(
         0,
         vk::Viewport(0.0f, 0.0f, static_cast<float>(swapChainExtent.width),
                      static_cast<float>(swapChainExtent.height), 0.0f, 1.0f));
     commandBuffers[currentFrame].setScissor(
         0, vk::Rect2D(vk::Offset2D(0, 0), swapChainExtent));
-    commandBuffers[currentFrame].draw(3, 1, 0, 0);
+
+    commandBuffers[currentFrame].bindVertexBuffers(0, *vertexBuffer, {0});
+    commandBuffers[currentFrame].bindIndexBuffer(
+        *indexBuffer, 0,
+        vk::IndexTypeValue<decltype(indices)::value_type>::value);
+    commandBuffers[currentFrame].drawIndexed(indices.size(), 1, 0, 0, 0);
+
+    // commandBuffers[currentFrame].draw(3, 1, 0, 0);
     commandBuffers[currentFrame].endRendering();
     // After rendering, transition the swapchain image to PRESENT_SRC
     transition_image_layout(
@@ -943,6 +955,32 @@ private:
     bufferMemory = vk::raii::DeviceMemory(device, allocInfo);
 
     buffer.bindMemory(*bufferMemory, 0);
+  }
+
+  void createIndexBuffer() {
+    vk::DeviceSize bufferSize = sizeof(indices[0]) * indices.size();
+
+	// std::cout << "BUFFER SIZE: " << bufferSize << "\n";
+	// std::cout << "BUFFER SIZE: " << bufferSize << "\n";
+
+    vk::raii::Buffer stagingBuffer({});
+    vk::raii::DeviceMemory stagingBufferMemory({});
+    createBuffer(bufferSize, vk::BufferUsageFlagBits::eTransferSrc,
+                 vk::MemoryPropertyFlagBits::eHostVisible |
+                     vk::MemoryPropertyFlagBits::eHostCoherent,
+                 stagingBuffer, stagingBufferMemory);
+
+    void *data = stagingBufferMemory.mapMemory(0, bufferSize);
+    memcpy(data, indices.data(), (size_t)bufferSize);
+    stagingBufferMemory.unmapMemory();
+
+    createBuffer(bufferSize,
+                 vk::BufferUsageFlagBits::eTransferDst |
+                     vk::BufferUsageFlagBits::eIndexBuffer,
+                 vk::MemoryPropertyFlagBits::eDeviceLocal, indexBuffer,
+                 indexBufferMemory);
+
+    copyBuffer(stagingBuffer, indexBuffer, bufferSize);
   }
 };
 
