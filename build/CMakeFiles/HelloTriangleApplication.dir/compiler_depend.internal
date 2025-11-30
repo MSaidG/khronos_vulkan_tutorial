@@ -3,6 +3,7 @@
 
 CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/base_code.cpp
+ /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/stb_image.h
  /usr/include/GL/gl.h
  /usr/include/GL/glext.h
  /usr/include/GLFW/glfw3.h
@@ -252,6 +253,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/istream
  /usr/include/c++/15/limits
  /usr/include/c++/15/locale
+ /usr/include/c++/15/math.h
  /usr/include/c++/15/memory
  /usr/include/c++/15/new
  /usr/include/c++/15/numbers
@@ -265,6 +267,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/span
  /usr/include/c++/15/sstream
  /usr/include/c++/15/stdexcept
+ /usr/include/c++/15/stdlib.h
  /usr/include/c++/15/streambuf
  /usr/include/c++/15/string
  /usr/include/c++/15/string_view
@@ -507,12 +510,16 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/vulkan/vulkan_to_string.hpp
  /usr/include/wchar.h
  /usr/include/wctype.h
+ /usr/lib/gcc/x86_64-redhat-linux/15/include/emmintrin.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/float.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/limits.h
+ /usr/lib/gcc/x86_64-redhat-linux/15/include/mm_malloc.h
+ /usr/lib/gcc/x86_64-redhat-linux/15/include/mmintrin.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdint.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/syslimits.h
+ /usr/lib/gcc/x86_64-redhat-linux/15/include/xmmintrin.h
 
 HelloTriangleApplication
  /lib64/ld-linux-x86-64.so.2
