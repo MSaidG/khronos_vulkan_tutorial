@@ -318,10 +318,38 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: \
  /usr/include/c++/15/pstl/glue_memory_defs.h /usr/include/c++/15/vector \
  /usr/include/c++/15/bits/stl_vector.h \
  /usr/include/c++/15/bits/stl_bvector.h \
- /usr/include/c++/15/bits/vector.tcc /usr/include/vulkan/vulkan_raii.hpp \
- /usr/include/vulkan/vulkan.hpp /usr/include/vulkan/vulkan_hpp_macros.hpp \
- /usr/include/c++/15/version /usr/include/c++/15/utility \
- /usr/include/c++/15/bits/stl_relops.h /usr/include/c++/15/span \
+ /usr/include/c++/15/bits/vector.tcc \
+ /usr/include/glm/gtc/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_projection.hpp \
+ /usr/include/glm/gtc/constants.hpp \
+ /usr/include/glm/ext/scalar_constants.hpp \
+ /usr/include/glm/ext/scalar_constants.inl \
+ /usr/include/glm/gtc/constants.inl \
+ /usr/include/glm/ext/matrix_projection.inl \
+ /usr/include/glm/ext/matrix_clip_space.hpp \
+ /usr/include/glm/ext/matrix_clip_space.inl \
+ /usr/include/glm/ext/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_transform.inl \
+ /usr/include/glm/gtc/matrix_transform.inl /usr/include/c++/15/chrono \
+ /usr/include/c++/15/bits/chrono.h /usr/include/c++/15/ratio \
+ /usr/include/c++/15/ctime /usr/include/c++/15/bits/parse_numbers.h \
+ /usr/include/c++/15/sstream /usr/include/c++/15/bits/sstream.tcc \
+ /usr/include/c++/15/bits/chrono_io.h /usr/include/c++/15/iomanip \
+ /usr/include/c++/15/locale \
+ /usr/include/c++/15/bits/locale_facets_nonio.h \
+ /usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h \
+ /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/15/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/15/bits/locale_conv.h \
+ /usr/include/c++/15/bits/quoted_string.h /usr/include/c++/15/format \
+ /usr/include/c++/15/charconv /usr/include/c++/15/optional \
+ /usr/include/c++/15/bits/enable_special_members.h \
+ /usr/include/c++/15/span /usr/include/c++/15/bits/monostate.h \
+ /usr/include/c++/15/bits/formatfwd.h /usr/include/c++/15/bits/unicode.h \
+ /usr/include/c++/15/bits/unicode-data.h \
+ /usr/include/vulkan/vulkan_raii.hpp /usr/include/vulkan/vulkan.hpp \
+ /usr/include/vulkan/vulkan_hpp_macros.hpp /usr/include/c++/15/version \
+ /usr/include/c++/15/utility /usr/include/c++/15/bits/stl_relops.h \
  /usr/include/vulkan/vulkan.h /usr/include/vulkan/vk_platform.h \
  /usr/include/vulkan/vulkan_core.h \
  /usr/include/vk_video/vulkan_video_codec_h264std.h \
@@ -342,17 +370,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: \
  /usr/include/vk_video/vulkan_video_codec_vp9std.h /usr/include/dlfcn.h \
  /usr/include/bits/dlfcn.h /usr/include/bits/dl_find_object.h \
  /usr/include/vulkan/vulkan_enums.hpp \
- /usr/include/vulkan/vulkan_to_string.hpp /usr/include/c++/15/format \
- /usr/include/c++/15/charconv /usr/include/c++/15/locale \
- /usr/include/c++/15/bits/locale_facets_nonio.h /usr/include/c++/15/ctime \
- /usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h \
- /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/15/bits/locale_facets_nonio.tcc \
- /usr/include/c++/15/bits/locale_conv.h /usr/include/c++/15/optional \
- /usr/include/c++/15/bits/enable_special_members.h \
- /usr/include/c++/15/bits/monostate.h \
- /usr/include/c++/15/bits/formatfwd.h /usr/include/c++/15/bits/unicode.h \
- /usr/include/c++/15/bits/unicode-data.h \
+ /usr/include/vulkan/vulkan_to_string.hpp \
  /usr/include/vulkan/vulkan_handles.hpp \
  /usr/include/vulkan/vulkan_structs.hpp \
  /usr/include/vulkan/vulkan_funcs.hpp /usr/include/GLFW/glfw3.h \

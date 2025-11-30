@@ -125,6 +125,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/basic_string.tcc \
   /usr/include/c++/15/bits/char_traits.h \
   /usr/include/c++/15/bits/charconv.h \
+  /usr/include/c++/15/bits/chrono.h \
+  /usr/include/c++/15/bits/chrono_io.h \
   /usr/include/c++/15/bits/codecvt.h \
   /usr/include/c++/15/bits/concept_check.h \
   /usr/include/c++/15/bits/cpp_type_traits.h \
@@ -161,9 +163,11 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/ostream.h \
   /usr/include/c++/15/bits/ostream.tcc \
   /usr/include/c++/15/bits/ostream_insert.h \
+  /usr/include/c++/15/bits/parse_numbers.h \
   /usr/include/c++/15/bits/postypes.h \
   /usr/include/c++/15/bits/predefined_ops.h \
   /usr/include/c++/15/bits/ptr_traits.h \
+  /usr/include/c++/15/bits/quoted_string.h \
   /usr/include/c++/15/bits/range_access.h \
   /usr/include/c++/15/bits/ranges_algo.h \
   /usr/include/c++/15/bits/ranges_algobase.h \
@@ -177,6 +181,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/bits/shared_ptr_atomic.h \
   /usr/include/c++/15/bits/shared_ptr_base.h \
   /usr/include/c++/15/bits/specfun.h \
+  /usr/include/c++/15/bits/sstream.tcc \
   /usr/include/c++/15/bits/std_abs.h \
   /usr/include/c++/15/bits/std_mutex.h \
   /usr/include/c++/15/bits/stl_algo.h \
@@ -212,6 +217,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/cerrno \
   /usr/include/c++/15/cfloat \
   /usr/include/c++/15/charconv \
+  /usr/include/c++/15/chrono \
   /usr/include/c++/15/climits \
   /usr/include/c++/15/clocale \
   /usr/include/c++/15/cmath \
@@ -238,6 +244,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/format \
   /usr/include/c++/15/fstream \
   /usr/include/c++/15/initializer_list \
+  /usr/include/c++/15/iomanip \
   /usr/include/c++/15/ios \
   /usr/include/c++/15/iosfwd \
   /usr/include/c++/15/iostream \
@@ -253,7 +260,9 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/pstl/glue_algorithm_defs.h \
   /usr/include/c++/15/pstl/glue_memory_defs.h \
   /usr/include/c++/15/pstl/pstl_config.h \
+  /usr/include/c++/15/ratio \
   /usr/include/c++/15/span \
+  /usr/include/c++/15/sstream \
   /usr/include/c++/15/stdexcept \
   /usr/include/c++/15/streambuf \
   /usr/include/c++/15/string \
@@ -342,6 +351,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/glm/detail/type_vec4.hpp \
   /usr/include/glm/detail/type_vec4.inl \
   /usr/include/glm/exponential.hpp \
+  /usr/include/glm/ext/matrix_clip_space.hpp \
+  /usr/include/glm/ext/matrix_clip_space.inl \
   /usr/include/glm/ext/matrix_double2x2.hpp \
   /usr/include/glm/ext/matrix_double2x2_precision.hpp \
   /usr/include/glm/ext/matrix_double2x3.hpp \
@@ -378,6 +389,12 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/glm/ext/matrix_float4x3_precision.hpp \
   /usr/include/glm/ext/matrix_float4x4.hpp \
   /usr/include/glm/ext/matrix_float4x4_precision.hpp \
+  /usr/include/glm/ext/matrix_projection.hpp \
+  /usr/include/glm/ext/matrix_projection.inl \
+  /usr/include/glm/ext/matrix_transform.hpp \
+  /usr/include/glm/ext/matrix_transform.inl \
+  /usr/include/glm/ext/scalar_constants.hpp \
+  /usr/include/glm/ext/scalar_constants.inl \
   /usr/include/glm/ext/scalar_int_sized.hpp \
   /usr/include/glm/ext/scalar_uint_sized.hpp \
   /usr/include/glm/ext/vector_bool2.hpp \
@@ -413,6 +430,10 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/glm/fwd.hpp \
   /usr/include/glm/geometric.hpp \
   /usr/include/glm/glm.hpp \
+  /usr/include/glm/gtc/constants.hpp \
+  /usr/include/glm/gtc/constants.inl \
+  /usr/include/glm/gtc/matrix_transform.hpp \
+  /usr/include/glm/gtc/matrix_transform.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/mat2x2.hpp \
   /usr/include/glm/mat2x3.hpp \
@@ -579,8 +600,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/vector_relational.hpp:
 
-/usr/include/glm/simd/platform.h:
-
 /usr/include/glm/packing.hpp:
 
 /usr/include/glm/mat4x3.hpp:
@@ -595,13 +614,19 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/integer.hpp:
 
+/usr/include/glm/simd/platform.h:
+
+/usr/include/glm/gtc/matrix_transform.hpp:
+
+/usr/include/glm/gtc/constants.inl:
+
+/usr/include/glm/gtc/constants.hpp:
+
 /usr/include/glm/glm.hpp:
 
 /usr/include/vk_video/vulkan_video_codec_h265std.h:
 
 /usr/include/glm/geometric.hpp:
-
-/usr/include/glm/fwd.hpp:
 
 /usr/include/glm/ext/vector_uint2_sized.hpp:
 
@@ -645,6 +670,14 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/ext/scalar_uint_sized.hpp:
 
+/usr/include/glm/ext/scalar_constants.hpp:
+
+/usr/include/glm/ext/matrix_transform.hpp:
+
+/usr/include/glm/ext/matrix_projection.inl:
+
+/usr/include/glm/ext/matrix_projection.hpp:
+
 /usr/include/glm/ext/matrix_float4x4_precision.hpp:
 
 /usr/include/glm/ext/matrix_float4x4.hpp:
@@ -656,6 +689,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/glm/ext/matrix_float4x2.hpp:
 
 /usr/include/glm/ext/matrix_float3x4.hpp:
+
+/usr/include/glm/ext/matrix_transform.inl:
 
 /usr/include/glm/ext/matrix_float3x3.hpp:
 
@@ -688,6 +723,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/glm/ext/matrix_double2x4.hpp:
 
 /usr/include/glm/ext/matrix_double2x3.hpp:
+
+/usr/include/glm/ext/matrix_clip_space.hpp:
 
 /usr/include/locale.h:
 
@@ -727,7 +764,11 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/detail/type_half.hpp:
 
+/usr/include/glm/ext/matrix_clip_space.inl:
+
 /usr/include/glm/detail/setup.hpp:
+
+/usr/include/glm/gtc/matrix_transform.inl:
 
 /usr/include/glm/detail/type_mat2x3.hpp:
 
@@ -772,8 +813,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/c++/15/x86_64-redhat-linux/bits/error_constants.h:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_inline.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/cpu_defines.h:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/c++io.h:
 
@@ -829,6 +868,34 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/tr1/bessel_function.tcc:
 
+/usr/include/glm/ext/matrix_double2x3_precision.hpp:
+
+/usr/include/c++/15/string_view:
+
+/usr/include/glm/trigonometric.hpp:
+
+/usr/include/c++/15/string:
+
+/usr/include/c++/15/streambuf:
+
+/usr/include/sys/syscall.h:
+
+/usr/include/glm/detail/type_mat2x2.inl:
+
+/usr/include/c++/15/tr1/gamma.tcc:
+
+/usr/include/c++/15/span:
+
+/usr/include/glm/ext/vector_int4.hpp:
+
+/usr/include/c++/15/stdexcept:
+
+/usr/include/c++/15/ratio:
+
+/usr/include/c++/15/pstl/pstl_config.h:
+
+/usr/include/c++/15/pstl/glue_memory_defs.h:
+
 /usr/include/asm/bitsperlong.h:
 
 /usr/include/c++/15/bits/atomic_lockfree_defines.h:
@@ -838,16 +905,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/c++/15/bits/atomic_base.h:
 
 /usr/include/c++/15/bits/algorithmfwd.h:
-
-/usr/include/c++/15/bits/basic_string.h:
-
-/usr/include/c++/15/streambuf:
-
-/usr/include/glm/ext/vector_double4.hpp:
-
-/usr/include/glm/ext/matrix_float4x2_precision.hpp:
-
-/usr/include/c++/15/bits/version.h:
 
 /usr/include/c++/15/array:
 
@@ -864,10 +921,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
 /usr/include/c++/15/cfloat:
-
-/usr/include/c++/15/bits/cpp_type_traits.h:
-
-/usr/include/bits/wctype-wchar.h:
 
 /usr/include/bits/timesize.h:
 
@@ -985,13 +1038,15 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/bits/typesizes.h:
 
+/usr/include/c++/15/bits/basic_string.h:
+
+/usr/include/bits/wctype-wchar.h:
+
+/usr/include/c++/15/bits/cpp_type_traits.h:
+
 /usr/include/bits/confname.h:
 
-/usr/include/c++/15/bits/concept_check.h:
-
-/usr/include/bits/uio_lim.h:
-
-/usr/include/bits/math-vector.h:
+/usr/include/c++/15/chrono:
 
 /usr/include/glm/ext/vector_int3_sized.hpp:
 
@@ -1103,11 +1158,15 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/bits/fp-logb.h:
 
-/usr/include/c++/15/pstl/glue_memory_defs.h:
+/usr/include/c++/15/x86_64-redhat-linux/bits/cpu_defines.h:
+
+/usr/include/c++/15/bits/chrono.h:
 
 /usr/include/c++/15/bits/monostate.h:
 
 /usr/include/asm/types.h:
+
+/usr/include/c++/15/bits/chrono_io.h:
 
 /usr/include/glm/ext/vector_bool4_precision.hpp:
 
@@ -1137,6 +1196,18 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/align.h:
 
+/usr/include/bits/uio_lim.h:
+
+/usr/include/bits/math-vector.h:
+
+/usr/include/c++/15/bits/concept_check.h:
+
+/usr/include/glm/ext/vector_double4.hpp:
+
+/usr/include/glm/ext/matrix_float4x2_precision.hpp:
+
+/usr/include/c++/15/bits/version.h:
+
 /usr/include/bits/mathcalls-narrow.h:
 
 /usr/include/c++/15/bits/formatfwd.h:
@@ -1149,11 +1220,11 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/bits/fp-fast.h:
 
-/usr/include/bits/types/timer_t.h:
-
 /usr/include/c++/15/backward/auto_ptr.h:
 
 /usr/include/c++/15/bits/exception_defines.h:
+
+/usr/include/bits/types/timer_t.h:
 
 /usr/include/c++/15/bits/stl_heap.h:
 
@@ -1162,6 +1233,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/vulkan/vulkan_raii.hpp:
 
 /usr/include/glm/mat3x2.hpp:
+
+/usr/include/c++/15/sstream:
 
 /usr/include/bits/posix1_lim.h:
 
@@ -1317,6 +1390,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/asm/posix_types_64.h:
 
+/usr/include/c++/15/iomanip:
+
 /usr/include/c++/15/bits/ranges_base.h:
 
 /usr/include/bits/cpu-set.h:
@@ -1331,9 +1406,21 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/ostream.tcc:
 
+/usr/include/glm/fwd.hpp:
+
+/usr/include/c++/15/bits/parse_numbers.h:
+
 /usr/include/bits/local_lim.h:
 
 /usr/include/c++/15/bits/postypes.h:
+
+/usr/include/c++/15/bits/quoted_string.h:
+
+/usr/lib64/libc_nonshared.a:
+
+/usr/include/glm/ext/matrix_double4x2.hpp:
+
+/usr/include/c++/15/ext/numeric_traits.h:
 
 /usr/include/asm/unistd.h:
 
@@ -1364,6 +1451,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/backward/binders.h:
 
 /usr/include/c++/15/bits/specfun.h:
+
+/usr/include/c++/15/bits/sstream.tcc:
 
 /usr/include/c++/15/bits/std_abs.h:
 
@@ -1419,6 +1508,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/bits/stl_vector.h:
 
+/usr/include/glm/ext/scalar_constants.inl:
+
 /usr/include/c++/15/cwctype:
 
 /usr/include/glm/detail/type_vec1.hpp:
@@ -1469,12 +1560,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/ext/concurrence.h:
 
-/usr/lib64/libc_nonshared.a:
-
-/usr/include/glm/ext/matrix_double4x2.hpp:
-
-/usr/include/c++/15/ext/numeric_traits.h:
-
 /usr/include/c++/15/ext/string_conversions.h:
 
 /usr/include/c++/15/ios:
@@ -1484,10 +1569,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/limits:
 
 /usr/include/c++/15/locale:
-
-/usr/include/glm/ext/matrix_double2x3_precision.hpp:
-
-/usr/include/c++/15/string_view:
 
 /usr/lib64/libglfw.so:
 
@@ -1512,21 +1593,3 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/ostream:
 
 /usr/include/c++/15/pstl/execution_defs.h:
-
-/usr/include/c++/15/pstl/pstl_config.h:
-
-/usr/include/sys/syscall.h:
-
-/usr/include/glm/detail/type_mat2x2.inl:
-
-/usr/include/c++/15/tr1/gamma.tcc:
-
-/usr/include/c++/15/span:
-
-/usr/include/glm/ext/vector_int4.hpp:
-
-/usr/include/c++/15/stdexcept:
-
-/usr/include/glm/trigonometric.hpp:
-
-/usr/include/c++/15/string:
