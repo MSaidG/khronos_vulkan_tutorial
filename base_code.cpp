@@ -8,6 +8,11 @@ import vulkan_hpp;
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#define TINYOBJLOADER_IMPLEMENTATION // define this in only *one* .cc
+// Optional. define TINYOBJLOADER_USE_MAPBOX_EARCUT gives robust triangulation. Requires C++11
+#define TINYOBJLOADER_USE_MAPBOX_EARCUT
+#include "tiny_obj_loader.h"
+
 // #define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #include <algorithm>
 #include <array>
@@ -17,16 +22,22 @@ import vulkan_hpp;
 #include <cstring>
 #include <fstream>
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#define GLM_FORCE_RADIANS
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/hash.hpp>
 #include <iostream>
-#include <limits>
+// #include <limits>
 #include <memory>
 #include <stdexcept>
+#include <unordered_map>
 #include <vector>
 
 constexpr uint32_t WIDTH = 800;
 constexpr uint32_t HEIGHT = 600;
+const std::string MODEL_PATH = "models/viking_room.obj";
+const std::string TEXTURE_PATH = "textures/viking_room.png";
 
 const std::vector<char const*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
@@ -40,13 +51,65 @@ constexpr bool enableValidationLayers = true;
 
 constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
+struct UniformBufferObject {
+    // glm::vec2 foo; // alignment test
+    // alignas(16) glm::mat4 model;
+    glm::mat4 model;
+    glm::mat4 view;
+    glm::mat4 proj;
+};
+
+struct Vertex {
+    glm::vec3 pos;
+    glm::vec3 color;
+    glm::vec2 texCoord;
+
+    static vk::VertexInputBindingDescription getBindingDescription()
+    {
+        return vk::VertexInputBindingDescription()
+            .setBinding(0)
+            .setStride(sizeof(Vertex))
+            .setInputRate(vk::VertexInputRate::eVertex);
+    }
+
+    static std::array<vk::VertexInputAttributeDescription, 3>
+    getAttributeDescriptions()
+    {
+        return {
+            vk::VertexInputAttributeDescription(
+                0, 0, vk::Format::eR32G32B32Sfloat, offsetof(Vertex, pos)),
+            vk::VertexInputAttributeDescription(
+                1, 0, vk::Format::eR32G32B32Sfloat, offsetof(Vertex, color)),
+            vk::VertexInputAttributeDescription(
+                2, 0, vk::Format::eR32G32Sfloat, offsetof(Vertex, texCoord))
+        };
+    }
+
+    bool operator==(const Vertex& other) const
+    {
+        return pos == other.pos && color == other.color && texCoord == other.texCoord;
+    }
+};
+
+template <>
+struct std::hash<Vertex> {
+    size_t operator()(Vertex const& vertex) const noexcept
+    {
+        return ((hash<glm::vec3>()(vertex.pos) ^ (hash<glm::vec3>()(vertex.color) << 1)) >> 1) ^ (hash<glm::vec2>()(vertex.texCoord) << 1);
+    }
+};
+
 class HelloTriangleApplication {
 public:
     void run()
     {
         initWindow();
         initVulkan();
+        std::cout << "Vertices size: " << vertices.size() << "\n";
+        std::cout << "Indices size: " << indices.size() << "\n";
         mainLoop();
+        std::cout << "Vertices size: " << vertices.size() << "\n";
+        std::cout << "Indices size: " << indices.size() << "\n";
         cleanup();
     }
 
@@ -98,64 +161,34 @@ private:
     vk::raii::DeviceMemory depthImageMemory = nullptr;
     vk::raii::ImageView depthImageView = nullptr;
 
-    struct UniformBufferObject {
-        // glm::vec2 foo; // alignment test
-        // alignas(16) glm::mat4 model;
-        glm::mat4 model;
-        glm::mat4 view;
-        glm::mat4 proj;
-    };
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    std::unordered_map<Vertex, uint32_t> uniqueVertices {};
 
-    struct Vertex {
-        glm::vec3 pos;
-        glm::vec3 color;
-        glm::vec2 texCoord;
+    // const std::vector<Vertex> vertices = {
+    // { { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+    // { { 0.5f, -0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+    // { { 0.5f, 0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+    // { { -0.5f, 0.5f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } },
 
-        static vk::VertexInputBindingDescription getBindingDescription()
-        {
-            return vk::VertexInputBindingDescription()
-                .setBinding(0)
-                .setStride(sizeof(Vertex))
-                .setInputRate(vk::VertexInputRate::eVertex);
-        }
+    // { { -0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+    // { { 0.5f, -0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+    // { { 0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+    // { { -0.5f, 0.5f, -0.5f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } }
+    // };
 
-        static std::array<vk::VertexInputAttributeDescription, 3>
-        getAttributeDescriptions()
-        {
-            return {
-                vk::VertexInputAttributeDescription(
-                    0, 0, vk::Format::eR32G32B32Sfloat, offsetof(Vertex, pos)),
-                vk::VertexInputAttributeDescription(
-                    1, 0, vk::Format::eR32G32B32Sfloat, offsetof(Vertex, color)),
-                vk::VertexInputAttributeDescription(
-                    2, 0, vk::Format::eR32G32Sfloat, offsetof(Vertex, texCoord))
-            };
-        }
-    };
-
-    const std::vector<Vertex> vertices = {
-        { { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-        { { 0.5f, -0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-        { { 0.5f, 0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-        { { -0.5f, 0.5f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } },
-
-        { { -0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-        { { 0.5f, -0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-        { { 0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-        { { -0.5f, 0.5f, -0.5f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } }
-    };
-
-    const std::vector<uint16_t> indices = {
-        0, 1, 2, 2, 3, 0,
-        4, 5, 6, 6, 7, 4
-    };
+    // const std::vector<uint16_t> indices = {
+    // 0, 1, 2, 2, 3, 0,
+    // 4, 5, 6, 6, 7, 4
+    // };
 
     uint32_t currentFrame = 0;
     uint32_t semaphoreIndex = 0;
     bool framebufferResized = false;
 
     std::vector<const char*> requiredDeviceExtension = {
-        vk::KHRSwapchainExtensionName, vk::KHRSpirv14ExtensionName,
+        vk::KHRSwapchainExtensionName,
+        vk::KHRSpirv14ExtensionName,
         vk::KHRSynchronization2ExtensionName,
         vk::KHRCreateRenderpass2ExtensionName
     };
@@ -189,6 +222,7 @@ private:
         createTextureImage();
         createTextureImageView();
         createTextureSampler();
+        loadModel();
         createVertexBuffer();
         createIndexBuffer();
         createUniformBuffers();
@@ -203,6 +237,8 @@ private:
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
             drawFrame();
+            std::cout << "Vertices size: " << vertices.size() << "\n";
+            std::cout << "Indices size: " << indices.size() << "\n";
         }
         device.waitIdle(); // wait for device to finish operations before destroying
                            // resources
@@ -646,11 +682,13 @@ private:
             0, vk::Rect2D(vk::Offset2D(0, 0), swapChainExtent));
 
         commandBuffers[currentFrame].bindVertexBuffers(0, *vertexBuffer, { 0 });
+
         commandBuffers[currentFrame].bindIndexBuffer(
-            *indexBuffer, 0,
-            vk::IndexTypeValue<decltype(indices)::value_type>::value); // vk::IndexType::eUint16
+            *indexBuffer, 0, vk::IndexTypeValue<decltype(indices)::value_type>::value); // vk::IndexType::eUint32
+
         commandBuffers[currentFrame].bindDescriptorSets(vk::PipelineBindPoint::eGraphics,
             pipelineLayout, 0, *descriptorSets[currentFrame], nullptr);
+
         commandBuffers[currentFrame].drawIndexed(indices.size(), 1, 0, 0, 0);
 
         // commandBuffers[currentFrame].draw(3, 1, 0, 0);
@@ -768,7 +806,6 @@ private:
         commandBuffers[currentFrame].reset();
         recordCommandBuffer(imageIndex);
 
-
         vk::PipelineStageFlags waitDestinationStageMask(
             vk::PipelineStageFlagBits::eColorAttachmentOutput);
         const vk::SubmitInfo submitInfo = vk::SubmitInfo()
@@ -782,37 +819,28 @@ private:
 
         queue.submit(submitInfo, *inFlightFences[currentFrame]);
 
-		try
-		{
+        try {
             const vk::PresentInfoKHR presentInfoKHR = vk::PresentInfoKHR()
-                                                      .setWaitSemaphoreCount(1)
-                                                      .setSwapchainCount(1)
-                                                      .setPWaitSemaphores(&*renderFinishedSemaphores[imageIndex])
-                                                      .setPSwapchains(&*swapChain)
-                                                      .setPImageIndices(&imageIndex);
-			result = queue.presentKHR(presentInfoKHR);
-			if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR || framebufferResized)
-			{
-				framebufferResized = false;
-				recreateSwapChain();
-			}
-			else if (result != vk::Result::eSuccess)
-			{
-				throw std::runtime_error("failed to present swap chain image!");
-			}
-		}
-		catch (const vk::SystemError &e)
-		{
-			if (e.code().value() == static_cast<int>(vk::Result::eErrorOutOfDateKHR))
-			{
-				recreateSwapChain();
-				return;
-			}
-			else
-			{
-				throw;
-			}
-		}
+                                                          .setWaitSemaphoreCount(1)
+                                                          .setSwapchainCount(1)
+                                                          .setPWaitSemaphores(&*renderFinishedSemaphores[imageIndex])
+                                                          .setPSwapchains(&*swapChain)
+                                                          .setPImageIndices(&imageIndex);
+            result = queue.presentKHR(presentInfoKHR);
+            if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR || framebufferResized) {
+                framebufferResized = false;
+                recreateSwapChain();
+            } else if (result != vk::Result::eSuccess) {
+                throw std::runtime_error("failed to present swap chain image!");
+            }
+        } catch (const vk::SystemError& e) {
+            if (e.code().value() == static_cast<int>(vk::Result::eErrorOutOfDateKHR)) {
+                recreateSwapChain();
+                return;
+            } else {
+                throw;
+            }
+        }
 
         semaphoreIndex = (semaphoreIndex + 1) % presentCompleteSemaphores.size();
         currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
@@ -1187,7 +1215,8 @@ private:
     void createTextureImage()
     {
         int texWidth, texHeight, texChannels;
-        stbi_uc* pixels = stbi_load("textures/texture.jpg", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+        stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+        // stbi_uc* pixels = stbi_load("textures/texture.jpg", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
         vk::DeviceSize imageSize = texWidth * texHeight * 4;
 
         if (!pixels) {
@@ -1343,6 +1372,47 @@ private:
     bool hasStencilComponent(vk::Format format)
     {
         return format == vk::Format::eD32SfloatS8Uint || format == vk::Format::eD24UnormS8Uint;
+    }
+
+    void loadModel()
+    {
+
+        tinyobj::attrib_t attrib;
+        std::vector<tinyobj::shape_t> shapes;
+        std::vector<tinyobj::material_t> materials;
+        std::string warn, err;
+
+        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str())) {
+            throw std::runtime_error(warn + err);
+        }
+
+        for (const auto& shape : shapes) {
+            for (const auto& index : shape.mesh.indices) {
+                Vertex vertex {};
+
+                vertex.pos = {
+                    attrib.vertices[3 * index.vertex_index + 0],
+                    attrib.vertices[3 * index.vertex_index + 1],
+                    attrib.vertices[3 * index.vertex_index + 2],
+                };
+
+                vertex.texCoord = {
+                    attrib.texcoords[2 * index.texcoord_index + 0],
+                    1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
+                };
+
+                vertex.color = { 1.0f, 1.0f, 1.0f };
+
+                if (uniqueVertices.count(vertex) == 0) {
+                    uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
+                    vertices.push_back(vertex);
+                }
+                indices.push_back(uniqueVertices[vertex]);
+                
+                // vertices.push_back(vertex);
+                // indices.push_back(indices.size());
+            }
+        }
     }
 };
 

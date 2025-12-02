@@ -58,5 +58,11 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
-    }
+    },
+
+    "clangd.fallbackFlags": [
+        "-std=c++20",
+    ],
+
+
 }

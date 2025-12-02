@@ -3,7 +3,9 @@
 
 CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/base_code.cpp
+ /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/mapbox/earcut.hpp
  /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/stb_image.h
+ /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/tiny_obj_loader.h
  /usr/include/GL/gl.h
  /usr/include/GL/glext.h
  /usr/include/GLFW/glfw3.h
@@ -135,6 +137,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/bits/cxxabi_forced.h
  /usr/include/c++/15/bits/cxxabi_init_exception.h
  /usr/include/c++/15/bits/enable_special_members.h
+ /usr/include/c++/15/bits/erase_if.h
  /usr/include/c++/15/bits/exception.h
  /usr/include/c++/15/bits/exception_defines.h
  /usr/include/c++/15/bits/exception_ptr.h
@@ -143,6 +146,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/bits/functexcept.h
  /usr/include/c++/15/bits/functional_hash.h
  /usr/include/c++/15/bits/hash_bytes.h
+ /usr/include/c++/15/bits/hashtable.h
+ /usr/include/c++/15/bits/hashtable_policy.h
  /usr/include/c++/15/bits/invoke.h
  /usr/include/c++/15/bits/ios_base.h
  /usr/include/c++/15/bits/istream.tcc
@@ -162,6 +167,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/bits/move.h
  /usr/include/c++/15/bits/nested_exception.h
  /usr/include/c++/15/bits/new_allocator.h
+ /usr/include/c++/15/bits/node_handle.h
  /usr/include/c++/15/bits/ostream.h
  /usr/include/c++/15/bits/ostream.tcc
  /usr/include/c++/15/bits/ostream_insert.h
@@ -185,6 +191,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/bits/specfun.h
  /usr/include/c++/15/bits/sstream.tcc
  /usr/include/c++/15/bits/std_abs.h
+ /usr/include/c++/15/bits/std_function.h
  /usr/include/c++/15/bits/std_mutex.h
  /usr/include/c++/15/bits/stl_algo.h
  /usr/include/c++/15/bits/stl_algobase.h
@@ -195,10 +202,15 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/bits/stl_iterator.h
  /usr/include/c++/15/bits/stl_iterator_base_funcs.h
  /usr/include/c++/15/bits/stl_iterator_base_types.h
+ /usr/include/c++/15/bits/stl_map.h
+ /usr/include/c++/15/bits/stl_multimap.h
+ /usr/include/c++/15/bits/stl_multiset.h
  /usr/include/c++/15/bits/stl_pair.h
  /usr/include/c++/15/bits/stl_raw_storage_iter.h
  /usr/include/c++/15/bits/stl_relops.h
+ /usr/include/c++/15/bits/stl_set.h
  /usr/include/c++/15/bits/stl_tempbuf.h
+ /usr/include/c++/15/bits/stl_tree.h
  /usr/include/c++/15/bits/stl_uninitialized.h
  /usr/include/c++/15/bits/stl_vector.h
  /usr/include/c++/15/bits/streambuf.tcc
@@ -209,6 +221,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/bits/unicode.h
  /usr/include/c++/15/bits/uniform_int_dist.h
  /usr/include/c++/15/bits/unique_ptr.h
+ /usr/include/c++/15/bits/unordered_map.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -245,6 +258,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/ext/type_traits.h
  /usr/include/c++/15/format
  /usr/include/c++/15/fstream
+ /usr/include/c++/15/functional
  /usr/include/c++/15/initializer_list
  /usr/include/c++/15/iomanip
  /usr/include/c++/15/ios
@@ -253,6 +267,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/istream
  /usr/include/c++/15/limits
  /usr/include/c++/15/locale
+ /usr/include/c++/15/map
  /usr/include/c++/15/math.h
  /usr/include/c++/15/memory
  /usr/include/c++/15/new
@@ -264,6 +279,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/pstl/glue_memory_defs.h
  /usr/include/c++/15/pstl/pstl_config.h
  /usr/include/c++/15/ratio
+ /usr/include/c++/15/set
  /usr/include/c++/15/span
  /usr/include/c++/15/sstream
  /usr/include/c++/15/stdexcept
@@ -287,6 +303,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/tuple
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
+ /usr/include/c++/15/unordered_map
  /usr/include/c++/15/utility
  /usr/include/c++/15/vector
  /usr/include/c++/15/version
@@ -326,6 +343,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/glm/detail/func_vector_relational.inl
  /usr/include/glm/detail/qualifier.hpp
  /usr/include/glm/detail/setup.hpp
+ /usr/include/glm/detail/type_float.hpp
  /usr/include/glm/detail/type_half.hpp
  /usr/include/glm/detail/type_half.inl
  /usr/include/glm/detail/type_mat2x2.hpp
@@ -346,6 +364,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/glm/detail/type_mat4x3.inl
  /usr/include/glm/detail/type_mat4x4.hpp
  /usr/include/glm/detail/type_mat4x4.inl
+ /usr/include/glm/detail/type_quat.hpp
+ /usr/include/glm/detail/type_quat.inl
  /usr/include/glm/detail/type_vec1.hpp
  /usr/include/glm/detail/type_vec1.inl
  /usr/include/glm/detail/type_vec2.hpp
@@ -397,34 +417,60 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/glm/ext/matrix_projection.inl
  /usr/include/glm/ext/matrix_transform.hpp
  /usr/include/glm/ext/matrix_transform.inl
+ /usr/include/glm/ext/quaternion_common.hpp
+ /usr/include/glm/ext/quaternion_common.inl
+ /usr/include/glm/ext/quaternion_double.hpp
+ /usr/include/glm/ext/quaternion_double_precision.hpp
+ /usr/include/glm/ext/quaternion_float.hpp
+ /usr/include/glm/ext/quaternion_float_precision.hpp
+ /usr/include/glm/ext/quaternion_geometric.hpp
+ /usr/include/glm/ext/quaternion_geometric.inl
+ /usr/include/glm/ext/quaternion_relational.hpp
+ /usr/include/glm/ext/quaternion_relational.inl
+ /usr/include/glm/ext/quaternion_transform.hpp
+ /usr/include/glm/ext/quaternion_transform.inl
+ /usr/include/glm/ext/quaternion_trigonometric.hpp
+ /usr/include/glm/ext/quaternion_trigonometric.inl
  /usr/include/glm/ext/scalar_constants.hpp
  /usr/include/glm/ext/scalar_constants.inl
  /usr/include/glm/ext/scalar_int_sized.hpp
  /usr/include/glm/ext/scalar_uint_sized.hpp
+ /usr/include/glm/ext/vector_bool1.hpp
+ /usr/include/glm/ext/vector_bool1_precision.hpp
  /usr/include/glm/ext/vector_bool2.hpp
  /usr/include/glm/ext/vector_bool2_precision.hpp
  /usr/include/glm/ext/vector_bool3.hpp
  /usr/include/glm/ext/vector_bool3_precision.hpp
  /usr/include/glm/ext/vector_bool4.hpp
  /usr/include/glm/ext/vector_bool4_precision.hpp
+ /usr/include/glm/ext/vector_double1.hpp
+ /usr/include/glm/ext/vector_double1_precision.hpp
  /usr/include/glm/ext/vector_double2.hpp
  /usr/include/glm/ext/vector_double2_precision.hpp
  /usr/include/glm/ext/vector_double3.hpp
  /usr/include/glm/ext/vector_double3_precision.hpp
  /usr/include/glm/ext/vector_double4.hpp
  /usr/include/glm/ext/vector_double4_precision.hpp
+ /usr/include/glm/ext/vector_float1.hpp
+ /usr/include/glm/ext/vector_float1_precision.hpp
  /usr/include/glm/ext/vector_float2.hpp
  /usr/include/glm/ext/vector_float2_precision.hpp
  /usr/include/glm/ext/vector_float3.hpp
  /usr/include/glm/ext/vector_float3_precision.hpp
  /usr/include/glm/ext/vector_float4.hpp
  /usr/include/glm/ext/vector_float4_precision.hpp
+ /usr/include/glm/ext/vector_int1.hpp
+ /usr/include/glm/ext/vector_int1_sized.hpp
  /usr/include/glm/ext/vector_int2.hpp
  /usr/include/glm/ext/vector_int2_sized.hpp
  /usr/include/glm/ext/vector_int3.hpp
  /usr/include/glm/ext/vector_int3_sized.hpp
  /usr/include/glm/ext/vector_int4.hpp
  /usr/include/glm/ext/vector_int4_sized.hpp
+ /usr/include/glm/ext/vector_relational.hpp
+ /usr/include/glm/ext/vector_relational.inl
+ /usr/include/glm/ext/vector_uint1.hpp
+ /usr/include/glm/ext/vector_uint1_sized.hpp
  /usr/include/glm/ext/vector_uint2.hpp
  /usr/include/glm/ext/vector_uint2_sized.hpp
  /usr/include/glm/ext/vector_uint3.hpp
@@ -436,8 +482,17 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/glm/glm.hpp
  /usr/include/glm/gtc/constants.hpp
  /usr/include/glm/gtc/constants.inl
+ /usr/include/glm/gtc/epsilon.hpp
+ /usr/include/glm/gtc/epsilon.inl
  /usr/include/glm/gtc/matrix_transform.hpp
  /usr/include/glm/gtc/matrix_transform.inl
+ /usr/include/glm/gtc/quaternion.hpp
+ /usr/include/glm/gtc/quaternion.inl
+ /usr/include/glm/gtc/vec1.hpp
+ /usr/include/glm/gtx/dual_quaternion.hpp
+ /usr/include/glm/gtx/dual_quaternion.inl
+ /usr/include/glm/gtx/hash.hpp
+ /usr/include/glm/gtx/hash.inl
  /usr/include/glm/integer.hpp
  /usr/include/glm/mat2x2.hpp
  /usr/include/glm/mat2x3.hpp

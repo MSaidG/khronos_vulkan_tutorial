@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(HelloTriangleApplication)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Vulkan REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -14,7 +14,7 @@ pkg_check_modules(GLFW REQUIRED glfw3)
 # link_directories(${VULKAN_SDK}/x86_64/lib)
 set(SLANGC_EXECUTABLE "/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/bin/slangc")
 
-
+# add_compile_options(-O3 -march=native)
 
 add_executable(HelloTriangleApplication base_code.cpp)
 
