@@ -167,6 +167,11 @@ private:
     std::vector<uint32_t> indices;
     std::unordered_map<Vertex, uint32_t> uniqueVertices {};
 
+    vk::SampleCountFlagBits msaaSamples = vk::SampleCountFlagBits::e1;
+    vk::raii::Image colorImage = nullptr;
+    vk::raii::DeviceMemory colorImageMemory = nullptr;
+    vk::raii::ImageView colorImageView = nullptr;
+
     // const std::vector<Vertex> vertices = {
     // { { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
     // { { 0.5f, -0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
@@ -214,12 +219,14 @@ private:
         setupDebugMessenger();
         createSurface();
         pickPhysicalDevice();
+        msaaSamples = getMaxUsableSampleCount();
         createLogicalDevice();
         createSwapChain();
         createImageViews();
         createDescriptorSetLayout();
         createGraphicsPipeline();
         createCommandPool();
+        createColorResources();
         createDepthResources();
         createTextureImage();
         createTextureImageView();
@@ -338,47 +345,28 @@ private:
     void pickPhysicalDevice()
     {
         std::vector<vk::raii::PhysicalDevice> devices = instance.enumeratePhysicalDevices();
-        const auto devIter = std::ranges::find_if(devices, [&](auto const& device) {
-            // Check if the device supports the Vulkan 1.3 API version
-            bool supportsVulkan1_3 = device.getProperties().apiVersion >= VK_API_VERSION_1_3;
+        const auto devIter = std::ranges::find_if(
+            devices,
+            [&](auto const& device) {
+                // Check if the device supports the Vulkan 1.3 API version
+                bool supportsVulkan1_3 = device.getProperties().apiVersion >= VK_API_VERSION_1_3;
 
-            // Check if any of the queue families support graphics operations
-            auto queueFamilies = device.getQueueFamilyProperties();
-            bool supportsGraphics = std::ranges::any_of(queueFamilies, [](auto const& qfp) {
-                return !!(qfp.queueFlags & vk::QueueFlagBits::eGraphics);
-            });
+                // Check if any of the queue families support graphics operations
+                auto queueFamilies = device.getQueueFamilyProperties();
+                bool supportsGraphics = std::ranges::any_of(queueFamilies, [](auto const& qfp) { return !!(qfp.queueFlags & vk::QueueFlagBits::eGraphics); });
 
-            // Check if all required device extensions are available
-            auto availableDeviceExtensions = device.enumerateDeviceExtensionProperties();
-            bool supportsAllRequiredExtensions = std::ranges::all_of(
-                requiredDeviceExtension,
-                [&availableDeviceExtensions](auto const& requiredDeviceExtension) {
-                    return std::ranges::any_of(
-                        availableDeviceExtensions,
-                        [requiredDeviceExtension](
-                            auto const& availableDeviceExtension) {
-                            return strcmp(availableDeviceExtension.extensionName,
-                                       requiredDeviceExtension)
-                                == 0;
-                        });
+                // Check if all required device extensions are available
+                auto availableDeviceExtensions = device.enumerateDeviceExtensionProperties();
+                bool supportsAllRequiredExtensions = std::ranges::all_of(requiredDeviceExtension, [&availableDeviceExtensions](auto const& requiredDeviceExtension) {
+                    return std::ranges::any_of(availableDeviceExtensions,
+                        [requiredDeviceExtension](auto const& availableDeviceExtension) { return strcmp(availableDeviceExtension.extensionName, requiredDeviceExtension) == 0; });
                 });
 
-            auto features = device.template getFeatures2<
-                vk::PhysicalDeviceFeatures2, vk::PhysicalDeviceVulkan11Features,
-                vk::PhysicalDeviceVulkan13Features,
-                vk::PhysicalDeviceExtendedDynamicStateFeaturesEXT>();
-            bool supportsRequiredFeatures = features.template get<vk::PhysicalDeviceVulkan11Features>()
-                                                .shaderDrawParameters
-                && features.template get<vk::PhysicalDeviceVulkan13Features>()
-                       .synchronization2
-                && features.template get<vk::PhysicalDeviceVulkan13Features>()
-                       .dynamicRendering
-                && features
-                       .template get<vk::PhysicalDeviceExtendedDynamicStateFeaturesEXT>()
-                       .extendedDynamicState;
+                auto features = device.template getFeatures2<vk::PhysicalDeviceFeatures2, vk::PhysicalDeviceVulkan13Features, vk::PhysicalDeviceExtendedDynamicStateFeaturesEXT>();
+                bool supportsRequiredFeatures = features.template get<vk::PhysicalDeviceFeatures2>().features.samplerAnisotropy && features.template get<vk::PhysicalDeviceVulkan13Features>().dynamicRendering && features.template get<vk::PhysicalDeviceExtendedDynamicStateFeaturesEXT>().extendedDynamicState;
 
-            return supportsVulkan1_3 && supportsGraphics && supportsAllRequiredExtensions && supportsRequiredFeatures;
-        });
+                return supportsVulkan1_3 && supportsGraphics && supportsAllRequiredExtensions && supportsRequiredFeatures;
+            });
         if (devIter != devices.end()) {
             physicalDevice = *devIter;
         } else {
@@ -527,7 +515,7 @@ private:
                                                                   .setLineWidth(1.f);
 
         vk::PipelineMultisampleStateCreateInfo multisampling = vk::PipelineMultisampleStateCreateInfo()
-                                                                   .setRasterizationSamples(vk::SampleCountFlagBits::e1)
+                                                                   .setRasterizationSamples(msaaSamples)
                                                                    .setSampleShadingEnable(vk::False);
 
         vk::PipelineDepthStencilStateCreateInfo depthStencil = vk::PipelineDepthStencilStateCreateInfo()
@@ -536,6 +524,8 @@ private:
                                                                    .setDepthCompareOp(vk::CompareOp::eLess)
                                                                    .setDepthBoundsTestEnable(vk::False)
                                                                    .setStencilTestEnable(vk::False);
+
+
 
         vk::PipelineColorBlendAttachmentState colorBlendAttachment = vk::PipelineColorBlendAttachmentState()
                                                                          .setBlendEnable(vk::False)
@@ -633,6 +623,7 @@ private:
     {
         commandBuffers[currentFrame].begin({});
         // Before starting rendering, transition the swapchain image to
+
         // COLOR_ATTACHMENT_OPTIMAL
         transition_image_layout(
             swapChainImages[imageIndex],
@@ -643,6 +634,18 @@ private:
             vk::PipelineStageFlagBits2::eColorAttachmentOutput, // srcStage
             vk::PipelineStageFlagBits2::eColorAttachmentOutput, // dstStage
             vk::ImageAspectFlagBits::eColor);
+
+        // Transition the multisampled color image to COLOR_ATTACHMENT_OPTIMAL
+        transition_image_layout(
+            *colorImage,
+            vk::ImageLayout::eUndefined,
+            vk::ImageLayout::eColorAttachmentOptimal,
+            vk::AccessFlagBits2::eColorAttachmentWrite,
+            vk::AccessFlagBits2::eColorAttachmentWrite,
+            vk::PipelineStageFlagBits2::eColorAttachmentOutput,
+            vk::PipelineStageFlagBits2::eColorAttachmentOutput,
+            vk::ImageAspectFlagBits::eColor);
+
         // Transition depth image to depth attachment optimal layout
         transition_image_layout(
             *depthImage,
@@ -657,9 +660,13 @@ private:
         vk::ClearValue clearColor = vk::ClearColorValue(0.0f, 0.0f, 0.0f, 1.0f);
         vk::ClearValue clearDepth = vk::ClearDepthStencilValue(1.0f, 0);
 
+        // Color attachment (mutlisampled) with resolve attachment
         vk::RenderingAttachmentInfo colorAttachmentInfo = vk::RenderingAttachmentInfo()
-                                                              .setImageView(swapChainImageViews[imageIndex])
+                                                              .setImageView(colorImageView)
                                                               .setImageLayout(vk::ImageLayout::eColorAttachmentOptimal)
+                                                              .setResolveMode(vk::ResolveModeFlagBits::eAverage)
+                                                              .setResolveImageView(swapChainImageViews[imageIndex])
+                                                              .setResolveImageLayout(vk::ImageLayout::eColorAttachmentOptimal)
                                                               .setLoadOp(vk::AttachmentLoadOp::eClear)
                                                               .setStoreOp(vk::AttachmentStoreOp::eStore)
                                                               .setClearValue(clearColor);
@@ -974,6 +981,7 @@ private:
 
         createSwapChain();
         createImageViews();
+        createColorResources();
         createDepthResources();
     }
 
@@ -1194,10 +1202,11 @@ private:
         }
     }
 
-    void createImage(uint32_t width, uint32_t height, uint32_t mipLevels, vk::Format format, vk::ImageTiling tiling, vk::ImageUsageFlags usage, vk::MemoryPropertyFlags properties, vk::raii::Image& image, vk::raii::DeviceMemory& imageMemory)
+    void createImage(uint32_t width, uint32_t height, uint32_t mipLevels, vk::SampleCountFlagBits numSamples, vk::Format format, vk::ImageTiling tiling, vk::ImageUsageFlags usage, vk::MemoryPropertyFlags properties, vk::raii::Image& image, vk::raii::DeviceMemory& imageMemory)
     {
         vk::ImageCreateInfo imageInfo = vk::ImageCreateInfo()
                                             .setImageType(vk::ImageType::e2D)
+                                            .setSamples(numSamples)
                                             .setFormat(format)
                                             .setExtent({ width, height, 1 })
                                             .setMipLevels(mipLevels)
@@ -1226,12 +1235,11 @@ private:
         vk::DeviceSize imageSize = texWidth * texHeight * 4;
         mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
         // stbi_uc* pixels = stbi_load("textures/texture.jpg", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
-        
+
         if (!pixels) {
             std::cerr << "STB failed: " << stbi_failure_reason() << std::endl;
             throw std::runtime_error("Failed to load texture image!");
         }
-
 
         vk::raii::Buffer stagingBuffer({});
         vk::raii::DeviceMemory stagingBufferMemory({});
@@ -1243,9 +1251,9 @@ private:
 
         stbi_image_free(pixels);
 
-        createImage(texWidth, texHeight, mipLevels, vk::Format::eR8G8B8A8Srgb, vk::ImageTiling::eOptimal,
-             vk::ImageUsageFlagBits::eTransferSrc | vk::ImageUsageFlagBits::eTransferDst | vk::ImageUsageFlagBits::eSampled, vk::MemoryPropertyFlagBits::eDeviceLocal, 
-             textureImage, textureImageMemory);
+        createImage(texWidth, texHeight, mipLevels, vk::SampleCountFlagBits::e1, vk::Format::eR8G8B8A8Srgb, vk::ImageTiling::eOptimal,
+            vk::ImageUsageFlagBits::eTransferSrc | vk::ImageUsageFlagBits::eTransferDst | vk::ImageUsageFlagBits::eSampled, vk::MemoryPropertyFlagBits::eDeviceLocal,
+            textureImage, textureImageMemory);
 
         transitionImageLayout(textureImage, vk::ImageLayout::eUndefined, vk::ImageLayout::eTransferDstOptimal, mipLevels);
         copyBufferToImage(stagingBuffer, textureImage, static_cast<uint32_t>(texWidth), static_cast<uint32_t>(texHeight));
@@ -1421,7 +1429,7 @@ private:
 
         vk::ImageViewCreateInfo viewInfo = vk::ImageViewCreateInfo()
                                                .setImage(image)
-                                               .setViewType(vk::ImageViewType::e2D) 
+                                               .setViewType(vk::ImageViewType::e2D)
                                                .setFormat(format)
                                                .setSubresourceRange(vk::ImageSubresourceRange()
                                                        .setAspectMask(aspectFlags)
@@ -1455,7 +1463,7 @@ private:
     void createDepthResources()
     {
         vk::Format depthFormat = findDepthFormat();
-        createImage(swapChainExtent.width, swapChainExtent.height, 1, depthFormat,
+        createImage(swapChainExtent.width, swapChainExtent.height, 1, msaaSamples, depthFormat,
             vk::ImageTiling::eOptimal, vk::ImageUsageFlagBits::eDepthStencilAttachment,
             vk::MemoryPropertyFlagBits::eDeviceLocal, depthImage, depthImageMemory);
         depthImageView = createImageView(depthImage, depthFormat, vk::ImageAspectFlagBits::eDepth, 1);
@@ -1528,6 +1536,35 @@ private:
             }
         }
     }
+
+    vk::SampleCountFlagBits getMaxUsableSampleCount()
+    {
+        vk::PhysicalDeviceProperties physicalDeviceProperties = physicalDevice.getProperties();
+
+        vk::SampleCountFlags counts = physicalDeviceProperties.limits.framebufferColorSampleCounts & physicalDeviceProperties.limits.framebufferDepthSampleCounts;
+        if (counts & vk::SampleCountFlagBits::e64)
+            return vk::SampleCountFlagBits::e64;
+        if (counts & vk::SampleCountFlagBits::e32)
+            return vk::SampleCountFlagBits::e32;
+        if (counts & vk::SampleCountFlagBits::e16)
+            return vk::SampleCountFlagBits::e16;
+        if (counts & vk::SampleCountFlagBits::e8)
+            return vk::SampleCountFlagBits::e8;
+        if (counts & vk::SampleCountFlagBits::e4)
+            return vk::SampleCountFlagBits::e4;
+        if (counts & vk::SampleCountFlagBits::e2)
+            return vk::SampleCountFlagBits::e2;
+
+        return vk::SampleCountFlagBits::e1;
+    }
+
+	void createColorResources()
+	{
+		vk::Format colorFormat = swapChainSurfaceFormat.format;
+
+		createImage(swapChainExtent.width, swapChainExtent.height, 1, msaaSamples, colorFormat, vk::ImageTiling::eOptimal, vk::ImageUsageFlagBits::eTransientAttachment | vk::ImageUsageFlagBits::eColorAttachment, vk::MemoryPropertyFlagBits::eDeviceLocal, colorImage, colorImageMemory);
+		colorImageView = createImageView(colorImage, colorFormat, vk::ImageAspectFlagBits::eColor, 1);
+	}
 };
 
 int main()
