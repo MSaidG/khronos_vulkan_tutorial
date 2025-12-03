@@ -70,7 +70,7 @@ CMakeFiles/compile_shaders: /home/msgulberk/Projects/user_vulkan_tutorials/First
 
 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/slang.spv: /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/shader.slang
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Compiling Slang Shader /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/shader.slang"
-	cd /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders && /usr/bin/cmake -E env LD_LIBRARY_PATH=/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/lib: /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/bin/slangc /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/shader.slang -target spirv -profile spirv_1_4 -emit-spirv-directly -fvk-use-entrypoint-name -entry vertMain -entry fragMain -o /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/slang.spv
+	cd /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders && /usr/bin/cmake -E env LD_LIBRARY_PATH=/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/lib:/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/lib /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/bin/slangc /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/shader.slang -target spirv -profile spirv_1_4 -emit-spirv-directly -fvk-use-entrypoint-name -entry vertMain -entry fragMain -o /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/slang.spv
 
 CMakeFiles/compile_shaders.dir/codegen:
 .PHONY : CMakeFiles/compile_shaders.dir/codegen

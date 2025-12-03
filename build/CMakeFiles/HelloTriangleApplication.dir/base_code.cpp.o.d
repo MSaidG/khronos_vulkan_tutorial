@@ -220,31 +220,36 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: \
  /usr/include/c++/15/backward/auto_ptr.h \
  /usr/include/c++/15/bits/ranges_uninitialized.h \
  /usr/include/c++/15/pstl/glue_memory_defs.h \
- /usr/include/vulkan/vulkan_core.h /usr/include/vulkan/vk_platform.h \
- /usr/include/vk_video/vulkan_video_codec_h264std.h \
- /usr/include/vk_video/vulkan_video_codecs_common.h \
- /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
- /usr/include/vk_video/vulkan_video_codec_h264std.h \
- /usr/include/vk_video/vulkan_video_codec_h265std.h \
- /usr/include/vk_video/vulkan_video_codec_h265std_encode.h \
- /usr/include/vk_video/vulkan_video_codec_h265std.h \
- /usr/include/vk_video/vulkan_video_codec_h264std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_h265std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_av1std.h \
- /usr/include/vk_video/vulkan_video_codec_av1std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_av1std.h \
- /usr/include/vk_video/vulkan_video_codec_av1std_encode.h \
- /usr/include/vk_video/vulkan_video_codec_vp9std.h \
- /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h \
- /usr/include/vk_video/vulkan_video_codec_vp9std.h \
- /usr/include/vulkan/vulkan_raii.hpp /usr/include/vulkan/vulkan.hpp \
- /usr/include/vulkan/vulkan_hpp_macros.hpp /usr/include/c++/15/version \
- /usr/include/c++/15/span /usr/include/vulkan/vulkan.h \
- /usr/include/vulkan/vulkan_core.h /usr/include/dlfcn.h \
- /usr/include/bits/dlfcn.h /usr/include/bits/dl_find_object.h \
- /usr/include/vulkan/vulkan_enums.hpp \
- /usr/include/vulkan/vulkan_to_string.hpp /usr/include/c++/15/format \
- /usr/include/c++/15/charconv /usr/include/c++/15/locale \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_core.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vk_platform.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codecs_common.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_encode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_encode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_decode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_decode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_decode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_encode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std_decode.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_raii.hpp \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.hpp \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_hpp_macros.hpp \
+ /usr/include/c++/15/version /usr/include/c++/15/span \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_core.h \
+ /usr/include/dlfcn.h /usr/include/bits/dlfcn.h \
+ /usr/include/bits/dl_find_object.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_enums.hpp \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_to_string.hpp \
+ /usr/include/c++/15/format /usr/include/c++/15/charconv \
+ /usr/include/c++/15/locale \
  /usr/include/c++/15/bits/locale_facets_nonio.h /usr/include/c++/15/ctime \
  /usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h \
  /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h \
@@ -254,9 +259,11 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: \
  /usr/include/c++/15/bits/monostate.h \
  /usr/include/c++/15/bits/formatfwd.h /usr/include/c++/15/bits/unicode.h \
  /usr/include/c++/15/bits/unicode-data.h \
- /usr/include/vulkan/vulkan_handles.hpp \
- /usr/include/vulkan/vulkan_structs.hpp \
- /usr/include/vulkan/vulkan_funcs.hpp /usr/include/GLFW/glfw3.h \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_handles.hpp \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_structs.hpp \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_funcs.hpp \
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_profiles.hpp \
+ /usr/include/c++/15/cstdarg /usr/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
  /usr/include/KHR/khrplatform.h /usr/include/glm/glm.hpp \
  /usr/include/glm/detail/_fixes.hpp /usr/include/glm/detail/setup.hpp \

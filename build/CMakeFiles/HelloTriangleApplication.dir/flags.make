@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include
 
 CXX_FLAGS = -g -std=gnu++20
 

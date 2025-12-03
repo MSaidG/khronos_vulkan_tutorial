@@ -21,6 +21,9 @@ add_executable(HelloTriangleApplication base_code.cpp)
 target_include_directories(HelloTriangleApplication PRIVATE ${GLFW_INCLUDE_DIRS})
 target_link_libraries(HelloTriangleApplication PRIVATE ${GLFW_LIBRARIES} Vulkan::Vulkan)
 
+include_directories($ENV{VULKAN_SDK}/include)
+
+
 function(add_slang_shader TARGET SOURCE_FILE OUTPUT_FILE)
     set(SHADERS_DIR ${CMAKE_CURRENT_LIST_DIR}/shaders)
 
