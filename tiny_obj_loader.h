@@ -60,7 +60,7 @@ THE SOFTWARE.
 //   #define TINYOBJLOADER_IMPLEMENTATION
 //   #include "tiny_obj_loader.h"
 //
-
+#pragma once
 #ifndef TINY_OBJ_LOADER_H_
 #define TINY_OBJ_LOADER_H_
 
