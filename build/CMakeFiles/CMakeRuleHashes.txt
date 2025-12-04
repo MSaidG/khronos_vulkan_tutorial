@@ -1,4 +1,9 @@
 # Hashes of file build rules.
 2ca42afa626b300a8c76b162947bb954 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders
-544ede4edd565050410f2215414cdb93 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/slang.spv
-b675d61762bea48a1b2f4f3c9a980545 CMakeFiles/compile_shaders
+8fef3ed839a9975c19449251135eace1 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/frag.spv
+f7508010e54300d9b603e3a30090613d /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/slang.spv
+30f449dcc71a24ebe64bdfbedf02408a /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/shaders/vert.spv
+b675d61762bea48a1b2f4f3c9a980545 CMakeFiles/compile_frag_shader
+b675d61762bea48a1b2f4f3c9a980545 CMakeFiles/compile_glsl_shaders
+b675d61762bea48a1b2f4f3c9a980545 CMakeFiles/compile_slang_shaders
+b675d61762bea48a1b2f4f3c9a980545 CMakeFiles/compile_vert_shader

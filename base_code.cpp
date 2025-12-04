@@ -1,27 +1,83 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-#define TINYOBJLOADER_IMPLEMENTATION // define this in only *one* .cc
 // Optional. define TINYOBJLOADER_USE_MAPBOX_EARCUT gives robust triangulation. Requires C++11
 #define TINYOBJLOADER_USE_MAPBOX_EARCUT
+#define TINYOBJLOADER_IMPLEMENTATION // define this in only *one* .cc
 #include "tiny_obj_loader.h"
 
+#if defined(__ANDROID__)
+#include <vulkan/vulkan_android.h>
 #include <vulkan/vulkan_core.h>
+#endif
+
 #if defined(__INTELLISENSE__) || !defined(USE_CPP20_MODULES)
 #include <vulkan/vulkan_raii.hpp>
 #else
 import vulkan_hpp;
 #endif
+
+// Platform detection
+#if defined(__ANDROID__)
+#define PLATFORM_ANDROID 1
+#else
+#define PLATFORM_DESKTOP 1
+#endif
+
+// Platform-specific includes
+#if PLATFORM_ANDROID
+// Android-specific includes
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
+#include <android/log.h>
+#include <game-activity/native_app_glue/android_native_app_glue.h>
+
+// Declare and implement app_dummy function from native_app_glue
+extern "C" void app_dummy()
+{
+    // This is a dummy function that does nothing
+    // It's used to prevent the linker from stripping out the native_app_glue code
+}
+
+// Define AAssetManager type for Android
+typedef AAssetManager AssetManagerType;
+
+// Define logging macros for Android
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "VulkanTutorial", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "VulkanTutorial", __VA_ARGS__))
+#define LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR, "VulkanTutorial", __VA_ARGS__))
+#define LOG_INFO(msg) LOGI("%s", msg)
+#define LOG_ERROR(msg) LOGE("%s", msg)
+#else
+// Define AAssetManager type for non-Android platforms
+typedef void AssetManagerType;
+// Desktop-specific includes
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
+// Define logging macros for Desktop
+#define LOGI(...)        \
+    printf(__VA_ARGS__); \
+    printf("\n")
+#define LOGW(...)        \
+    printf(__VA_ARGS__); \
+    printf("\n")
+#define LOGE(...)                 \
+    fprintf(stderr, __VA_ARGS__); \
+    fprintf(stderr, "\n")
+#define LOG_INFO(msg) std::cout << msg << std::endl
+#define LOG_ERROR(msg) std::cerr << msg << std::endl
+#endif
+
 #include <vulkan/vulkan_enums.hpp>
 #include <vulkan/vulkan_handles.hpp>
 #include <vulkan/vulkan_profiles.hpp>
-#define GLFW_INCLUDE_VULKAN // REQUIRED only for GLFW CreateWindowSurface.
-#include <GLFW/glfw3.h>
 
 // #define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLM_FORCE_RADIANS
 #define GLM_ENABLE_EXPERIMENTAL
+#define GLM_FORCE_CXX11
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/hash.hpp>
@@ -40,38 +96,42 @@ import vulkan_hpp;
 #include <unordered_map>
 #include <vector>
 
-constexpr uint32_t WIDTH = 800;
-constexpr uint32_t HEIGHT = 600;
-const std::string MODEL_PATH = "models/viking_room.obj";
-const std::string TEXTURE_PATH = "textures/viking_room.png";
-constexpr int MAX_FRAMES_IN_FLIGHT = 2;
+constexpr uint32_t WIDTH                = 800;
+constexpr uint32_t HEIGHT               = 600;
+const std::string  MODEL_PATH           = "models/viking_room.obj";
+const std::string  TEXTURE_PATH         = "textures/viking_room.png";
+constexpr int      MAX_FRAMES_IN_FLIGHT = 2;
 
-// const std::vector<char const*> validationLayers = {
-// "VK_LAYER_KHRONOS_validation"
-// };
+#if PLATFORM_ANDROID
+// Define VpProfileProperties structure if not already defined
+#ifndef VP_PROFILE_PROPERTIES_DEFINED
+#define VP_PROFILE_PROPERTIES_DEFINED
+struct VpProfileProperties {
+    char     name[256];
+    uint32_t specVersion;
+};
+#endif
+
+// Define Vulkan Profile constants
+#ifndef VP_KHR_ROADMAP_2022_NAME
+#define VP_KHR_ROADMAP_2022_NAME "VP_KHR_roadmap_2022"
+#endif
+
+#ifndef VP_KHR_ROADMAP_2022_SPEC_VERSION
+#define VP_KHR_ROADMAP_2022_SPEC_VERSION 1
+#endif
+#endif
 
 const std::vector<const char*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
 };
 
-// #ifdef NDEBUG
-// constexpr bool enableValidationLayers = false;
-// #else
-// constexpr bool enableValidationLayers = true;
-// #endif
-
 struct AppInfo {
-    bool profileSupported = false;
+    bool                profileSupported = false;
     VpProfileProperties profile;
-    // bool dynamicRenderingSupported = false;
-    // bool timelineSemaphoresSupported = false;
-    // bool synchronization2Supported = false;
-
 };
 
 struct UniformBufferObject {
-    // glm::vec2 foo; // alignment test
-    // alignas(16) glm::mat4 model;
     glm::mat4 model;
     glm::mat4 view;
     glm::mat4 proj;
@@ -119,98 +179,167 @@ struct std::hash<Vertex> {
 
 class HelloTriangleApplication {
 public:
+#if PLATFORM_DESKTOP
+    // Desktop constructor
+    HelloTriangleApplication()
+    {
+        // No Android-specific initialization needed
+    }
+#else
+    // Android constructor
+    HelloTriangleApplication(android_app* app)
+        : androidApp(app)
+    {
+        androidApp->userData = this;
+        androidApp->onAppCmd = handleAppCommand;
+        // Note: onInputEvent is no longer a member of android_app in the current NDK version
+        // Input events are now handled differently
+
+        // Get the asset manager
+        assetManager = androidApp->activity->assetManager;
+    }
+#endif
+
     void run()
     {
+#if PLATFORM_DESKTOP
+        // Desktop main loop
         initWindow();
         initVulkan();
         mainLoop();
         cleanup();
+#else
+        // Android main loop is handled by Android
+        while (!initialized) {
+            // Wait for app to initialize
+            int                  events;
+            android_poll_source* source;
+            if (ALooper_pollOnce(0, nullptr, &events, (void**)&source) >= 0) {
+                if (source != nullptr) {
+                    source->process(androidApp, source);
+                }
+            }
+        }
+#endif
+    }
+
+#if PLATFORM_DESKTOP
+    // Initialize window (Desktop only)
+    void initWindow()
+    {
+        glfwInit();
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+
+        window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan Cross-Platform", nullptr, nullptr);
+        glfwSetWindowUserPointer(window, this);
+        glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
+
+        LOG_INFO("Desktop window created");
+    }
+
+    // Desktop main loop
+    void mainLoop()
+    {
+        while (!glfwWindowShouldClose(window)) {
+            glfwPollEvents();
+            drawFrame();
+        }
+
+        device.waitIdle();
+    }
+
+    // Desktop framebuffer resize callback
+    static void framebufferResizeCallback(GLFWwindow* window, int, int)
+    {
+        auto app                = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
+        app->framebufferResized = true;
+    }
+#endif
+
+    void cleanup()
+    {
+        if (initialized) {
+            // Wait for device to finish operations
+            if (*device) {
+                device.waitIdle();
+            }
+
+            // Cleanup resources
+            cleanupSwapChain();
+
+            initialized = false;
+        }
     }
 
 private:
     AppInfo appInfo {};
 
+#if PLATFORM_ANDROID
+    // Android-specific members
+    android_app*      androidApp   = nullptr;
+    AssetManagerType* assetManager = nullptr;
+#else
+    // Desktop-specific members
     GLFWwindow* window = nullptr;
-    vk::raii::Context context;
-    vk::raii::Instance instance = nullptr;
+#endif
+    bool initialized        = false;
+    bool framebufferResized = false;
+
+    // Vulkan Objects
+    vk::raii::Context                context;
+    vk::raii::Instance               instance       = nullptr;
     vk::raii::DebugUtilsMessengerEXT debugMessenger = nullptr;
-    vk::raii::SurfaceKHR surface = nullptr;
-    vk::raii::PhysicalDevice physicalDevice = nullptr;
-    vk::raii::Device device = nullptr;
-    uint32_t queueIndex = ~0;
-    vk::raii::Queue queue = nullptr;
-    vk::raii::SwapchainKHR swapChain = nullptr;
-    std::vector<vk::Image> swapChainImages;
-    vk::SurfaceFormatKHR swapChainSurfaceFormat;
-    vk::Extent2D swapChainExtent;
+    vk::raii::SurfaceKHR             surface        = nullptr;
+    vk::raii::PhysicalDevice         physicalDevice = nullptr;
+    vk::raii::Device                 device         = nullptr;
+    uint32_t                         queueIndex     = ~0;
+    vk::raii::Queue                  queue          = nullptr;
+    vk::raii::SwapchainKHR           swapChain      = nullptr;
+    std::vector<vk::Image>           swapChainImages;
+    vk::SurfaceFormatKHR             swapChainSurfaceFormat;
+    vk::Extent2D                     swapChainExtent;
     std::vector<vk::raii::ImageView> swapChainImageViews;
 
     // Traditional render pass (fallback for non-dynamic rendering)
-    vk::raii::RenderPass renderPass = nullptr;
-    std::vector<vk::raii::Framebuffer> swapChainFramebuffers;
-
-    vk::raii::PipelineLayout pipelineLayout = nullptr;
-    vk::raii::DescriptorSetLayout descriptorSetLayout = nullptr;
-    vk::raii::Pipeline graphicsPipeline = nullptr;
-
-    vk::raii::CommandPool commandPool = nullptr;
+    vk::raii::RenderPass                 renderPass = nullptr;
+    std::vector<vk::raii::Framebuffer>   swapChainFramebuffers;
+    vk::raii::PipelineLayout             pipelineLayout      = nullptr;
+    vk::raii::Pipeline                   graphicsPipeline    = nullptr;
+    vk::raii::DescriptorSetLayout        descriptorSetLayout = nullptr;
+    vk::raii::CommandPool                commandPool         = nullptr;
     std::vector<vk::raii::CommandBuffer> commandBuffers;
-
-    std::vector<vk::raii::Semaphore> presentCompleteSemaphores;
-    std::vector<vk::raii::Semaphore> renderFinishedSemaphores;
-    std::vector<vk::raii::Fence> inFlightFences;
-
-    vk::raii::Buffer vertexBuffer = nullptr;
-    vk::raii::Buffer indexBuffer = nullptr;
-    vk::raii::DeviceMemory vertexBufferMemory = nullptr;
-    vk::raii::DeviceMemory indexBufferMemory = nullptr;
-
-    std::vector<vk::raii::Buffer> uniformBuffers;
-    std::vector<vk::raii::DeviceMemory> uniformBuffersMemory;
-    std::vector<void*> uniformBuffersMapped;
-
-    vk::raii::DescriptorPool descriptorPool = nullptr;
+    vk::raii::Buffer                     vertexBuffer       = nullptr;
+    vk::raii::Buffer                     indexBuffer        = nullptr;
+    vk::raii::DeviceMemory               vertexBufferMemory = nullptr;
+    vk::raii::DeviceMemory               indexBufferMemory  = nullptr;
+    vk::raii::Image                      textureImage       = nullptr;
+    vk::raii::DeviceMemory               textureImageMemory = nullptr;
+    vk::raii::ImageView                  textureImageView   = nullptr;
+    vk::raii::Sampler                    textureSampler     = nullptr;
+    std::vector<vk::raii::Buffer>        uniformBuffers;
+    std::vector<vk::raii::DeviceMemory>  uniformBuffersMemory;
+    vk::raii::DescriptorPool             descriptorPool = nullptr;
     std::vector<vk::raii::DescriptorSet> descriptorSets;
+    std::vector<vk::raii::Semaphore>     presentCompleteSemaphores;
+    std::vector<vk::raii::Semaphore>     renderFinishedSemaphores;
+    std::vector<vk::raii::Fence>         inFlightFences;
+    uint32_t                             currentFrame   = 0;
+    uint32_t                             semaphoreIndex = 0;
 
-    uint32_t mipLevels = 0;
-    vk::raii::Image textureImage = nullptr;
-    vk::raii::DeviceMemory textureImageMemory = nullptr;
-    vk::raii::ImageView textureImageView = nullptr;
-    vk::raii::Sampler textureSampler = nullptr;
-
-    vk::raii::Image depthImage = nullptr;
-    vk::raii::DeviceMemory depthImageMemory = nullptr;
-    vk::raii::ImageView depthImageView = nullptr;
-
-    std::vector<Vertex> vertices;
+    std::vector<Vertex>   vertices;
     std::vector<uint32_t> indices;
+
+    std::vector<void*>                   uniformBuffersMapped;
+    uint32_t                             mipLevels        = 0;
+    vk::raii::Image                      depthImage       = nullptr;
+    vk::raii::DeviceMemory               depthImageMemory = nullptr;
+    vk::raii::ImageView                  depthImageView   = nullptr;
     std::unordered_map<Vertex, uint32_t> uniqueVertices {};
-
-    vk::SampleCountFlagBits msaaSamples = vk::SampleCountFlagBits::e1;
-    vk::raii::Image colorImage = nullptr;
-    vk::raii::DeviceMemory colorImageMemory = nullptr;
-    vk::raii::ImageView colorImageView = nullptr;
-
-    // const std::vector<Vertex> vertices = {
-    // { { -0.5f, -0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-    // { { 0.5f, -0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-    // { { 0.5f, 0.5f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-    // { { -0.5f, 0.5f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } },
-
-    // { { -0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-    // { { 0.5f, -0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-    // { { 0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-    // { { -0.5f, 0.5f, -0.5f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } }
-    // };
-
-    // const std::vector<uint16_t> indices = {
-    // 0, 1, 2, 2, 3, 0,
-    // 4, 5, 6, 6, 7, 4
-    // };
-
-    uint32_t currentFrame = 0;
-    uint32_t semaphoreIndex = 0;
-    bool framebufferResized = false;
+    vk::SampleCountFlagBits              msaaSamples      = vk::SampleCountFlagBits::e1;
+    vk::raii::Image                      colorImage       = nullptr;
+    vk::raii::DeviceMemory               colorImageMemory = nullptr;
+    vk::raii::ImageView                  colorImageView   = nullptr;
 
     std::vector<const char*> requiredDeviceExtension = {
         vk::KHRSwapchainExtensionName,
@@ -219,18 +348,17 @@ private:
         vk::KHRCreateRenderpass2ExtensionName
     };
 
-    void initWindow()
-    {
-        glfwInit();
+    // Swap chain support details
+    struct SwapChainSupportDetails {
+        vk::SurfaceCapabilitiesKHR        capabilities;
+        std::vector<vk::SurfaceFormatKHR> formats;
+        std::vector<vk::PresentModeKHR>   presentModes;
+    };
 
-        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-
-        window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan Profiles", nullptr, nullptr);
-
-        glfwSetWindowUserPointer(window, this);
-        glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
-    }
+    // Required device extensions
+    const std::vector<const char*> deviceExtensions = {
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME
+    };
 
     void initVulkan()
     {
@@ -269,28 +397,24 @@ private:
         createDescriptorSets();
         createCommandBuffers();
         createSyncObjects();
-
     }
 
-    void mainLoop()
-    {
-        while (!glfwWindowShouldClose(window)) {
-            glfwPollEvents();
-            drawFrame();
-            // std::cout << "Vertices size: " << vertices.size() << "\n";
-            // std::cout << "Indices size: " << indices.size() << "\n";
-        }
-        device.waitIdle(); // wait for device to finish operations before destroying
-                           // resources
-    }
+    // void mainLoop()
+    // {
+    //     while (!glfwWindowShouldClose(window)) {
+    //         glfwPollEvents();
+    //         drawFrame();
+    //     }
+    //     device.waitIdle(); // wait for device to finish operations before destroying resources
+    // }
 
-    void cleanup()
-    {
-        cleanupSwapChain();
+    // void cleanup()
+    // {
+    //     cleanupSwapChain();
 
-        glfwDestroyWindow(window);
-        glfwTerminate();
-    }
+    //     glfwDestroyWindow(window);
+    //     glfwTerminate();
+    // }
 
     void createInstance()
     {
@@ -345,6 +469,7 @@ private:
                                                 .setPpEnabledExtensionNames(requiredExtensions.data());
 
         instance = vk::raii::Instance(context, createInfo);
+        LOGI("Vulkan instance created");
     }
 
     void setupDebugMessenger()
@@ -384,39 +509,66 @@ private:
 
         debugMessenger = instance.createDebugUtilsMessengerEXT(debugUtilsMessengerCreateInfoEXT);
     }
-
+    // Create platform-specific surface
     void createSurface()
     {
         VkSurfaceKHR _surface;
-        if (glfwCreateWindowSurface(*instance, window, nullptr, &_surface) != 0) {
-            throw std::runtime_error("failed to create window surface!");
+
+#if PLATFORM_ANDROID
+        // Create Android surface
+        VkAndroidSurfaceCreateInfoKHR createInfo = {
+            .sType  = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
+            .pNext  = nullptr,
+            .flags  = 0,
+            .window = androidApp->window
+        };
+
+        VkResult result = vkCreateAndroidSurfaceKHR(
+            *instance,
+            &createInfo,
+            nullptr,
+            &_surface);
+
+        if (result != VK_SUCCESS) {
+            throw std::runtime_error("Failed to create Android surface");
         }
+
+        LOG_INFO("Android surface created");
+#else
+        // Create desktop surface using GLFW
+        if (glfwCreateWindowSurface(*instance, window, nullptr, &_surface) != 0) {
+            throw std::runtime_error("Failed to create window surface");
+        }
+
+        LOG_INFO("Desktop surface created");
+#endif
+
         surface = vk::raii::SurfaceKHR(instance, _surface);
     }
 
     void pickPhysicalDevice()
     {
         std::vector<vk::raii::PhysicalDevice> devices = instance.enumeratePhysicalDevices();
-        const auto devIter = std::ranges::find_if(
+        const auto                            devIter = std::ranges::find_if(
             devices,
             [&](auto const& device) {
                 // Check if any of the queue families support graphics operations
-                auto queueFamilies = device.getQueueFamilyProperties();
+                auto queueFamilies    = device.getQueueFamilyProperties();
                 bool supportsGraphics = std::ranges::any_of(queueFamilies, [](auto const& qfp) { return !!(qfp.queueFlags & vk::QueueFlagBits::eGraphics); });
 
                 // Check if all required device extensions are available
-                auto availableDeviceExtensions = device.enumerateDeviceExtensionProperties();
+                auto availableDeviceExtensions     = device.enumerateDeviceExtensionProperties();
                 bool supportsAllRequiredExtensions = std::ranges::all_of(requiredDeviceExtension,
-                    [&availableDeviceExtensions](auto const& requiredDeviceExtension) {
+                                               [&availableDeviceExtensions](auto const& requiredDeviceExtension) {
                         return std::ranges::any_of(availableDeviceExtensions,
-                            [requiredDeviceExtension](auto const& availableDeviceExtension) { return strcmp(availableDeviceExtension.extensionName, requiredDeviceExtension) == 0; });
+                                                       [requiredDeviceExtension](auto const& availableDeviceExtension) { return strcmp(availableDeviceExtension.extensionName, requiredDeviceExtension) == 0; });
                     });
 
                 return supportsGraphics && supportsAllRequiredExtensions;
             });
         if (devIter != devices.end()) {
             physicalDevice = *devIter;
-            msaaSamples = getMaxUsableSampleCount();
+            msaaSamples    = getMaxUsableSampleCount();
         } else {
             throw std::runtime_error("failed to find a suitable GPU!");
         }
@@ -491,7 +643,7 @@ private:
             throw std::runtime_error("Could not find a queue for graphics and present -> terminating");
         }
 
-        float queuePriority = 0.5f;
+        float                     queuePriority         = 0.5f;
         vk::DeviceQueueCreateInfo deviceQueueCreateInfo = vk::DeviceQueueCreateInfo()
                                                               .setQueueFamilyIndex(queueIndex)
                                                               .setQueueCount(1)
@@ -502,15 +654,15 @@ private:
 
             // Enable required features
             vk::PhysicalDeviceFeatures2 features2;
-            vk::PhysicalDeviceFeatures deviceFeatures {};
+            vk::PhysicalDeviceFeatures  deviceFeatures {};
             deviceFeatures.samplerAnisotropy = VK_TRUE;
             deviceFeatures.sampleRateShading = VK_TRUE;
-            features2.features = deviceFeatures;
+            features2.features               = deviceFeatures;
 
             // Enable dynamic rendering
             vk::PhysicalDeviceDynamicRenderingFeatures dynamicRenderingFeatures;
             dynamicRenderingFeatures.dynamicRendering = VK_TRUE;
-            features2.pNext = &dynamicRenderingFeatures;
+            features2.pNext                           = &dynamicRenderingFeatures;
 
             // Create a vk::DeviceCreateInfo with the required features
             vk::DeviceCreateInfo vkDeviceCreateInfo = vk::DeviceCreateInfo()
@@ -547,9 +699,9 @@ private:
 
     void createSwapChain()
     {
-        auto surfaceCapabilities = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
-        swapChainExtent = chooseSwapExtent(surfaceCapabilities);
-        swapChainSurfaceFormat = chooseSwapSurfaceFormat(physicalDevice.getSurfaceFormatsKHR(*surface));
+        auto surfaceCapabilities                       = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
+        swapChainExtent                                = chooseSwapExtent(surfaceCapabilities);
+        swapChainSurfaceFormat                         = chooseSwapSurfaceFormat(physicalDevice.getSurfaceFormatsKHR(*surface));
         vk::SwapchainCreateInfoKHR swapChainCreateInfo = vk::SwapchainCreateInfoKHR()
                                                              .setSurface(*surface)
                                                              .setMinImageCount(chooseSwapMinImageCount(surfaceCapabilities))
@@ -565,7 +717,7 @@ private:
                                                                  physicalDevice.getSurfacePresentModesKHR(*surface)))
                                                              .setClipped(true);
 
-        swapChain = vk::raii::SwapchainKHR(device, swapChainCreateInfo);
+        swapChain       = vk::raii::SwapchainKHR(device, swapChainCreateInfo);
         swapChainImages = swapChain.getImages();
     }
 
@@ -591,23 +743,63 @@ private:
 
     void createGraphicsPipeline()
     {
-        vk::raii::ShaderModule shaderModule = createShaderModule(readFile("shaders/slang.spv"));
+        // Load shader code from asset files
+        LOGI("Loading shaders from assets");
 
-        vk::PipelineShaderStageCreateInfo vertShaderStageInfo = vk::PipelineShaderStageCreateInfo()
-                                                                    .setStage(vk::ShaderStageFlagBits::eVertex)
-                                                                    .setModule(shaderModule)
-                                                                    .setPName("vertMain");
-        vk::PipelineShaderStageCreateInfo fragShaderStageInfo = vk::PipelineShaderStageCreateInfo()
-                                                                    .setStage(vk::ShaderStageFlagBits::eFragment)
-                                                                    .setModule(shaderModule)
-                                                                    .setPName("fragMain");
+        // vk::raii::ShaderModule shaderModule = createShaderModule(readFile("shaders/slang.spv"));
 
-        vk::PipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo,
-            fragShaderStageInfo };
+        // vk::PipelineShaderStageCreateInfo vertShaderStageInfo = vk::PipelineShaderStageCreateInfo()
+        //                                                             .setStage(vk::ShaderStageFlagBits::eVertex)
+        //                                                             .setModule(shaderModule)
+        //                                                             .setPName("vertMain");
+        // vk::PipelineShaderStageCreateInfo fragShaderStageInfo = vk::PipelineShaderStageCreateInfo()
+        //                                                             .setStage(vk::ShaderStageFlagBits::eFragment)
+        //                                                             .setModule(shaderModule)
+        //                                                             .setPName("fragMain");
 
-        auto bindingDescription = Vertex::getBindingDescription();
-        auto attributeDescriptions = Vertex::getAttributeDescriptions();
-        vk::PipelineVertexInputStateCreateInfo vertexInputInfo = vk::PipelineVertexInputStateCreateInfo()
+        // vk::PipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo,
+        //     fragShaderStageInfo };
+
+        // Load shader files using cross-platform function
+#if PLATFORM_ANDROID
+        std::optional<AssetManagerType*> optionalAssetManager = assetManager;
+#else
+        std::optional<void*> optionalAssetManager = std::nullopt;
+#endif
+        std::vector<char> vertShaderCode = readFile("shaders/vert.spv", optionalAssetManager);
+        std::vector<char> fragShaderCode = readFile("shaders/frag.spv", optionalAssetManager);
+
+        LOGI("Shaders loaded successfully");
+
+        // Create shader modules
+        vk::ShaderModuleCreateInfo vertShaderModuleInfo = vk::ShaderModuleCreateInfo()
+                                                              .setCodeSize(vertShaderCode.size())
+                                                              .setPCode(reinterpret_cast<const uint32_t*>(vertShaderCode.data()));
+
+        vk::raii::ShaderModule vertShaderModule = device.createShaderModule(vertShaderModuleInfo);
+
+        vk::ShaderModuleCreateInfo fragShaderModuleInfo = vk::ShaderModuleCreateInfo()
+                                                              .setCodeSize(fragShaderCode.size())
+                                                              .setPCode(reinterpret_cast<const uint32_t*>(fragShaderCode.data()));
+
+        vk::raii::ShaderModule fragShaderModule = device.createShaderModule(fragShaderModuleInfo);
+
+        // Create shader stages
+        vk::PipelineShaderStageCreateInfo shaderStages[] = {
+            vk::PipelineShaderStageCreateInfo()
+                .setStage(vk::ShaderStageFlagBits::eVertex)
+                .setModule(*vertShaderModule)
+                .setPName("main"),
+            vk::PipelineShaderStageCreateInfo()
+                .setStage(vk::ShaderStageFlagBits::eFragment)
+                .setModule(*fragShaderModule)
+                .setPName("main")
+        };
+
+        auto bindingDescription
+            = Vertex::getBindingDescription();
+        auto                                   attributeDescriptions = Vertex::getAttributeDescriptions();
+        vk::PipelineVertexInputStateCreateInfo vertexInputInfo       = vk::PipelineVertexInputStateCreateInfo()
                                                                      .setVertexBindingDescriptionCount(1)
                                                                      .setPVertexBindingDescriptions(&bindingDescription)
                                                                      .setVertexAttributeDescriptionCount(attributeDescriptions.size())
@@ -653,9 +845,9 @@ private:
                                                                   .setAttachmentCount(1)
                                                                   .setPAttachments(&colorBlendAttachment);
 
-        std::vector dynamicStates = { vk::DynamicState::eViewport,
-            vk::DynamicState::eScissor };
-        vk::PipelineDynamicStateCreateInfo dynamicState = vk::PipelineDynamicStateCreateInfo()
+        std::vector                        dynamicStates = { vk::DynamicState::eViewport,
+                                   vk::DynamicState::eScissor };
+        vk::PipelineDynamicStateCreateInfo dynamicState  = vk::PipelineDynamicStateCreateInfo()
                                                               .setDynamicStateCount(static_cast<uint32_t>(dynamicStates.size()))
                                                               .setPDynamicStates(dynamicStates.data());
 
@@ -672,33 +864,30 @@ private:
             vk::PipelineRenderingCreateInfo>
             pipelineCreateInfoChain;
 
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().stageCount = 2;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pStages = shaderStages;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pVertexInputState = &vertexInputInfo;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().stageCount          = 2;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pStages             = shaderStages;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pVertexInputState   = &vertexInputInfo;
         pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pInputAssemblyState = &inputAssembly;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pViewportState = &viewportState;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pViewportState      = &viewportState;
         pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pRasterizationState = &rasterizer;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pMultisampleState = &multisampling;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pDepthStencilState = &depthStencil;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pColorBlendState = &colorBlending;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pDynamicState = &dynamicState;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().layout = pipelineLayout;
-        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().renderPass = nullptr;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pMultisampleState   = &multisampling;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pDepthStencilState  = &depthStencil;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pColorBlendState    = &colorBlending;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().pDynamicState       = &dynamicState;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().layout              = pipelineLayout;
+        pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().renderPass          = nullptr;
 
-        pipelineCreateInfoChain.get<vk::PipelineRenderingCreateInfo>().colorAttachmentCount = 1;
+        pipelineCreateInfoChain.get<vk::PipelineRenderingCreateInfo>().colorAttachmentCount    = 1;
         pipelineCreateInfoChain.get<vk::PipelineRenderingCreateInfo>().pColorAttachmentFormats = &swapChainSurfaceFormat.format;
-        pipelineCreateInfoChain.get<vk::PipelineRenderingCreateInfo>().depthAttachmentFormat = findDepthFormat();
+        pipelineCreateInfoChain.get<vk::PipelineRenderingCreateInfo>().depthAttachmentFormat   = findDepthFormat();
 
-		if (appInfo.profileSupported)
-		{
-			std::cout << "Creating pipeline with dynamic rendering (KHR roadmap 2022 profile)" << std::endl;
-		}
-		else
-		{
-			std::cout << "Creating pipeline with traditional render pass (fallback)" << std::endl;
-			pipelineCreateInfoChain.unlink<vk::PipelineRenderingCreateInfo>();
-			pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().renderPass = *renderPass;
-		}
+        if (appInfo.profileSupported) {
+            std::cout << "Creating pipeline with dynamic rendering (KHR roadmap 2022 profile)" << std::endl;
+        } else {
+            std::cout << "Creating pipeline with traditional render pass (fallback)" << std::endl;
+            pipelineCreateInfoChain.unlink<vk::PipelineRenderingCreateInfo>();
+            pipelineCreateInfoChain.get<vk::GraphicsPipelineCreateInfo>().renderPass = *renderPass;
+        }
 
         graphicsPipeline = vk::raii::Pipeline(
             device, nullptr,
@@ -749,14 +938,14 @@ private:
     }
 
     void transition_image_layout(
-        vk::Image image,
-        vk::ImageLayout old_layout,
-        vk::ImageLayout new_layout,
-        vk::AccessFlags2 src_access_mask,
-        vk::AccessFlags2 dst_access_mask,
+        vk::Image               image,
+        vk::ImageLayout         old_layout,
+        vk::ImageLayout         new_layout,
+        vk::AccessFlags2        src_access_mask,
+        vk::AccessFlags2        dst_access_mask,
         vk::PipelineStageFlags2 src_stage_mask,
         vk::PipelineStageFlags2 dst_stage_mask,
-        vk::ImageAspectFlags image_aspect_flags)
+        vk::ImageAspectFlags    image_aspect_flags)
     {
         vk::ImageMemoryBarrier2 barrier = vk::ImageMemoryBarrier2()
                                               .setSrcStageMask(src_stage_mask)
@@ -1198,7 +1387,7 @@ private:
         }
 
         semaphoreIndex = (semaphoreIndex + 1) % presentCompleteSemaphores.size();
-        currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
+        currentFrame   = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
     }
 
     [[nodiscard]] vk::raii::ShaderModule
@@ -1253,26 +1442,38 @@ private:
         if (capabilities.currentExtent.width != 0xFFFFFFFF) {
             return capabilities.currentExtent;
         }
+
+#if PLATFORM_ANDROID
+        // Get the window size from Android
+        int32_t width  = ANativeWindow_getWidth(androidApp->window);
+        int32_t height = ANativeWindow_getHeight(androidApp->window);
+#else
+        // Get the window size from GLFW
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
-
-        return { std::clamp<uint32_t>(width, capabilities.minImageExtent.width,
-                     capabilities.maxImageExtent.width),
-            std::clamp<uint32_t>(height, capabilities.minImageExtent.height,
-                capabilities.maxImageExtent.height) };
+#endif
+        return { std::clamp<uint32_t>(width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width),
+            std::clamp<uint32_t>(height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height) };
     }
 
     [[nodiscard]] std::vector<const char*> getRequiredExtensions() const
     {
+#if PLATFORM_ANDROID
+        // Android requires these extensions
+        std::vector<const char*> extensions = {
+            VK_KHR_SURFACE_EXTENSION_NAME,
+            VK_KHR_ANDROID_SURFACE_EXTENSION_NAME
+        };
+#else
         // Get the required extensions from GLFW
-        uint32_t glfwExtensionCount = 0;
-        auto glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-        std::vector extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
-
+        uint32_t                 glfwExtensionCount = 0;
+        auto                     glfwExtensions     = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+        std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+#endif
         // Check if the debug utils extension is available
-        std::vector<vk::ExtensionProperties> props = context.enumerateInstanceExtensionProperties();
-        bool debugUtilsAvailable = std::ranges::any_of(props,
-            [](vk::ExtensionProperties const& ep) {
+        std::vector<vk::ExtensionProperties> props               = context.enumerateInstanceExtensionProperties();
+        bool                                 debugUtilsAvailable = std::ranges::any_of(props,
+                                            [](vk::ExtensionProperties const& ep) {
                 return strcmp(ep.extensionName, vk::EXTDebugUtilsExtensionName) == 0;
             });
 
@@ -1280,17 +1481,18 @@ private:
         // This allows validation layers to be enabled via vulkanconfig
         if (debugUtilsAvailable) {
             extensions.push_back(vk::EXTDebugUtilsExtensionName);
+#if PLATFORM_DESKTOP
             std::cout << "VK_EXT_debug_utils extension is available. Validation layers should work." << std::endl;
         } else {
-            std::cout << "VK_EXT_debug_utils extension not available. Validation layers may not work." << std::endl;
+            LOG_INFO("VK_EXT_debug_utils extension not available. Validation layers may not work.");
+#endif
         }
-
         return extensions;
     }
 
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
-        vk::DebugUtilsMessageSeverityFlagBitsEXT severity,
-        vk::DebugUtilsMessageTypeFlagsEXT type,
+        vk::DebugUtilsMessageSeverityFlagBitsEXT      severity,
+        vk::DebugUtilsMessageTypeFlagsEXT             type,
         const vk::DebugUtilsMessengerCallbackDataEXT* pCallbackData, void*)
     {
         if (severity == vk::DebugUtilsMessageSeverityFlagBitsEXT::eError || severity == vk::DebugUtilsMessageSeverityFlagBitsEXT::eWarning) {
@@ -1301,16 +1503,47 @@ private:
         return vk::False;
     }
 
-    static std::vector<char> readFile(const std::string& filename)
+    // Cross-platform file reading function
+    std::vector<char> readFile(const std::string& filename, std::optional<AssetManagerType*> assetManager = std::nullopt)
     {
-        std::ifstream file(filename, std::ios::ate | std::ios::binary);
-        if (!file.is_open()) {
-            throw std::runtime_error("failed to open file!");
+#if PLATFORM_ANDROID
+        // On Android, use asset manager if provided
+        if (assetManager.has_value() && *assetManager != nullptr) {
+            // Open the asset
+            AAsset* asset = AAssetManager_open(*assetManager, filename.c_str(), AASSET_MODE_BUFFER);
+            if (!asset) {
+                LOGE("Failed to open asset: %s", filename.c_str());
+                throw std::runtime_error("Failed to open file: " + filename);
+            }
+
+            // Get the file size
+            off_t             fileSize = AAsset_getLength(asset);
+            std::vector<char> buffer(fileSize);
+
+            // Read the file data
+            AAsset_read(asset, buffer.data(), fileSize);
+
+            // Close the asset
+            AAsset_close(asset);
+
+            return buffer;
         }
-        std::vector<char> buffer(file.tellg());
-        file.seekg(0, std::ios::beg);
-        file.read(buffer.data(), static_cast<std::streamsize>(buffer.size()));
+#endif
+
+        // Desktop version or Android fallback to filesystem
+        std::ifstream file(filename, std::ios::ate | std::ios::binary);
+
+        if (!file.is_open()) {
+            throw std::runtime_error("Failed to open file: " + filename);
+        }
+
+        size_t            fileSize = static_cast<size_t>(file.tellg());
+        std::vector<char> buffer(fileSize);
+
+        file.seekg(0);
+        file.read(buffer.data(), fileSize);
         file.close();
+
         return buffer;
     }
 
@@ -1323,12 +1556,17 @@ private:
 
     void recreateSwapChain()
     {
+#if !PLATFORM_ANDROID
+        // On desktop, wait until the framebuffer has a non-zero size (e.g., when window is minimized)
         int width = 0, height = 0;
-        glfwGetFramebufferSize(window, &width, &height);
-        while (width == 0 || height == 0) {
+        if (window) {
             glfwGetFramebufferSize(window, &width, &height);
-            glfwWaitEvents();
+            while (width == 0 || height == 0) {
+                glfwGetFramebufferSize(window, &width, &height);
+                glfwWaitEvents();
+            }
         }
+#endif
 
         device.waitIdle();
 
@@ -1346,13 +1584,13 @@ private:
         createDepthResources();
     }
 
-    static void framebufferResizeCallback(GLFWwindow* window, int width,
-        int height)
-    {
-        auto app = reinterpret_cast<HelloTriangleApplication*>(
-            glfwGetWindowUserPointer(window));
-        app->framebufferResized = true;
-    }
+    // static void framebufferResizeCallback(GLFWwindow* window, int width,
+    //     int height)
+    // {
+    //     auto app = reinterpret_cast<HelloTriangleApplication*>(
+    //         glfwGetWindowUserPointer(window));
+    //     app->framebufferResized = true;
+    // }
 
     void createVertexBuffer()
     {
@@ -1363,7 +1601,7 @@ private:
                                                .setUsage(vk::BufferUsageFlagBits::eTransferSrc)
                                                .setSharingMode(vk::SharingMode::eExclusive);
 
-        vk::raii::Buffer stagingBuffer(device, stagingInfo);
+        vk::raii::Buffer       stagingBuffer(device, stagingInfo);
         vk::MemoryRequirements memRequirementsStaging = stagingBuffer.getMemoryRequirements();
 
         vk::MemoryAllocateInfo memoryAllocateInfoStaging = vk::MemoryAllocateInfo()
@@ -1385,7 +1623,7 @@ private:
                                               .setUsage(vk::BufferUsageFlagBits::eVertexBuffer | vk::BufferUsageFlagBits::eTransferDst)
                                               .setSharingMode(vk::SharingMode::eExclusive);
 
-        vertexBuffer = vk::raii::Buffer(device, bufferInfo);
+        vertexBuffer                           = vk::raii::Buffer(device, bufferInfo);
         vk::MemoryRequirements memRequirements = vertexBuffer.getMemoryRequirements();
 
         vk::MemoryAllocateInfo memoryAllocateInfo = vk::MemoryAllocateInfo()
@@ -1401,7 +1639,7 @@ private:
     }
 
     uint32_t findMemoryType(uint32_t typeFilter,
-        vk::MemoryPropertyFlags properties)
+        vk::MemoryPropertyFlags      properties)
     {
 
         vk::PhysicalDeviceMemoryProperties memProperties = physicalDevice.getMemoryProperties();
@@ -1416,7 +1654,7 @@ private:
 
     void createBuffer(vk::DeviceSize size, vk::BufferUsageFlags usage,
         vk::MemoryPropertyFlags properties,
-        vk::raii::Buffer& buffer,
+        vk::raii::Buffer&       buffer,
         vk::raii::DeviceMemory& bufferMemory)
     {
         vk::BufferCreateInfo bufferInfo = vk::BufferCreateInfo().setSize(size).setUsage(usage).setSharingMode(
@@ -1424,7 +1662,7 @@ private:
         buffer = vk::raii::Buffer(device, bufferInfo);
 
         vk::MemoryRequirements memRequirements = buffer.getMemoryRequirements();
-        vk::MemoryAllocateInfo allocInfo = vk::MemoryAllocateInfo()
+        vk::MemoryAllocateInfo allocInfo       = vk::MemoryAllocateInfo()
                                                .setAllocationSize(memRequirements.size)
                                                .setMemoryTypeIndex(
                                                    findMemoryType(memRequirements.memoryTypeBits, properties));
@@ -1437,7 +1675,7 @@ private:
     {
         vk::DeviceSize bufferSize = sizeof(indices[0]) * indices.size();
 
-        vk::raii::Buffer stagingBuffer({});
+        vk::raii::Buffer       stagingBuffer({});
         vk::raii::DeviceMemory stagingBufferMemory({});
         createBuffer(bufferSize, vk::BufferUsageFlagBits::eTransferSrc,
             vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent,
@@ -1478,8 +1716,8 @@ private:
         uniformBuffersMapped.clear();
 
         for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i) {
-            vk::DeviceSize bufferSize = sizeof(UniformBufferObject);
-            vk::raii::Buffer buffer({});
+            vk::DeviceSize         bufferSize = sizeof(UniformBufferObject);
+            vk::raii::Buffer       buffer({});
             vk::raii::DeviceMemory bufferMem({});
             createBuffer(bufferSize, vk::BufferUsageFlagBits::eUniformBuffer, vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent, buffer, bufferMem);
 
@@ -1493,13 +1731,13 @@ private:
     {
         static auto startTime = std::chrono::high_resolution_clock::now();
 
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+        auto  currentTime = std::chrono::high_resolution_clock::now();
+        float time        = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
 
         UniformBufferObject ubo {};
         ubo.model = rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        ubo.view = lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        ubo.proj = glm::perspective(glm::radians(45.0f), static_cast<float>(swapChainExtent.width) / static_cast<float>(swapChainExtent.height), 0.1f, 100.0f);
+        ubo.view  = lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.proj  = glm::perspective(glm::radians(45.0f), static_cast<float>(swapChainExtent.width) / static_cast<float>(swapChainExtent.height), 0.1f, 100.0f);
         ubo.proj[1][1] *= -1;
 
         memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
@@ -1524,7 +1762,7 @@ private:
     void createDescriptorSets()
     {
         std::vector<vk::DescriptorSetLayout> layouts(MAX_FRAMES_IN_FLIGHT, *descriptorSetLayout);
-        vk::DescriptorSetAllocateInfo allocInfo = vk::DescriptorSetAllocateInfo()
+        vk::DescriptorSetAllocateInfo        allocInfo = vk::DescriptorSetAllocateInfo()
                                                       .setDescriptorPool(descriptorPool)
                                                       .setDescriptorSetCount(static_cast<uint32_t>(layouts.size()))
                                                       .setPSetLayouts(layouts.data());
@@ -1581,7 +1819,7 @@ private:
         image = vk::raii::Image(device, imageInfo);
 
         vk::MemoryRequirements memRequirements = image.getMemoryRequirements();
-        vk::MemoryAllocateInfo allocInfo = vk::MemoryAllocateInfo()
+        vk::MemoryAllocateInfo allocInfo       = vk::MemoryAllocateInfo()
                                                .setAllocationSize(memRequirements.size)
                                                .setMemoryTypeIndex(findMemoryType(memRequirements.memoryTypeBits, properties));
 
@@ -1591,10 +1829,24 @@ private:
 
     void createTextureImage()
     {
-        int texWidth, texHeight, texChannels;
-        stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+        int      texWidth, texHeight, texChannels;
+        stbi_uc* pixels = nullptr;
+
+#if PLATFORM_ANDROID
+        // Load image from Android assets
+        std::optional<AssetManagerType*> optionalAssetManager = assetManager;
+        std::vector<char>                imageData            = readFile(TEXTURE_PATH, optionalAssetManager);
+        pixels                                                = stbi_load_from_memory(
+            reinterpret_cast<const stbi_uc*>(imageData.data()),
+            static_cast<int>(imageData.size()),
+            &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+#else
+        // Load image from filesystem
+        pixels = stbi_load(TEXTURE_PATH.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+#endif
+
         vk::DeviceSize imageSize = texWidth * texHeight * 4;
-        mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
+        mipLevels                = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
         // stbi_uc* pixels = stbi_load("textures/texture.jpg", &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
 
         if (!pixels) {
@@ -1602,7 +1854,7 @@ private:
             throw std::runtime_error("Failed to load texture image!");
         }
 
-        vk::raii::Buffer stagingBuffer({});
+        vk::raii::Buffer       stagingBuffer({});
         vk::raii::DeviceMemory stagingBufferMemory({});
         createBuffer(imageSize, vk::BufferUsageFlagBits::eTransferSrc, vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent, stagingBuffer, stagingBufferMemory);
 
@@ -1649,7 +1901,7 @@ private:
                                                      .setLayerCount(1)
                                                      .setLevelCount(1));
 
-        int32_t mipWidth = texWidth;
+        int32_t mipWidth  = texWidth;
         int32_t mipHeigth = texHeight;
 
         for (uint32_t i = 1; i < mipLevels; i++) {
@@ -1663,8 +1915,8 @@ private:
             commandBuffer->pipelineBarrier(vk::PipelineStageFlagBits::eTransfer, vk::PipelineStageFlagBits::eTransfer, {}, {}, {}, barrier);
 
             vk::ArrayWrapper1D<vk::Offset3D, 2> offsets, dstOffsets;
-            offsets[0] = vk::Offset3D(0, 0, 0);
-            offsets[1] = vk::Offset3D(mipWidth, mipHeigth, 1);
+            offsets[0]    = vk::Offset3D(0, 0, 0);
+            offsets[1]    = vk::Offset3D(mipWidth, mipHeigth, 1);
             dstOffsets[0] = vk::Offset3D(0, 0, 0);
             dstOffsets[1] = vk::Offset3D(
                 mipWidth > 1 ? mipWidth / 2 : 1,
@@ -1750,13 +2002,13 @@ private:
             barrier.srcAccessMask = {};
             barrier.dstAccessMask = vk::AccessFlagBits::eTransferWrite;
 
-            sourceStage = vk::PipelineStageFlagBits::eTopOfPipe;
+            sourceStage      = vk::PipelineStageFlagBits::eTopOfPipe;
             destinationStage = vk::PipelineStageFlagBits::eTransfer;
         } else if (oldLayout == vk::ImageLayout::eTransferDstOptimal && newLayout == vk::ImageLayout::eShaderReadOnlyOptimal) {
             barrier.srcAccessMask = vk::AccessFlagBits::eTransferWrite;
             barrier.dstAccessMask = vk::AccessFlagBits::eShaderRead;
 
-            sourceStage = vk::PipelineStageFlagBits::eTransfer;
+            sourceStage      = vk::PipelineStageFlagBits::eTransfer;
             destinationStage = vk::PipelineStageFlagBits::eFragmentShader;
         } else {
             throw std::invalid_argument("unsupported layout transition!");
@@ -1768,7 +2020,7 @@ private:
     void copyBufferToImage(const vk::raii::Buffer& buffer, vk::raii::Image& image, uint32_t width, uint32_t height)
     {
         std::unique_ptr<vk::raii::CommandBuffer> commandBuffer = beginSingleTimeCommands();
-        vk::BufferImageCopy region = vk::BufferImageCopy()
+        vk::BufferImageCopy                      region        = vk::BufferImageCopy()
                                          .setBufferOffset(0)
                                          .setBufferRowLength(0)
                                          .setBufferImageHeight(0)
@@ -1803,8 +2055,8 @@ private:
 
     void createTextureSampler()
     {
-        vk::PhysicalDeviceProperties properties = physicalDevice.getProperties();
-        vk::SamplerCreateInfo samplerInfo = vk::SamplerCreateInfo()
+        vk::PhysicalDeviceProperties properties  = physicalDevice.getProperties();
+        vk::SamplerCreateInfo        samplerInfo = vk::SamplerCreateInfo()
                                                 .setMagFilter(vk::Filter::eLinear)
                                                 .setMinFilter(vk::Filter::eLinear)
                                                 // .setMinLod(static_cast<float>(mipLevels - 1))
@@ -1860,14 +2112,27 @@ private:
     void loadModel()
     {
 
-        tinyobj::attrib_t attrib;
-        std::vector<tinyobj::shape_t> shapes;
+        tinyobj::attrib_t                attrib;
+        std::vector<tinyobj::shape_t>    shapes;
         std::vector<tinyobj::material_t> materials;
-        std::string warn, err;
+        std::string                      warn, err;
 
-        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str())) {
-            throw std::runtime_error(warn + err);
+#if PLATFORM_ANDROID
+        // Load OBJ file from Android assets
+        std::optional<AssetManagerType*> optionalAssetManager = assetManager;
+        std::vector<char>                objData              = readFile(MODEL_PATH, optionalAssetManager);
+        std::string                      objString(objData.begin(), objData.end());
+        std::istringstream               objStream(objString);
+
+        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, &objStream)) {
+            throw std::runtime_error("Failed to load model: " + MODEL_PATH + " - " + warn + err);
         }
+#else
+        // Load OBJ file from filesystem
+        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str())) {
+            throw std::runtime_error("Failed to load model: " + MODEL_PATH + " - " + warn + err);
+        }
+#endif
 
         for (const auto& shape : shapes) {
             for (const auto& index : shape.mesh.indices) {
@@ -1934,14 +2199,29 @@ private:
             VP_KHR_ROADMAP_2022_NAME,
             VP_KHR_ROADMAP_2022_SPEC_VERSION
         };
-
         // Check if the profile is supported
         VkBool32 supported = VK_FALSE;
+
+#ifdef PLATFORM_ANDROID
+        // Create a vp::ProfileDesc from our VpProfileProperties
+        vp::ProfileDesc profileDesc = {
+            appInfo.profile.name,
+            appInfo.profile.specVersion
+        };
+
+        // Use vp::GetProfileSupport instead of vpGetPhysicalDeviceProfileSupport
+        bool result = vp::GetProfileSupport(
+            *physicalDevice, // Pass the physical device directly
+            &profileDesc, // Pass the profile description
+            &supported // Output parameter for support status
+        );
+#else
         VkResult result = vpGetPhysicalDeviceProfileSupport(
             *instance,
             *physicalDevice,
             &appInfo.profile,
             &supported);
+#endif
 
         if (result == VK_SUCCESS && supported == VK_TRUE) {
             appInfo.profileSupported = true;
@@ -2085,7 +2365,7 @@ private:
                                                .setDstAccessMask(vk::AccessFlagBits::eColorAttachmentWrite | vk::AccessFlagBits::eDepthStencilAttachmentWrite);
 
         // Create the render pass
-        std::array attachments = { colorAttachment, depthAttachment, colorAttachmentResolve };
+        std::array               attachments    = { colorAttachment, depthAttachment, colorAttachmentResolve };
         vk::RenderPassCreateInfo renderPassInfo = vk::RenderPassCreateInfo()
                                                       .setAttachmentCount(static_cast<uint32_t>(attachments.size()))
                                                       .setPAttachments(attachments.data())
@@ -2097,32 +2377,89 @@ private:
         renderPass = vk::raii::RenderPass(device, renderPassInfo);
     }
 
-	void createFramebuffers()
-	{
-		// This is only called if the Best Practices profile is not supported
-		// or if dynamic rendering is not available
-		swapChainFramebuffers.reserve(swapChainImageViews.size());
+    void createFramebuffers()
+    {
+        // This is only called if the Best Practices profile is not supported
+        // or if dynamic rendering is not available
+        swapChainFramebuffers.reserve(swapChainImageViews.size());
 
-		for (size_t i = 0; i < swapChainImageViews.size(); i++)
-		{
-			std::array<vk::ImageView, 3> attachments = {
-			    *colorImageView,
-			    *depthImageView,
-			    *swapChainImageViews[i]};
+        for (size_t i = 0; i < swapChainImageViews.size(); i++) {
+            std::array<vk::ImageView, 3> attachments = {
+                *colorImageView,
+                *depthImageView,
+                *swapChainImageViews[i]
+            };
 
-			vk::FramebufferCreateInfo framebufferInfo = vk::FramebufferCreateInfo()
-			    .setRenderPass(*renderPass)      
-			    .setAttachmentCount(static_cast<uint32_t>(attachments.size())) 
-			    .setPAttachments(attachments.data())    
-			    .setWidth(swapChainExtent.width)           
-			    .setHeight(swapChainExtent.height)          
-			    .setLayers(1);          
+            vk::FramebufferCreateInfo framebufferInfo = vk::FramebufferCreateInfo()
+                                                            .setRenderPass(*renderPass)
+                                                            .setAttachmentCount(static_cast<uint32_t>(attachments.size()))
+                                                            .setPAttachments(attachments.data())
+                                                            .setWidth(swapChainExtent.width)
+                                                            .setHeight(swapChainExtent.height)
+                                                            .setLayers(1);
 
-			swapChainFramebuffers.push_back(device.createFramebuffer(framebufferInfo));
-		}
-	}
+            swapChainFramebuffers.push_back(device.createFramebuffer(framebufferInfo));
+        }
+    }
+
+#if PLATFORM_ANDROID
+    // Handle app commands
+    static void handleAppCommand(android_app* app, int32_t cmd)
+    {
+        auto* vulkanApp = static_cast<HelloTriangleApplication*>(app->userData);
+        switch (cmd) {
+        case APP_CMD_INIT_WINDOW:
+            // Window created, initialize Vulkan
+            if (app->window != nullptr) {
+                vulkanApp->initVulkan();
+            }
+            break;
+        case APP_CMD_TERM_WINDOW:
+            // Window destroyed, clean up Vulkan
+            vulkanApp->cleanup();
+            break;
+        default:
+            break;
+        }
+    }
+
+    // Handle input events
+    static int32_t handleInputEvent(android_app* app, AInputEvent* event)
+    {
+        auto* vulkanApp = static_cast<HelloTriangleApplication*>(app->userData);
+        if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
+            // Handle touch events
+            float x = AMotionEvent_getX(event, 0);
+            float y = AMotionEvent_getY(event, 0);
+
+            // Process touch coordinates
+            LOGI("Touch at: %f, %f", x, y);
+
+            return 1;
+        }
+        return 0;
+    }
+#endif
 };
 
+// Platform-specific entry point
+#if PLATFORM_ANDROID
+// Android main entry point
+void android_main(android_app* app)
+{
+    // Make sure glue isn't stripped
+    app_dummy();
+
+    try {
+        // Create and run the Vulkan application
+        HelloTriangleApplication vulkanApp(app);
+        vulkanApp.run();
+    } catch (const std::exception& e) {
+        LOGE("Exception caught: %s", e.what());
+    }
+}
+#else
+// Desktop main entry point
 int main()
 {
     try {
@@ -2135,3 +2472,4 @@ int main()
 
     return EXIT_SUCCESS;
 }
+#endif

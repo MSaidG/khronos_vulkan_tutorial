@@ -130,17 +130,56 @@ HelloTriangleApplication/fast:
 .PHONY : HelloTriangleApplication/fast
 
 #=============================================================================
-# Target rules for targets named compile_shaders
+# Target rules for targets named compile_slang_shaders
 
 # Build rule for target.
-compile_shaders: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compile_shaders
-.PHONY : compile_shaders
+compile_slang_shaders: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compile_slang_shaders
+.PHONY : compile_slang_shaders
 
 # fast build rule for target.
-compile_shaders/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_shaders.dir/build.make CMakeFiles/compile_shaders.dir/build
-.PHONY : compile_shaders/fast
+compile_slang_shaders/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_slang_shaders.dir/build.make CMakeFiles/compile_slang_shaders.dir/build
+.PHONY : compile_slang_shaders/fast
+
+#=============================================================================
+# Target rules for targets named compile_vert_shader
+
+# Build rule for target.
+compile_vert_shader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compile_vert_shader
+.PHONY : compile_vert_shader
+
+# fast build rule for target.
+compile_vert_shader/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_vert_shader.dir/build.make CMakeFiles/compile_vert_shader.dir/build
+.PHONY : compile_vert_shader/fast
+
+#=============================================================================
+# Target rules for targets named compile_frag_shader
+
+# Build rule for target.
+compile_frag_shader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compile_frag_shader
+.PHONY : compile_frag_shader
+
+# fast build rule for target.
+compile_frag_shader/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_frag_shader.dir/build.make CMakeFiles/compile_frag_shader.dir/build
+.PHONY : compile_frag_shader/fast
+
+#=============================================================================
+# Target rules for targets named compile_glsl_shaders
+
+# Build rule for target.
+compile_glsl_shaders: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compile_glsl_shaders
+.PHONY : compile_glsl_shaders
+
+# fast build rule for target.
+compile_glsl_shaders/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_glsl_shaders.dir/build.make CMakeFiles/compile_glsl_shaders.dir/build
+.PHONY : compile_glsl_shaders/fast
 
 base_code.o: base_code.cpp.o
 .PHONY : base_code.o
@@ -174,7 +213,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... compile_shaders"
+	@echo "... compile_frag_shader"
+	@echo "... compile_glsl_shaders"
+	@echo "... compile_slang_shaders"
+	@echo "... compile_vert_shader"
 	@echo "... HelloTriangleApplication"
 	@echo "... base_code.o"
 	@echo "... base_code.i"

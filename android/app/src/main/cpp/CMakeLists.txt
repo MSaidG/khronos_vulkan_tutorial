@@ -78,8 +78,8 @@ target_sources(VulkanCppModule
 )
 
 
-# Set up shader compilation for 34_android
-set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../attachments")
+# Set up shader compilation for base_code.cpp
+set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../")
 set(SHADER_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/shaders")
 file(MAKE_DIRECTORY ${SHADER_OUTPUT_DIR})
 
@@ -114,7 +114,7 @@ add_shaders_target(android_shaders CHAPTER_NAME "${SHADER_OUTPUT_DIR}" SOURCES $
 # used in the AndroidManifest.xml file.
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../attachments/34_android.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../base_code.cpp
         game_activity_bridge.cpp)
 
 # Add dependency on shader compilation

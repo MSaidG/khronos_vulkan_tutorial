@@ -64,10 +64,12 @@ CMAKE_BINARY_DIR = /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/
 
 # The main recursive "all" target.
 all: CMakeFiles/HelloTriangleApplication.dir/all
+all: CMakeFiles/compile_glsl_shaders.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/HelloTriangleApplication.dir/codegen
+codegen: CMakeFiles/compile_glsl_shaders.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -76,14 +78,18 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/HelloTriangleApplication.dir/clean
-clean: CMakeFiles/compile_shaders.dir/clean
+clean: CMakeFiles/compile_slang_shaders.dir/clean
+clean: CMakeFiles/compile_vert_shader.dir/clean
+clean: CMakeFiles/compile_frag_shader.dir/clean
+clean: CMakeFiles/compile_glsl_shaders.dir/clean
 .PHONY : clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/HelloTriangleApplication.dir
 
 # All Build rule for target.
-CMakeFiles/HelloTriangleApplication.dir/all: CMakeFiles/compile_shaders.dir/all
+CMakeFiles/HelloTriangleApplication.dir/all: CMakeFiles/compile_slang_shaders.dir/all
+CMakeFiles/HelloTriangleApplication.dir/all: CMakeFiles/compile_glsl_shaders.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangleApplication.dir/build.make CMakeFiles/HelloTriangleApplication.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangleApplication.dir/build.make CMakeFiles/HelloTriangleApplication.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=1,2 "Built target HelloTriangleApplication"
@@ -91,7 +97,7 @@ CMakeFiles/HelloTriangleApplication.dir/all: CMakeFiles/compile_shaders.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/HelloTriangleApplication.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/HelloTriangleApplication.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 0
 .PHONY : CMakeFiles/HelloTriangleApplication.dir/rule
@@ -101,7 +107,8 @@ HelloTriangleApplication: CMakeFiles/HelloTriangleApplication.dir/rule
 .PHONY : HelloTriangleApplication
 
 # codegen rule for target.
-CMakeFiles/HelloTriangleApplication.dir/codegen: CMakeFiles/compile_shaders.dir/all
+CMakeFiles/HelloTriangleApplication.dir/codegen: CMakeFiles/compile_slang_shaders.dir/all
+CMakeFiles/HelloTriangleApplication.dir/codegen: CMakeFiles/compile_glsl_shaders.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangleApplication.dir/build.make CMakeFiles/HelloTriangleApplication.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=1,2 "Finished codegen for target HelloTriangleApplication"
 .PHONY : CMakeFiles/HelloTriangleApplication.dir/codegen
@@ -112,36 +119,132 @@ CMakeFiles/HelloTriangleApplication.dir/clean:
 .PHONY : CMakeFiles/HelloTriangleApplication.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/compile_shaders.dir
+# Target rules for target CMakeFiles/compile_slang_shaders.dir
 
 # All Build rule for target.
-CMakeFiles/compile_shaders.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_shaders.dir/build.make CMakeFiles/compile_shaders.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_shaders.dir/build.make CMakeFiles/compile_shaders.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=3 "Built target compile_shaders"
-.PHONY : CMakeFiles/compile_shaders.dir/all
+CMakeFiles/compile_slang_shaders.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_slang_shaders.dir/build.make CMakeFiles/compile_slang_shaders.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_slang_shaders.dir/build.make CMakeFiles/compile_slang_shaders.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=6 "Built target compile_slang_shaders"
+.PHONY : CMakeFiles/compile_slang_shaders.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/compile_shaders.dir/rule: cmake_check_build_system
+CMakeFiles/compile_slang_shaders.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 1
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/compile_shaders.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/compile_slang_shaders.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 0
-.PHONY : CMakeFiles/compile_shaders.dir/rule
+.PHONY : CMakeFiles/compile_slang_shaders.dir/rule
 
 # Convenience name for target.
-compile_shaders: CMakeFiles/compile_shaders.dir/rule
-.PHONY : compile_shaders
+compile_slang_shaders: CMakeFiles/compile_slang_shaders.dir/rule
+.PHONY : compile_slang_shaders
 
 # codegen rule for target.
-CMakeFiles/compile_shaders.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_shaders.dir/build.make CMakeFiles/compile_shaders.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=3 "Finished codegen for target compile_shaders"
-.PHONY : CMakeFiles/compile_shaders.dir/codegen
+CMakeFiles/compile_slang_shaders.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_slang_shaders.dir/build.make CMakeFiles/compile_slang_shaders.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=6 "Finished codegen for target compile_slang_shaders"
+.PHONY : CMakeFiles/compile_slang_shaders.dir/codegen
 
 # clean rule for target.
-CMakeFiles/compile_shaders.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_shaders.dir/build.make CMakeFiles/compile_shaders.dir/clean
-.PHONY : CMakeFiles/compile_shaders.dir/clean
+CMakeFiles/compile_slang_shaders.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_slang_shaders.dir/build.make CMakeFiles/compile_slang_shaders.dir/clean
+.PHONY : CMakeFiles/compile_slang_shaders.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/compile_vert_shader.dir
+
+# All Build rule for target.
+CMakeFiles/compile_vert_shader.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_vert_shader.dir/build.make CMakeFiles/compile_vert_shader.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_vert_shader.dir/build.make CMakeFiles/compile_vert_shader.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=7 "Built target compile_vert_shader"
+.PHONY : CMakeFiles/compile_vert_shader.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/compile_vert_shader.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/compile_vert_shader.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 0
+.PHONY : CMakeFiles/compile_vert_shader.dir/rule
+
+# Convenience name for target.
+compile_vert_shader: CMakeFiles/compile_vert_shader.dir/rule
+.PHONY : compile_vert_shader
+
+# codegen rule for target.
+CMakeFiles/compile_vert_shader.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_vert_shader.dir/build.make CMakeFiles/compile_vert_shader.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=7 "Finished codegen for target compile_vert_shader"
+.PHONY : CMakeFiles/compile_vert_shader.dir/codegen
+
+# clean rule for target.
+CMakeFiles/compile_vert_shader.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_vert_shader.dir/build.make CMakeFiles/compile_vert_shader.dir/clean
+.PHONY : CMakeFiles/compile_vert_shader.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/compile_frag_shader.dir
+
+# All Build rule for target.
+CMakeFiles/compile_frag_shader.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_frag_shader.dir/build.make CMakeFiles/compile_frag_shader.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_frag_shader.dir/build.make CMakeFiles/compile_frag_shader.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=3 "Built target compile_frag_shader"
+.PHONY : CMakeFiles/compile_frag_shader.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/compile_frag_shader.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/compile_frag_shader.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 0
+.PHONY : CMakeFiles/compile_frag_shader.dir/rule
+
+# Convenience name for target.
+compile_frag_shader: CMakeFiles/compile_frag_shader.dir/rule
+.PHONY : compile_frag_shader
+
+# codegen rule for target.
+CMakeFiles/compile_frag_shader.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_frag_shader.dir/build.make CMakeFiles/compile_frag_shader.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=3 "Finished codegen for target compile_frag_shader"
+.PHONY : CMakeFiles/compile_frag_shader.dir/codegen
+
+# clean rule for target.
+CMakeFiles/compile_frag_shader.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_frag_shader.dir/build.make CMakeFiles/compile_frag_shader.dir/clean
+.PHONY : CMakeFiles/compile_frag_shader.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/compile_glsl_shaders.dir
+
+# All Build rule for target.
+CMakeFiles/compile_glsl_shaders.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_glsl_shaders.dir/build.make CMakeFiles/compile_glsl_shaders.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_glsl_shaders.dir/build.make CMakeFiles/compile_glsl_shaders.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=4,5 "Built target compile_glsl_shaders"
+.PHONY : CMakeFiles/compile_glsl_shaders.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/compile_glsl_shaders.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/compile_glsl_shaders.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles 0
+.PHONY : CMakeFiles/compile_glsl_shaders.dir/rule
+
+# Convenience name for target.
+compile_glsl_shaders: CMakeFiles/compile_glsl_shaders.dir/rule
+.PHONY : compile_glsl_shaders
+
+# codegen rule for target.
+CMakeFiles/compile_glsl_shaders.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_glsl_shaders.dir/build.make CMakeFiles/compile_glsl_shaders.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles --progress-num=4,5 "Finished codegen for target compile_glsl_shaders"
+.PHONY : CMakeFiles/compile_glsl_shaders.dir/codegen
+
+# clean rule for target.
+CMakeFiles/compile_glsl_shaders.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compile_glsl_shaders.dir/build.make CMakeFiles/compile_glsl_shaders.dir/clean
+.PHONY : CMakeFiles/compile_glsl_shaders.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

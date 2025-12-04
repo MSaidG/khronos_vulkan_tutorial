@@ -1,4 +1,7 @@
 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/HelloTriangleApplication.dir
-/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/compile_shaders.dir
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/compile_slang_shaders.dir
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/compile_vert_shader.dir
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/compile_frag_shader.dir
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/compile_glsl_shaders.dir
 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/edit_cache.dir
 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/build/CMakeFiles/rebuild_cache.dir

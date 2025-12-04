@@ -59,6 +59,7 @@ android {
         getByName("main") {
             assets.srcDirs(
                 // Debug shader outputs
+                "../../../../",
                 ".externalNativeBuild/cmake/debug/arm64-v8a/shaders",
                 ".externalNativeBuild/cmake/debug/armeabi-v7a/shaders",
                 ".externalNativeBuild/cmake/debug/x86/shaders",
