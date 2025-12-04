@@ -2,10 +2,13 @@ package com.vulkan.mobile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
+// import com.google.androidgamesdk.GameActivity
 import android.widget.TextView
 import com.vulkan.mobile.databinding.ActivityMainBinding
+import com.google.androidgamesdk.GameActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : GameActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -17,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
+
+        // Keep the screen on while the app is running
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     /**

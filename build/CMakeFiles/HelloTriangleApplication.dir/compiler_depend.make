@@ -5,6 +5,30 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/mapbox/earcut.hpp \
   /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/stb_image.h \
   /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/tiny_obj_loader.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_decode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_encode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_decode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_encode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_decode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_encode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std_decode.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codecs_common.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vk_platform.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_core.h \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_enums.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_funcs.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_handles.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_hpp_macros.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_profiles.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_raii.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_structs.hpp \
+  /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_to_string.hpp \
   /usr/include/GL/gl.h \
   /usr/include/GL/glext.h \
   /usr/include/GLFW/glfw3.h \
@@ -237,6 +261,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/c++/15/cmath \
   /usr/include/c++/15/compare \
   /usr/include/c++/15/concepts \
+  /usr/include/c++/15/cstdarg \
   /usr/include/c++/15/cstddef \
   /usr/include/c++/15/cstdint \
   /usr/include/c++/15/cstdio \
@@ -539,29 +564,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o: /home/msgulberk/Project
   /usr/include/syscall.h \
   /usr/include/time.h \
   /usr/include/unistd.h \
-  /usr/include/vk_video/vulkan_video_codec_av1std.h \
-  /usr/include/vk_video/vulkan_video_codec_av1std_decode.h \
-  /usr/include/vk_video/vulkan_video_codec_av1std_encode.h \
-  /usr/include/vk_video/vulkan_video_codec_h264std.h \
-  /usr/include/vk_video/vulkan_video_codec_h264std_decode.h \
-  /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
-  /usr/include/vk_video/vulkan_video_codec_h265std.h \
-  /usr/include/vk_video/vulkan_video_codec_h265std_decode.h \
-  /usr/include/vk_video/vulkan_video_codec_h265std_encode.h \
-  /usr/include/vk_video/vulkan_video_codec_vp9std.h \
-  /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h \
-  /usr/include/vk_video/vulkan_video_codecs_common.h \
-  /usr/include/vulkan/vk_platform.h \
-  /usr/include/vulkan/vulkan.h \
-  /usr/include/vulkan/vulkan.hpp \
-  /usr/include/vulkan/vulkan_core.h \
-  /usr/include/vulkan/vulkan_enums.hpp \
-  /usr/include/vulkan/vulkan_funcs.hpp \
-  /usr/include/vulkan/vulkan_handles.hpp \
-  /usr/include/vulkan/vulkan_hpp_macros.hpp \
-  /usr/include/vulkan/vulkan_raii.hpp \
-  /usr/include/vulkan/vulkan_structs.hpp \
-  /usr/include/vulkan/vulkan_to_string.hpp \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/emmintrin.h \
@@ -602,10 +604,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
-
-/usr/lib64/libglfw.so:
-
 /usr/lib64/libc.so:
 
 /usr/lib64/crtn.o:
@@ -620,6 +618,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h:
 
+/usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h:
+
 /usr/lib/gcc/x86_64-redhat-linux/15/include/mm_malloc.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/emmintrin.h:
@@ -628,71 +628,43 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/wchar.h:
 
-/usr/include/vulkan/vulkan_to_string.hpp:
+/usr/include/unistd.h:
 
-/usr/include/vulkan/vulkan_structs.hpp:
+/usr/include/syscall.h:
 
-/usr/include/vulkan/vulkan_hpp_macros.hpp:
+/usr/include/sys/types.h:
 
-/usr/include/vulkan/vulkan_funcs.hpp:
+/usr/include/sys/syscall.h:
 
-/usr/include/vulkan/vulkan_enums.hpp:
+/usr/include/sys/select.h:
 
-/usr/include/vulkan/vulkan_core.h:
+/usr/include/strings.h:
 
-/usr/include/vulkan/vulkan.hpp:
+/usr/include/stdio.h:
 
-/usr/include/vk_video/vulkan_video_codecs_common.h:
+/usr/include/stdint.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h:
+/usr/include/sched.h:
 
-/usr/include/vk_video/vulkan_video_codec_vp9std_decode.h:
+/usr/include/linux/types.h:
 
-/usr/include/vk_video/vulkan_video_codec_h264std_encode.h:
-
-/usr/include/c++/15/functional:
-
-/lib64/libmvec.so.1:
-
-/usr/include/c++/15/ext/string_conversions.h:
-
-/usr/include/c++/15/bits/hashtable_policy.h:
-
-/usr/include/vk_video/vulkan_video_codec_h265std.h:
-
-/usr/include/c++/15/bits/exception_ptr.h:
-
-/usr/include/bits/floatn-common.h:
-
-/usr/include/c++/15/ext/alloc_traits.h:
-
-/usr/include/vk_video/vulkan_video_codec_h264std_decode.h:
-
-/usr/include/glm/ext/vector_uint2.hpp:
-
-/usr/include/bits/getopt_core.h:
-
-/usr/include/glm/ext/matrix_double3x4_precision.hpp:
-
-/usr/include/c++/15/ctime:
-
-/usr/include/c++/15/cmath:
+/usr/include/linux/sched/types.h:
 
 /usr/include/c++/15/bits/uniform_int_dist.h:
 
 /usr/include/glm/detail/type_vec1.hpp:
 
-/usr/include/c++/15/cwctype:
-
 /usr/include/c++/15/bits/stl_vector.h:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/os_defines.h:
 
-/usr/include/c++/15/cstring:
+/usr/include/string.h:
 
-/usr/include/c++/15/bits/enable_special_members.h:
+/usr/include/c++/15/bits/stl_tree.h:
 
 /usr/include/bits/waitstatus.h:
+
+/usr/include/c++/15/bits/enable_special_members.h:
 
 /usr/include/c++/15/bits/stl_tempbuf.h:
 
@@ -720,19 +692,11 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/ext/matrix_float3x3_precision.hpp:
 
-/usr/include/c++/15/cstdint:
-
-/usr/include/c++/15/bits/stl_pair.h:
-
 /usr/include/glm/detail/type_mat3x4.inl:
 
 /usr/include/c++/15/clocale:
 
 /usr/include/c++/15/bits/stl_algobase.h:
-
-/usr/include/c++/15/bits/cxxabi_forced.h:
-
-/usr/include/c++/15/concepts:
 
 /usr/include/c++/15/bits/std_function.h:
 
@@ -748,13 +712,13 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/types/struct_FILE.h:
 
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_decode.h:
+
 /usr/include/c++/15/bits/ranges_uninitialized.h:
 
 /usr/include/glm/ext/matrix_double4x3_precision.hpp:
 
 /usr/include/c++/15/bits/ranges_algo.h:
-
-/usr/include/c++/15/ext/numeric_traits.h:
 
 /usr/include/c++/15/bits/quoted_string.h:
 
@@ -774,8 +738,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/asm/posix_types_64.h:
 
-/usr/include/linux/sched/types.h:
-
 /usr/include/c++/15/bits/max_size_type.h:
 
 /usr/include/c++/15/bits/locale_facets_nonio.tcc:
@@ -789,6 +751,10 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /lib64/ld-linux-x86-64.so.2:
 
 /usr/include/c++/15/bits/istream.tcc:
+
+/usr/include/locale.h:
+
+/usr/include/c++/15/bits/allocated_ptr.h:
 
 /usr/include/c++/15/bits/ios_base.h:
 
@@ -808,79 +774,73 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/cpu-set.h:
 
-/usr/include/c++/15/bits/locale_classes.tcc:
+/usr/include/c++/15/bits/hashtable_policy.h:
 
-/usr/include/glm/detail/type_vec1.inl:
+/lib64/libmvec.so.1:
+
+/usr/include/c++/15/ext/string_conversions.h:
+
+/usr/include/c++/15/bits/locale_classes.tcc:
 
 /usr/include/c++/15/bits/hash_bytes.h:
 
 /usr/include/c++/15/algorithm:
 
-/usr/include/c++/15/ext/type_traits.h:
-
 /usr/include/c++/15/bits/functional_hash.h:
 
 /usr/include/c++/15/bits/iterator_concepts.h:
 
-/usr/include/vk_video/vulkan_video_codec_av1std_decode.h:
+/usr/include/c++/15/bits/exception_ptr.h:
 
-/usr/include/c++/15/bits/fstream.tcc:
-
-/usr/include/c++/15/bits/nested_exception.h:
-
-/usr/include/c++/15/bits/memoryfwd.h:
-
-/usr/include/c++/15/cstddef:
-
-/usr/include/bits/getopt_posix.h:
-
-/usr/include/errno.h:
+/usr/include/bits/floatn-common.h:
 
 /usr/include/c++/15/bits/exception.h:
 
 /usr/include/glm/detail/compute_common.hpp:
 
-/usr/include/strings.h:
-
-/usr/include/c++/15/ext/concurrence.h:
-
-/usr/include/c++/15/ext/atomicity.h:
-
-/usr/include/c++/15/bits/stl_iterator_base_funcs.h:
-
 /usr/include/c++/15/bits/uses_allocator_args.h:
 
 /usr/include/c++/15/bits/chrono.h:
 
-/usr/include/glm/detail/type_vec3.hpp:
+/usr/include/c++/15/bits/basic_string.tcc:
 
-/usr/include/bits/select.h:
+/usr/include/c++/15/bits/streambuf.tcc:
 
-/usr/include/bits/struct_rwlock.h:
+/usr/include/c++/15/bits/cpp_type_traits.h:
 
-/usr/include/bits/sched.h:
+/usr/include/glm/ext/vector_float1.hpp:
 
-/usr/include/bits/types/__FILE.h:
+/usr/include/c++/15/ostream:
 
-/usr/include/features.h:
-
-/usr/include/bits/stdint-uintn.h:
-
-/usr/include/asm/errno.h:
-
-/usr/include/bits/types/cookie_io_functions_t.h:
-
-/usr/include/bits/pthreadtypes.h:
-
-/usr/include/bits/pthreadtypes-arch.h:
-
-/usr/include/bits/pthread_stack_min-dynamic.h:
+/usr/include/c++/15/bits/basic_string.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/libstdc++.so:
 
 /usr/include/glm/vec2.hpp:
 
-/usr/include/bits/posix1_lim.h:
+/usr/include/c++/15/bits/basic_ios.h:
+
+/usr/include/c++/15/set:
+
+/usr/include/c++/15/bits/atomic_lockfree_defines.h:
+
+/usr/include/c++/15/bits/atomic_base.h:
+
+/usr/include/c++/15/bits/allocator.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/c++/15/climits:
+
+/usr/include/c++/15/bits/vector.tcc:
+
+/usr/include/c++/15/iostream:
+
+/usr/include/c++/15/bits/align.h:
+
+/usr/include/c++/15/backward/auto_ptr.h:
+
+/usr/include/c++/15/bits/exception_defines.h:
 
 /usr/lib64/libc_nonshared.a:
 
@@ -888,65 +848,105 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/types/timer_t.h:
 
-/usr/include/c++/15/bits/exception_defines.h:
+/usr/include/c++/15/bits/ranges_util.h:
 
-/usr/include/c++/15/backward/auto_ptr.h:
+/usr/include/c++/15/array:
 
-/usr/include/bits/fp-fast.h:
+/usr/include/c++/15/bits/range_access.h:
 
-/usr/include/sched.h:
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/tiny_obj_loader.h:
 
-/usr/include/bits/mathcalls-narrow.h:
+/usr/include/c++/15/bits/string_view.tcc:
 
-/usr/include/c++/15/bits/version.h:
+/usr/include/bits/xopen_lim.h:
 
-/usr/include/sys/cdefs.h:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_decode.h:
 
-/usr/include/glm/ext/matrix_float4x2_precision.hpp:
+/usr/include/bits/wordsize.h:
 
-/usr/include/glm/ext/vector_double4.hpp:
+/usr/include/bits/uintn-identity.h:
 
-/usr/include/c++/15/bits/concept_check.h:
+/usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h:
 
-/usr/include/bits/uio_lim.h:
+/usr/include/glm/ext/vector_double2_precision.hpp:
 
-/usr/include/c++/15/bits/align.h:
+/usr/include/bits/confname.h:
 
-/usr/include/bits/libc-header-start.h:
+/usr/include/c++/15/cassert:
 
-/usr/include/c++/15/bits/atomic_wait.h:
+/usr/include/bits/types/clockid_t.h:
 
-/usr/include/GL/gl.h:
+/usr/include/bits/wctype-wchar.h:
 
-/usr/include/bits/floatn.h:
+/usr/include/bits/stdint-intn.h:
+
+/usr/include/c++/15/typeinfo:
 
 /usr/include/c++/15/fstream:
 
 /usr/include/glm/ext/vector_int3_sized.hpp:
 
-/usr/include/glm/detail/type_mat3x2.hpp:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_encode.h:
 
-/usr/include/bits/libm-simd-decl-stubs.h:
+/usr/include/c++/15/bits/fstream.tcc:
+
+/usr/include/c++/15/bits/nested_exception.h:
+
+/usr/include/c++/15/bits/memoryfwd.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/bits/stdint-uintn.h:
+
+/usr/include/glm/detail/type_vec1.inl:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_structs.hpp:
+
+/usr/include/c++/15/bits/cxxabi_forced.h:
+
+/usr/include/bits/dl_find_object.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/glm/detail/type_mat2x2.hpp:
+
+/usr/include/bits/types/__sigset_t.h:
+
+/usr/include/c++/15/bits/monostate.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/glm/mat2x4.hpp:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std.h:
+
+/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/mapbox/earcut.hpp:
+
+/usr/include/glm/ext/vector_bool4_precision.hpp:
+
+/usr/include/c++/15/bits/predefined_ops.h:
+
+/usr/include/GL/glext.h:
 
 /usr/include/bits/endianness.h:
 
 /usr/include/libintl.h:
 
-/usr/include/glm/ext/matrix_double4x4.hpp:
-
-/usr/include/alloca.h:
-
-/usr/include/glm/ext/vector_bool4_precision.hpp:
-
-/usr/include/c++/15/bits/monostate.h:
+/usr/include/bits/stdint-least.h:
 
 /usr/include/c++/15/bits/node_handle.h:
 
-/usr/include/linux/stddef.h:
+/usr/include/bits/floatn.h:
 
-/usr/include/bits/fp-logb.h:
-
-/usr/include/c++/15/cwchar:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std.h:
 
 /usr/include/bits/mathcalls-helper-functions.h:
 
@@ -954,45 +954,175 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/c++/15/bits/hashtable.h:
 
+/usr/include/c++/15/bits/memory_resource.h:
+
+/usr/include/c++/15/bits/stl_function.h:
+
+/usr/include/bits/types/struct_itimerspec.h:
+
 /usr/include/c++/15/bits/stl_algo.h:
 
 /usr/include/bits/types/time_t.h:
 
-/usr/include/GLFW/glfw3.h:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.h:
 
-/usr/include/bits/flt-eval-method.h:
+/usr/include/c++/15/type_traits:
 
-/usr/include/vk_video/vulkan_video_codec_h265std_decode.h:
+/usr/include/c++/15/bits/charconv.h:
 
-/usr/include/bits/types/FILE.h:
+/usr/include/bits/types/clock_t.h:
+
+/usr/include/c++/15/pstl/glue_algorithm_defs.h:
+
+/usr/include/glm/ext/matrix_double3x4.hpp:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.hpp:
+
+/usr/include/glm/ext/quaternion_trigonometric.hpp:
+
+/usr/include/bits/types/struct_timespec.h:
+
+/usr/include/c++/15/bits/algorithmfwd.h:
+
+/usr/include/asm/bitsperlong.h:
+
+/usr/lib64/libglfw.so:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std.h:
+
+/usr/include/glm/ext/vector_double4_precision.hpp:
 
 /usr/include/bits/byteswap.h:
 
-/usr/include/c++/15/cstdlib:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_encode.h:
 
-/usr/include/vulkan/vulkan_raii.hpp:
+/usr/include/bits/thread-shared-types.h:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std_decode.h:
 
 /usr/include/glm/ext/vector_uint4.hpp:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std.h:
 
 /usr/include/bits/types/wint_t.h:
 
 /usr/include/glm/ext/scalar_int_sized.hpp:
 
-/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/tiny_obj_loader.h:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codecs_common.h:
 
-/usr/include/c++/15/bits/range_access.h:
+/usr/include/GL/gl.h:
 
-/usr/include/c++/15/ext/aligned_buffer.h:
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_handles.hpp:
 
-/home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/mapbox/earcut.hpp:
+/usr/include/asm/unistd_64.h:
 
-/usr/include/c++/15/bits/predefined_ops.h:
+/usr/include/c++/15/bits/specfun.h:
 
-/usr/include/asm-generic/errno.h:
+/usr/include/bits/types/__fpos_t.h:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_encode.h:
+
+/usr/include/bits/timesize.h:
+
+/usr/include/c++/15/string:
+
+/usr/include/glm/trigonometric.hpp:
+
+/usr/include/c++/15/bits/atomic_wait.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vk_platform.h:
+
+/usr/include/c++/15/bits/shared_ptr_atomic.h:
+
+/usr/include/bits/types/struct_sched_param.h:
+
+/usr/include/glm/ext/matrix_float3x2_precision.hpp:
+
+/usr/include/glm/ext/quaternion_transform.hpp:
+
+/usr/include/c++/15/bits/utility.h:
+
+/usr/include/glm/detail/func_packing.inl:
+
+/usr/include/c++/15/bits/ostream_insert.h:
+
+/usr/include/bits/long-double.h:
+
+/usr/include/c++/15/tr1/modified_bessel_func.tcc:
+
+/usr/include/bits/types/__FILE.h:
+
+/usr/include/bits/struct_rwlock.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/features.h:
+
+/usr/include/GLFW/glfw3.h:
+
+/usr/include/bits/flt-eval-method.h:
+
+/usr/include/bits/types/FILE.h:
+
+/usr/include/c++/15/bits/stl_iterator_base_funcs.h:
+
+/usr/include/alloca.h:
+
+/usr/include/glm/ext/matrix_double4x4.hpp:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_to_string.hpp:
+
+/usr/include/bits/fp-fast.h:
+
+/usr/include/bits/posix1_lim.h:
 
 /usr/include/sys/single_threaded.h:
 
-/usr/include/GL/glext.h:
+/usr/include/asm-generic/errno.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/bits/fp-logb.h:
+
+/usr/include/c++/15/cctype:
+
+/usr/include/c++/15/bits/char_traits.h:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_core.h:
+
+/usr/include/glm/ext/quaternion_float.hpp:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/include/xmmintrin.h:
+
+/usr/include/glm/mat4x4.hpp:
+
+/usr/include/bits/getopt_core.h:
+
+/usr/include/glm/ext/matrix_double3x4_precision.hpp:
+
+/usr/include/c++/15/bits/streambuf_iterator.h:
+
+/usr/include/bits/getopt_posix.h:
+
+/usr/include/c++/15/cstddef:
+
+/usr/include/errno.h:
+
+/usr/include/bits/libc-header-start.h:
+
+/usr/include/c++/15/bits/alloc_traits.h:
+
+/usr/include/glm/ext/vector_uint3.hpp:
+
+/usr/include/c++/15/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/15/bits/ostream.h:
+
+/usr/include/glm/detail/type_mat3x2.hpp:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
 
 /usr/include/c++/15/charconv:
 
@@ -1008,7 +1138,43 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/syscall.h:
 
-/usr/include/c++/15/cstdio:
+/usr/include/c++/15/math.h:
+
+/usr/include/c++/15/chrono:
+
+/usr/include/c++/15/unordered_map:
+
+/usr/include/c++/15/bits/concept_check.h:
+
+/usr/include/bits/uio_lim.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/include/mmintrin.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/bits/mathcalls-macros.h:
+
+/usr/include/time.h:
+
+/usr/include/c++/15/tr1/hypergeometric.tcc:
+
+/usr/include/bits/mathcalls-narrow.h:
+
+/usr/include/c++/15/bits/version.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/glm/ext/matrix_float4x2_precision.hpp:
+
+/usr/include/glm/ext/vector_double4.hpp:
+
+/usr/include/bits/mathcalls.h:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_raii.hpp:
+
+/usr/include/bits/posix2_lim.h:
+
+/usr/include/bits/atomic_wide_counter.h:
 
 /usr/include/bits/posix_opt.h:
 
@@ -1016,121 +1182,17 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/detail/type_mat2x4.inl:
 
-/usr/include/bits/atomic_wide_counter.h:
+/usr/include/bits/pthread_stack_min-dynamic.h:
 
-/usr/include/c++/15/cassert:
+/usr/include/bits/pthreadtypes-arch.h:
 
-/usr/include/c++/15/bits/streambuf.tcc:
+/usr/include/bits/pthreadtypes.h:
 
-/usr/include/c++/15/bits/basic_string.tcc:
+/usr/include/bits/types/cookie_io_functions_t.h:
 
-/usr/include/bits/types/clockid_t.h:
-
-/usr/include/c++/15/typeinfo:
-
-/usr/include/c++/15/bits/streambuf_iterator.h:
-
-/usr/include/bits/types.h:
-
-/usr/include/bits/dl_find_object.h:
-
-/usr/include/glm/detail/type_mat2x2.hpp:
-
-/usr/include/asm-generic/posix_types.h:
-
-/usr/include/c++/15/bits/allocator.h:
-
-/usr/include/bits/types/__sigset_t.h:
-
-/usr/include/bits/posix2_lim.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/include/mmintrin.h:
-
-/usr/include/vulkan/vulkan.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/include/vk_video/vulkan_video_codec_vp9std.h:
-
-/usr/include/bits/mathcalls-macros.h:
-
-/usr/include/bits/long-double.h:
-
-/usr/include/asm/unistd_64.h:
-
-/usr/include/c++/15/bits/specfun.h:
-
-/usr/include/bits/types/__fpos_t.h:
-
-/usr/include/c++/15/bits/ostream.h:
-
-/usr/include/c++/15/bits/stl_raw_storage_iter.h:
-
-/usr/include/c++/15/bits/ranges_util.h:
-
-/usr/include/c++/15/unordered_map:
-
-/usr/include/bits/confname.h:
-
-/usr/include/c++/15/bits/cpp_type_traits.h:
-
-/usr/include/bits/stdint-intn.h:
-
-/usr/include/bits/wctype-wchar.h:
-
-/usr/include/glm/ext/vector_float1.hpp:
-
-/usr/include/c++/15/ostream:
-
-/usr/include/c++/15/bits/basic_string.h:
-
-/usr/include/glm/ext/quaternion_transform.inl:
-
-/usr/include/bits/typesizes.h:
-
-/usr/include/bits/uintn-identity.h:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/c++locale.h:
-
-/usr/include/glm/ext/vector_double2_precision.hpp:
-
-/usr/include/asm-generic/errno-base.h:
-
-/usr/include/glm/mat2x4.hpp:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/c++/15/cctype:
-
-/usr/include/c++/15/bits/char_traits.h:
-
-/usr/include/glm/ext/quaternion_float.hpp:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/include/xmmintrin.h:
-
-/usr/include/glm/mat4x4.hpp:
+/usr/include/bits/select.h:
 
 /usr/include/bits/setjmp.h:
-
-/usr/include/c++/15/climits:
-
-/usr/include/c++/15/bits/vector.tcc:
-
-/usr/include/c++/15/iostream:
-
-/usr/include/c++/15/bits/utility.h:
-
-/usr/include/glm/detail/func_packing.inl:
-
-/usr/include/c++/15/bits/ostream_insert.h:
-
-/usr/include/bits/stdint-least.h:
-
-/usr/include/bits/time.h:
-
-/usr/include/asm/posix_types.h:
 
 /usr/include/c++/15/bits/stl_iterator.h:
 
@@ -1143,8 +1205,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/glm/ext/matrix_double2x2_precision.hpp:
 
 /usr/include/bits/struct_mutex.h:
-
-/usr/include/bits/thread-shared-types.h:
 
 /usr/include/bits/stdlib-float.h:
 
@@ -1168,33 +1228,13 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/types/__locale_t.h:
 
-/usr/include/bits/mathcalls.h:
-
-/usr/include/bits/types/clock_t.h:
-
-/usr/include/c++/15/bits/charconv.h:
-
-/usr/include/c++/15/pstl/glue_algorithm_defs.h:
-
-/usr/include/glm/ext/matrix_double3x4.hpp:
-
 /usr/include/bits/types/locale_t.h:
-
-/usr/include/glm/ext/vector_uint3.hpp:
-
-/usr/include/c++/15/bits/alloc_traits.h:
 
 /usr/include/bits/types/mbstate_t.h:
 
 /usr/include/bits/types/sigset_t.h:
 
-/usr/include/c++/15/bits/basic_ios.h:
-
 /usr/include/c++/15/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/15/bits/shared_ptr_atomic.h:
-
-/usr/include/bits/types/struct_sched_param.h:
 
 /usr/include/c++/15/bits/locale_conv.h:
 
@@ -1206,10 +1246,6 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/ext/matrix_double3x3_precision.hpp:
 
-/usr/include/glm/ext/quaternion_trigonometric.hpp:
-
-/usr/include/bits/types/struct_timespec.h:
-
 /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/base_code.cpp:
 
 /usr/include/glm/ext/vector_bool1_precision.hpp:
@@ -1220,31 +1256,51 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/bits/unistd_ext.h:
 
-/usr/include/bits/wordsize.h:
+/usr/include/c++/15/cmath:
 
-/usr/include/stdio.h:
+/usr/include/c++/15/concepts:
 
-/usr/include/c++/15/bits/string_view.tcc:
+/usr/include/c++/15/cstdarg:
 
-/usr/include/bits/xopen_lim.h:
+/usr/include/glm/detail/func_matrix.inl:
 
-/usr/include/c++/15/array:
+/usr/include/c++/15/bits/stl_pair.h:
 
-/usr/include/c++/15/bits/atomic_base.h:
+/usr/include/c++/15/cstdint:
 
-/usr/include/c++/15/bits/stl_function.h:
+/usr/include/c++/15/cstdio:
 
-/usr/include/bits/types/struct_itimerspec.h:
+/usr/include/c++/15/cstdlib:
 
-/usr/include/c++/15/bits/memory_resource.h:
+/usr/include/c++/15/cstring:
 
-/usr/include/c++/15/set:
+/usr/include/c++/15/ctime:
 
-/usr/include/c++/15/bits/atomic_lockfree_defines.h:
+/usr/include/c++/15/cwchar:
 
-/usr/include/c++/15/bits/algorithmfwd.h:
+/usr/include/c++/15/cwctype:
 
-/usr/include/asm/bitsperlong.h:
+/usr/include/glm/detail/type_vec3.hpp:
+
+/usr/include/c++/15/ext/aligned_buffer.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/glm/ext/quaternion_transform.inl:
+
+/usr/include/c++/15/ext/alloc_traits.h:
+
+/usr/include/glm/ext/vector_uint2.hpp:
+
+/usr/include/c++/15/ext/concurrence.h:
+
+/usr/include/c++/15/ext/atomicity.h:
+
+/usr/include/c++/15/ext/numeric_traits.h:
+
+/usr/include/c++/15/ext/type_traits.h:
+
+/usr/include/c++/15/functional:
 
 /usr/include/c++/15/initializer_list:
 
@@ -1253,6 +1309,12 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/c++/15/bits/std_abs.h:
 
 /usr/include/c++/15/ios:
+
+/usr/include/c++/15/bits/chrono_io.h:
+
+/usr/include/glm/ext/quaternion_geometric.inl:
+
+/usr/include/c++/15/iosfwd:
 
 /usr/include/glm/ext/matrix_double4x2.hpp:
 
@@ -1264,13 +1326,7 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/ext/vector_relational.inl:
 
-/usr/include/c++/15/chrono:
-
-/usr/include/c++/15/math.h:
-
 /usr/include/c++/15/memory:
-
-/usr/include/vk_video/vulkan_video_codec_h264std.h:
 
 /usr/include/c++/15/new:
 
@@ -1285,6 +1341,8 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 /usr/include/glm/exponential.hpp:
 
 /usr/include/glm/mat3x3.hpp:
+
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_hpp_macros.hpp:
 
 /usr/include/c++/15/pstl/execution_defs.h:
 
@@ -1308,17 +1366,9 @@ HelloTriangleApplication: /lib64/ld-linux-x86-64.so.2 \
 
 /usr/include/glm/detail/type_mat2x2.inl:
 
-/usr/include/sys/syscall.h:
-
 /usr/include/c++/15/format:
 
 /usr/include/c++/15/streambuf:
-
-/usr/include/bits/timesize.h:
-
-/usr/include/c++/15/string:
-
-/usr/include/glm/trigonometric.hpp:
 
 /usr/include/c++/15/string_view:
 
@@ -1332,6 +1382,10 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/vec3.hpp:
 
+/usr/include/stdc-predef.h:
+
+/usr/include/c++/15/tr1/ell_integral.tcc:
+
 /usr/include/glm/ext/vector_bool3.hpp:
 
 /usr/include/glm/ext/matrix_float2x3_precision.hpp:
@@ -1340,8 +1394,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/tr1/legendre_function.tcc:
 
-/usr/include/c++/15/tr1/modified_bessel_func.tcc:
-
 /usr/include/c++/15/tr1/poly_hermite.tcc:
 
 /usr/include/c++/15/tr1/riemann_zeta.tcc:
@@ -1349,8 +1401,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/c++/15/x86_64-redhat-linux/bits/time_members.h:
 
 /usr/include/c++/15/tuple:
-
-/usr/include/c++/15/type_traits:
 
 /usr/include/c++/15/utility:
 
@@ -1394,13 +1444,13 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/error_constants.h:
 
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_decode.h:
+
 /usr/include/c++/15/x86_64-redhat-linux/bits/gthr.h:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/messages_members.h:
 
 /usr/include/ctype.h:
-
-/usr/include/stdint.h:
 
 /usr/include/c++/15/compare:
 
@@ -1417,8 +1467,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/glm/detail/func_geometric.inl:
 
 /usr/include/glm/detail/func_integer.inl:
-
-/usr/include/glm/detail/func_matrix.inl:
 
 /usr/include/glm/detail/func_vector_relational.inl:
 
@@ -1458,8 +1506,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/detail/type_mat2x4.hpp:
 
-/usr/include/linux/types.h:
-
 /usr/include/c++/15/sstream:
 
 /usr/include/glm/detail/type_mat3x2.inl:
@@ -1494,10 +1540,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/detail/type_vec3.inl:
 
-/usr/include/c++/15/bits/allocated_ptr.h:
-
-/usr/include/locale.h:
-
 /usr/include/glm/ext/matrix_clip_space.hpp:
 
 /usr/include/glm/ext/matrix_double2x3.hpp:
@@ -1516,8 +1558,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/ext/matrix_double3x2.hpp:
 
-/usr/include/vk_video/vulkan_video_codec_h265std_encode.h:
-
 /usr/include/glm/ext/matrix_double4x3.hpp:
 
 /usr/include/glm/ext/matrix_double3x2_precision.hpp:
@@ -1530,10 +1570,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/gtc/epsilon.hpp:
 
-/usr/include/c++/15/tr1/ell_integral.tcc:
-
-/usr/include/stdc-predef.h:
-
 /usr/include/glm/ext/matrix_float2x3.hpp:
 
 /usr/include/c++/15/bits/formatfwd.h:
@@ -1542,11 +1578,13 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/c++/15/optional:
 
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_profiles.hpp:
+
 /usr/include/glm/ext/matrix_float2x4.hpp:
 
-/usr/include/c++/15/debug/debug.h:
-
 /usr/include/glm/detail/compute_vector_relational.hpp:
+
+/usr/include/c++/15/debug/debug.h:
 
 /usr/include/glm/ext/matrix_float2x4_precision.hpp:
 
@@ -1574,6 +1612,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/ext/matrix_float4x3.hpp:
 
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_enums.hpp:
+
 /usr/include/glm/gtc/quaternion.hpp:
 
 /usr/include/endian.h:
@@ -1585,8 +1625,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/glm/ext/matrix_float4x4_precision.hpp:
 
 /usr/include/glm/ext/matrix_projection.hpp:
-
-/usr/include/vulkan/vulkan_handles.hpp:
 
 /usr/include/glm/ext/matrix_projection.inl:
 
@@ -1606,17 +1644,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/ext/vector_double3.hpp:
 
-/usr/include/c++/15/bits/chrono_io.h:
-
-/usr/include/c++/15/iosfwd:
-
-/usr/include/glm/ext/quaternion_geometric.inl:
-
 /usr/include/glm/ext/quaternion_relational.inl:
-
-/usr/include/glm/ext/matrix_float3x2_precision.hpp:
-
-/usr/include/glm/ext/quaternion_transform.hpp:
 
 /usr/include/assert.h:
 
@@ -1650,19 +1678,15 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/ext/vector_double2.hpp:
 
-/usr/include/glm/ext/vector_double4_precision.hpp:
-
 /usr/include/c++/15/system_error:
 
 /usr/include/glm/ext/vector_float1_precision.hpp:
 
-/usr/include/vulkan/vk_platform.h:
-
 /usr/include/glm/ext/vector_float2.hpp:
 
-/usr/include/c++/15/bits/locale_facets.tcc:
-
 /usr/include/stdlib.h:
+
+/usr/include/c++/15/bits/locale_facets.tcc:
 
 /usr/include/glm/ext/vector_uint1_sized.hpp:
 
@@ -1700,6 +1724,12 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/geometric.hpp:
 
+/usr/include/pthread.h:
+
+/usr/include/glm/matrix.hpp:
+
+/usr/include/glm/glm.hpp:
+
 /usr/include/glm/gtc/constants.hpp:
 
 /usr/include/glm/gtc/constants.inl:
@@ -1717,12 +1747,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/glm/simd/platform.h:
 
 /usr/include/glm/gtc/quaternion.inl:
-
-/usr/include/glm/matrix.hpp:
-
-/usr/include/glm/glm.hpp:
-
-/usr/include/pthread.h:
 
 /usr/include/glm/gtc/vec1.hpp:
 
@@ -1750,6 +1774,8 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 
 /usr/include/glm/packing.hpp:
 
+/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_funcs.hpp:
+
 /usr/include/c++/15/bits/locale_facets.h:
 
 /usr/include/gnu/stubs.h:
@@ -1759,23 +1785,3 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o:
 /usr/include/limits.h:
 
 /usr/include/linux/limits.h:
-
-/usr/include/c++/15/bits/stl_tree.h:
-
-/usr/include/string.h:
-
-/usr/include/sys/select.h:
-
-/usr/include/sys/types.h:
-
-/usr/include/syscall.h:
-
-/usr/include/c++/15/tr1/hypergeometric.tcc:
-
-/usr/include/time.h:
-
-/usr/include/unistd.h:
-
-/usr/include/vk_video/vulkan_video_codec_av1std.h:
-
-/usr/include/vk_video/vulkan_video_codec_av1std_encode.h:

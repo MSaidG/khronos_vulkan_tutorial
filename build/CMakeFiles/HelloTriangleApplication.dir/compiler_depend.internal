@@ -6,6 +6,30 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/mapbox/earcut.hpp
  /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/stb_image.h
  /home/msgulberk/Projects/user_vulkan_tutorials/FirstTriangle/tiny_obj_loader.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_decode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_av1std_encode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_decode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h264std_encode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_decode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_h265std_encode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codec_vp9std_decode.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vk_video/vulkan_video_codecs_common.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vk_platform.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_core.h
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_enums.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_funcs.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_handles.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_hpp_macros.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_profiles.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_raii.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_structs.hpp
+ /home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include/vulkan/vulkan_to_string.hpp
  /usr/include/GL/gl.h
  /usr/include/GL/glext.h
  /usr/include/GLFW/glfw3.h
@@ -238,6 +262,7 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/c++/15/cmath
  /usr/include/c++/15/compare
  /usr/include/c++/15/concepts
+ /usr/include/c++/15/cstdarg
  /usr/include/c++/15/cstddef
  /usr/include/c++/15/cstdint
  /usr/include/c++/15/cstdio
@@ -540,29 +565,6 @@ CMakeFiles/HelloTriangleApplication.dir/base_code.cpp.o
  /usr/include/syscall.h
  /usr/include/time.h
  /usr/include/unistd.h
- /usr/include/vk_video/vulkan_video_codec_av1std.h
- /usr/include/vk_video/vulkan_video_codec_av1std_decode.h
- /usr/include/vk_video/vulkan_video_codec_av1std_encode.h
- /usr/include/vk_video/vulkan_video_codec_h264std.h
- /usr/include/vk_video/vulkan_video_codec_h264std_decode.h
- /usr/include/vk_video/vulkan_video_codec_h264std_encode.h
- /usr/include/vk_video/vulkan_video_codec_h265std.h
- /usr/include/vk_video/vulkan_video_codec_h265std_decode.h
- /usr/include/vk_video/vulkan_video_codec_h265std_encode.h
- /usr/include/vk_video/vulkan_video_codec_vp9std.h
- /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h
- /usr/include/vk_video/vulkan_video_codecs_common.h
- /usr/include/vulkan/vk_platform.h
- /usr/include/vulkan/vulkan.h
- /usr/include/vulkan/vulkan.hpp
- /usr/include/vulkan/vulkan_core.h
- /usr/include/vulkan/vulkan_enums.hpp
- /usr/include/vulkan/vulkan_funcs.hpp
- /usr/include/vulkan/vulkan_handles.hpp
- /usr/include/vulkan/vulkan_hpp_macros.hpp
- /usr/include/vulkan/vulkan_raii.hpp
- /usr/include/vulkan/vulkan_structs.hpp
- /usr/include/vulkan/vulkan_to_string.hpp
  /usr/include/wchar.h
  /usr/include/wctype.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/emmintrin.h
