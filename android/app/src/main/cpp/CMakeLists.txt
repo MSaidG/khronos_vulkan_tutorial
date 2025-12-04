@@ -16,7 +16,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project("mobile")
 
 set(MAIN_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../CMakeLists.txt")
+set(VULKAN_SDK "/home/msgulberk/Tools/Sources/vulkanSDK/1.4.328.1/x86_64/include")
+set(LOCAL_LIB "/usr/include")
 
+set(CMAKE_SHARED_LINKER_FLAGS
+        "${CMAKE_SHARED_LINKER_FLAGS} -u \
+    Java_com_google_androidgamesdk_GameActivity_initializeNativeCode")
 
 find_package(Vulkan REQUIRED)
 # Add the packages from the Android Game SDK
@@ -28,7 +33,7 @@ include_directories(${ANDROID_NDK}/sources/android/game-activity/include)
 
 # Set up shader compilation tools
 add_executable(glslang::validator IMPORTED)
-find_program(GLSLANG_VALIDATOR "glslangValidator" HINTS $ENV{VULKAN_SDK}/bin REQUIRED)
+find_program(GLSLANG_VALIDATOR "glslangValidator" HINTS $ENV{VULKAN_SDK}/../bin REQUIRED)
 set_property(TARGET glslang::validator PROPERTY IMPORTED_LOCATION "${GLSLANG_VALIDATOR}")
 
 # Define shader building function
@@ -53,33 +58,37 @@ endfunction()
 
 
 # (Optional) Add the Vulkan C++ module when ENABLE_CPP20_MODULE=ON
-add_library(VulkanCppModule SHARED)
-target_compile_definitions(VulkanCppModule
-        PUBLIC VULKAN_HPP_DISPATCH_LOADER_DYNAMIC=1 VULKAN_HPP_NO_STRUCT_CONSTRUCTORS=1
-)
-target_include_directories(VulkanCppModule
-        PRIVATE
-        "${Vulkan_INCLUDE_DIR}"
-)
-target_link_libraries(VulkanCppModule
-        PUBLIC
-        ${Vulkan_LIBRARIES}
-)
-set_target_properties(VulkanCppModule PROPERTIES CXX_STANDARD 20)
+#add_library(VulkanCppModule SHARED
+#        "${Vulkan_INCLUDE_DIR}/vulkan/vulkan.cppm")
+#
+### Set up the C++ module file set
+#target_sources(VulkanCppModule
+#        PUBLIC
+#        FILE_SET cxx_modules TYPE CXX_MODULES
+#        BASE_DIRS
+#        "${Vulkan_INCLUDE_DIR}"
+#        FILES
+#        "${Vulkan_INCLUDE_DIR}/vulkan/vulkan.cppm"
+#)
+#
+#target_compile_definitions(VulkanCppModule
+#        PUBLIC VULKAN_HPP_DISPATCH_LOADER_DYNAMIC=1 VULKAN_HPP_NO_STRUCT_CONSTRUCTORS=1
+#)
+#target_include_directories(VulkanCppModule
+#        PRIVATE
+#        "${Vulkan_INCLUDE_DIR}"
+#)
+#target_link_libraries(VulkanCppModule
+#        PUBLIC
+#        ${Vulkan_LIBRARIES}
+#)
+#set_target_properties(VulkanCppModule PROPERTIES CXX_STANDARD 20)
 
-# Set up the C++ module file set
-target_sources(VulkanCppModule
-        PUBLIC
-        FILE_SET cxx_modules TYPE CXX_MODULES
-        BASE_DIRS
-        "${Vulkan_INCLUDE_DIR}"
-        FILES
-        "${Vulkan_INCLUDE_DIR}/vulkan/vulkan.cppm"
-)
+
 
 
 # Set up shader compilation for base_code.cpp
-set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../")
+set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../shaders")
 set(SHADER_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/shaders")
 file(MAKE_DIRECTORY ${SHADER_OUTPUT_DIR})
 
@@ -112,34 +121,41 @@ add_shaders_target(android_shaders CHAPTER_NAME "${SHADER_OUTPUT_DIR}" SOURCES $
 # System.loadLibrary() and pass the name of the library defined here;
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
+
+
+message(STATUS "CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME}")
+message(STATUS "VULKAN_SDK = ${VULKAN_SDK}")
+message(STATUS "LOCAL_LIB = ${LOCAL_LIB}")
 add_library(${CMAKE_PROJECT_NAME} SHARED
-        # List C/C++ source files with relative paths to this CMakeLists.txt.
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../base_code.cpp
-        game_activity_bridge.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../base_code.cpp
+        game_activity_bridge.cpp
+)
 
 # Add dependency on shader compilation
-add_dependencies(vulkan_tutorial_android android_shaders)
+add_dependencies(mobile android_shaders)
 
 
 # Set include directories
-target_include_directories(vulkan_tutorial_android PRIVATE
+target_include_directories(
+        mobile PRIVATE
+        ${LOCAL_LIB}
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${Vulkan_INCLUDE_DIR}
+        ${VULKAN_SDK}
         ${ANDROID_NDK}/sources/android/game-activity/include
+
 )
 
 
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
-target_link_libraries(${CMAKE_PROJECT_NAME}
-        # List libraries link to the target library
+target_link_libraries(
+        ${CMAKE_PROJECT_NAME}
         android
         log
         games-frame-pacing::swappy_static
         games-performance-tuner::tuningfork_static
         game-activity::game-activity_static
-        game-activity::game-activity
-        VulkanCppModule
-        ${Vulkan_LIBRARIES}
+#        game-activity::game-activity
+        Vulkan::Vulkan
 )

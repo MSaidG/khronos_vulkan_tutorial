@@ -7,6 +7,8 @@
 #include "tiny_obj_loader.h"
 
 #if defined(__ANDROID__)
+#define VK_USE_PLATFORM_ANDROID_KHR
+#include <vulkan/vulkan.h>
 #include <vulkan/vulkan_android.h>
 #include <vulkan/vulkan_core.h>
 #endif
@@ -104,13 +106,13 @@ constexpr int      MAX_FRAMES_IN_FLIGHT = 2;
 
 #if PLATFORM_ANDROID
 // Define VpProfileProperties structure if not already defined
-#ifndef VP_PROFILE_PROPERTIES_DEFINED
-#define VP_PROFILE_PROPERTIES_DEFINED
-struct VpProfileProperties {
-    char     name[256];
-    uint32_t specVersion;
-};
-#endif
+// #ifndef VP_PROFILE_PROPERTIES_DEFINED
+// #define VP_PROFILE_PROPERTIES_DEFINED
+// struct VpProfileProperties {
+//     char     name[256];
+//     uint32_t specVersion;
+// };
+// #endif
 
 // Define Vulkan Profile constants
 #ifndef VP_KHR_ROADMAP_2022_NAME
@@ -2202,19 +2204,21 @@ private:
         // Check if the profile is supported
         VkBool32 supported = VK_FALSE;
 
-#ifdef PLATFORM_ANDROID
-        // Create a vp::ProfileDesc from our VpProfileProperties
-        vp::ProfileDesc profileDesc = {
-            appInfo.profile.name,
-            appInfo.profile.specVersion
-        };
+#ifdef PLATFORM_DESKTOP
+		// // Create a vp::ProfileDesc from our VpProfileProperties
+		// vp::ProfileDesc profileDesc = {
+		//     appInfo.profile.name,
+		//     appInfo.profile.specVersion};
 
-        // Use vp::GetProfileSupport instead of vpGetPhysicalDeviceProfileSupport
-        bool result = vp::GetProfileSupport(
-            *physicalDevice, // Pass the physical device directly
-            &profileDesc, // Pass the profile description
-            &supported // Output parameter for support status
-        );
+		// // Use vp::GetProfileSupport instead of vpGetPhysicalDeviceProfileSupport
+		// bool result = vp::GetProfileSupport(
+		//     *physicalDevice,        // Pass the physical device directly
+		//     &profileDesc,           // Pass the profile description
+		//     &supported              // Output parameter for support status
+		// );
+
+        vk::Instance vkInstance = *instance;
+        bool result = vpGetPhysicalDeviceProfileSupport(vkInstance, *physicalDevice, &appInfo.profile, &supported);
 #else
         VkResult result = vpGetPhysicalDeviceProfileSupport(
             *instance,

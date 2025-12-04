@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.vulkan.mobile"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -22,13 +22,15 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags += "-std=c++17"
+//                cppFlags += "-isystem ${project.findProperty("vulkan.sdk.path")}"
+                arguments += "-DANDROID_STL=c++_shared"
             }
         }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -59,7 +61,8 @@ android {
         getByName("main") {
             assets.srcDirs(
                 // Debug shader outputs
-                "../../../../",
+                // Removed likely incorrect root path causing implicit dependency issues
+                // "../../../../", 
                 ".externalNativeBuild/cmake/debug/arm64-v8a/shaders",
                 ".externalNativeBuild/cmake/debug/armeabi-v7a/shaders",
                 ".externalNativeBuild/cmake/debug/x86/shaders",
@@ -86,8 +89,20 @@ dependencies {
     implementation(libs.androidx.games.controller)
     implementation(libs.androidx.games.frame.pacing)
     implementation(libs.androidx.games.performance.tuner)
+    implementation(libs.androidx.core)
     //implementation("com.google.android")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+// Ensure native build tasks run before merging assets to resolve implicit dependencies
+// on generated shader files in .externalNativeBuild directories.
+tasks.withType<com.android.build.gradle.tasks.MergeSourceSetFolders>().configureEach {
+    if (name == "mergeDebugAssets") {
+        dependsOn("externalNativeBuildDebug")
+    }
+    if (name == "mergeReleaseAssets") {
+        dependsOn("externalNativeBuildRelease")
+    }
 }
